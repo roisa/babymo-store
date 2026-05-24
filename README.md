@@ -1,14 +1,22 @@
-# Baby Mo 🌷
+# Baby Mo 🌱
 
-> Small comforts for your everyday moments.
+> Kenyamanan kecil untuk hari-hari kamu.
 
 A production-ready, mobile-first ecommerce web app for **Baby Mo** — a modern
 emotional creator-commerce brand focused on comfort, self-expression, and
 cozy lifestyle products. Built for Indonesian WhatsApp-native shopping
 behaviour.
 
-This is not a marketplace clone. It's a soft, calm, premium-feeling store
-that pairs an emotionally warm UI with a lightweight operational backend
+**Default language: Indonesian** (ID). Toggle to English (EN) from the
+header — the choice persists across visits via `localStorage`.
+
+**Visual identity** follows the babymo.id brand: chunky rounded display
+type (Fredoka), vibrant grass green (#2BB14C), playful tangerine
+(#F58A2E), sunny yellow highlights, warm cream backgrounds, and 3D-toy
+"pop" shadow blocks.
+
+This is not a marketplace clone. It's a playful, premium-feeling store
+that pairs the babymo brand identity with a lightweight operational backend
 (WhatsApp checkout, static QRIS, semi-automatic verification).
 
 ---

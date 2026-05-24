@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
+import { useLang } from "@/context/LanguageContext";
 import {
   formatIDR,
   generateOrderId,
@@ -18,6 +19,7 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { items, subtotal, clear } = useCart();
   const { notify } = useToast();
+  const { t } = useLang();
 
   const [form, setForm] = useState<CustomerInfo>({
     customer_name: "",
@@ -43,18 +45,19 @@ export default function CheckoutPage() {
   const uniqueCode = useMemo(() => generateUniqueCode(), []);
   const total = subtotal + uniqueCode;
 
-  const setField = (k: keyof CustomerInfo) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => setForm({ ...form, [k]: e.target.value });
+  const setField =
+    (k: keyof CustomerInfo) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm({ ...form, [k]: e.target.value });
 
   const validate = (): string | null => {
-    if (!form.customer_name.trim()) return "Nama tidak boleh kosong";
+    if (!form.customer_name.trim()) return t.checkout_err_name;
     if (!/^\d{9,15}$/.test(form.whatsapp.replace(/\D/g, "")))
-      return "Nomor WhatsApp tidak valid";
-    if (!form.address.trim()) return "Alamat tidak boleh kosong";
-    if (!form.city.trim()) return "Kota tidak boleh kosong";
+      return t.checkout_err_whatsapp;
+    if (!form.address.trim()) return t.checkout_err_address;
+    if (!form.city.trim()) return t.checkout_err_city;
     if (!/^\d{4,6}$/.test(form.postal_code.trim()))
-      return "Kode pos tidak valid";
+      return t.checkout_err_postal;
     return null;
   };
 
@@ -84,13 +87,11 @@ export default function CheckoutPage() {
       created_at: new Date().toISOString(),
     };
 
-    // Persist locally
     saveLocalOrder(order);
     try {
       localStorage.setItem("babymo:customer", JSON.stringify(form));
     } catch {}
 
-    // Best-effort: persist to API (Supabase). Don't block checkout if it fails.
     try {
       await fetch("/api/orders", {
         method: "POST",
@@ -99,12 +100,10 @@ export default function CheckoutPage() {
       });
     } catch {}
 
-    // Open WhatsApp with prefilled message
     const msg = buildCheckoutMessage(items, form, total, orderId);
     const link = buildWhatsAppLink(msg);
     window.open(link, "_blank", "noopener,noreferrer");
 
-    // Clear cart, head to payment
     clear();
     router.push(`/payment/${orderId}`);
   };
@@ -112,15 +111,15 @@ export default function CheckoutPage() {
   if (hydrated && items.length === 0) {
     return (
       <div className="container-soft py-24 text-center">
-        <div className="mx-auto h-24 w-24 rounded-full bg-pinky-100" />
-        <h1 className="mt-6 font-display text-2xl text-ink-900">
-          Your bag is empty.
+        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-grass-100 text-4xl">
+          🌱
+        </div>
+        <h1 className="mt-6 font-display text-2xl font-bold text-ink-900">
+          {t.checkout_empty_title}
         </h1>
-        <p className="mt-1 text-sm text-ink-400">
-          Add something gentle first, then come back here.
-        </p>
-        <Link href="/products" className="btn-pink mt-6 inline-flex">
-          Browse the shop
+        <p className="mt-1 text-sm text-ink-400">{t.checkout_empty_sub}</p>
+        <Link href="/products" className="btn-orange mt-6 inline-flex">
+          {t.checkout_empty_cta}
         </Link>
       </div>
     );
@@ -128,95 +127,145 @@ export default function CheckoutPage() {
 
   return (
     <div className="container-soft py-8 sm:py-12">
-      <p className="text-xs font-medium uppercase tracking-widest text-pinky-500">
-        checkout
-      </p>
-      <h1 className="mt-2 font-display text-3xl text-ink-900 sm:text-4xl">
-        Just a few soft details.
+      <span className="chip uppercase tracking-wider">
+        {t.checkout_eyebrow}
+      </span>
+      <h1 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">
+        {t.checkout_title}
       </h1>
       <p className="mt-1 max-w-md text-sm text-ink-600">
-        We'll confirm your order through WhatsApp right after this.
+        {t.checkout_subtitle}
       </p>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_380px]">
-        {/* Form */}
         <div className="card p-5 sm:p-7">
-          <h2 className="font-display text-xl text-ink-900">Delivery details</h2>
+          <h2 className="font-display text-xl font-bold text-ink-900">
+            {t.checkout_form_title}
+          </h2>
           <div className="mt-5 grid gap-4">
-            <Field label="Full name">
-              <input className="input" value={form.customer_name} onChange={setField("customer_name")} placeholder="Maria Putri" />
+            <Field label={t.field_name}>
+              <input
+                className="input"
+                value={form.customer_name}
+                onChange={setField("customer_name")}
+                placeholder={t.field_name_ph}
+              />
             </Field>
-            <Field label="WhatsApp number">
-              <input className="input" type="tel" inputMode="numeric" value={form.whatsapp} onChange={setField("whatsapp")} placeholder="08123456789" />
+            <Field label={t.field_whatsapp}>
+              <input
+                className="input"
+                type="tel"
+                inputMode="numeric"
+                value={form.whatsapp}
+                onChange={setField("whatsapp")}
+                placeholder={t.field_whatsapp_ph}
+              />
             </Field>
-            <Field label="Full address">
-              <textarea className="input min-h-[88px]" value={form.address} onChange={setField("address")} placeholder="Jl. Melati No. 12, RT 03/RW 05, Kel. Mawar" />
+            <Field label={t.field_address}>
+              <textarea
+                className="input min-h-[88px]"
+                value={form.address}
+                onChange={setField("address")}
+                placeholder={t.field_address_ph}
+              />
             </Field>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="City">
-                <input className="input" value={form.city} onChange={setField("city")} placeholder="Bandung" />
+              <Field label={t.field_city}>
+                <input
+                  className="input"
+                  value={form.city}
+                  onChange={setField("city")}
+                  placeholder={t.field_city_ph}
+                />
               </Field>
-              <Field label="Postal code">
-                <input className="input" inputMode="numeric" value={form.postal_code} onChange={setField("postal_code")} placeholder="40115" />
+              <Field label={t.field_postal}>
+                <input
+                  className="input"
+                  inputMode="numeric"
+                  value={form.postal_code}
+                  onChange={setField("postal_code")}
+                  placeholder={t.field_postal_ph}
+                />
               </Field>
             </div>
-            <Field label="Delivery notes (optional)">
-              <textarea className="input min-h-[64px]" value={form.delivery_notes ?? ""} onChange={setField("delivery_notes")} placeholder="tolong bungkus rapi, ini hadiah 🌷" />
+            <Field label={t.field_notes}>
+              <textarea
+                className="input min-h-[64px]"
+                value={form.delivery_notes ?? ""}
+                onChange={setField("delivery_notes")}
+                placeholder={t.field_notes_ph}
+              />
             </Field>
           </div>
         </div>
 
-        {/* Summary */}
         <aside className="space-y-4">
           <div className="card p-5">
-            <h2 className="font-display text-xl text-ink-900">Order summary</h2>
+            <h2 className="font-display text-xl font-bold text-ink-900">
+              {t.summary_title}
+            </h2>
             <ul className="mt-4 space-y-3">
               {items.map((i) => (
-                <li key={i.productId} className="flex items-center justify-between gap-3 text-sm">
+                <li
+                  key={i.productId}
+                  className="flex items-center justify-between gap-3 text-sm"
+                >
                   <div className="min-w-0">
-                    <p className="line-clamp-1 text-ink-900">{i.name}</p>
+                    <p className="line-clamp-1 font-semibold text-ink-900">
+                      {i.name}
+                    </p>
                     <p className="text-xs text-ink-400">× {i.quantity}</p>
                   </div>
-                  <span className="text-ink-900">{formatIDR(i.price * i.quantity)}</span>
+                  <span className="font-semibold text-ink-900">
+                    {formatIDR(i.price * i.quantity)}
+                  </span>
                 </li>
               ))}
             </ul>
-            <hr className="my-4 border-ink-900/5" />
+            <hr className="my-4 border-grass-100" />
             <div className="space-y-1.5 text-sm">
-              <Row label="Subtotal" value={formatIDR(subtotal)} />
+              <Row label={t.summary_subtotal} value={formatIDR(subtotal)} />
               <Row
                 label={
                   <span className="flex items-center gap-1">
-                    Unique code
-                    <span className="rounded-full bg-pinky-100 px-1.5 py-0.5 text-[10px] text-pinky-500">
-                      auto
+                    {t.summary_unique}
+                    <span className="rounded-full bg-tangerine-100 px-1.5 py-0.5 text-[10px] font-bold text-tangerine-600">
+                      {t.summary_unique_chip}
                     </span>
                   </span>
                 }
                 value={`+ ${formatIDR(uniqueCode)}`}
               />
-              <Row label="Shipping" value="confirmed via WhatsApp" subtle />
+              <Row
+                label={t.summary_shipping}
+                value={t.summary_shipping_value}
+                subtle
+              />
             </div>
-            <hr className="my-4 border-ink-900/5" />
+            <hr className="my-4 border-grass-100" />
             <div className="flex items-end justify-between">
-              <span className="text-sm text-ink-600">Total</span>
-              <span className="font-display text-3xl text-ink-900">{formatIDR(total)}</span>
+              <span className="text-sm font-semibold text-ink-600">
+                {t.summary_total}
+              </span>
+              <span className="font-display text-3xl font-bold text-grass-600">
+                {formatIDR(total)}
+              </span>
             </div>
             <p className="mt-2 text-[11px] leading-relaxed text-ink-400">
-              The unique code helps us match your payment instantly. Please transfer the exact amount.
+              {t.summary_unique_help}
             </p>
           </div>
 
           <button
             onClick={handleCheckout}
             disabled={submitting}
-            className="btn-primary w-full"
+            className="btn-primary w-full text-base"
           >
-            {submitting ? "Opening WhatsApp…" : "Checkout via WhatsApp"}
+            {submitting ? t.checkout_btn_loading : t.checkout_btn}
             <Wa />
           </button>
           <p className="text-center text-[11px] text-ink-400">
-            By continuing, you agree to be contacted via WhatsApp about your order.
+            {t.checkout_terms}
           </p>
         </aside>
       </div>
@@ -224,7 +273,13 @@ export default function CheckoutPage() {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <label className="block">
       <span className="label">{label}</span>
@@ -245,7 +300,11 @@ function Row({
   return (
     <div className="flex items-center justify-between">
       <span className={subtle ? "text-ink-400" : "text-ink-600"}>{label}</span>
-      <span className={subtle ? "text-ink-400" : "text-ink-900"}>{value}</span>
+      <span
+        className={subtle ? "text-ink-400" : "font-semibold text-ink-900"}
+      >
+        {value}
+      </span>
     </div>
   );
 }

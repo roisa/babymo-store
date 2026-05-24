@@ -1,14 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/products";
+import { useLang } from "@/context/LanguageContext";
 
 export default function CategoryGrid() {
+  const { t } = useLang();
   return (
     <section className="py-12">
       <div className="container-soft">
         <SectionHeader
-          eyebrow="categories"
-          title="Comfort for your day"
-          subtitle="Find the little thing that fits your mood today."
+          eyebrow={t.section_categories_eyebrow}
+          title={t.section_categories_title}
+          subtitle={t.section_categories_subtitle}
         />
 
         <div className="mt-8 flex gap-3 overflow-x-auto pb-2 hide-scrollbar sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible lg:grid-cols-5">
@@ -16,12 +20,12 @@ export default function CategoryGrid() {
             <Link
               key={cat.slug}
               href={`/categories/${cat.slug}`}
-              className="group relative flex min-w-[140px] flex-col items-start gap-2 rounded-3xl bg-white p-5 shadow-card ring-1 ring-ink-900/5 transition-all hover:-translate-y-1 hover:shadow-glow"
+              className="group relative flex min-w-[140px] flex-col items-start gap-2 rounded-3xl bg-white p-5 shadow-card ring-2 ring-grass-100 transition-all hover:-translate-y-1 hover:shadow-pop hover:ring-grass-300"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-warm-gradient text-2xl">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-grass-50 text-2xl ring-2 ring-grass-100 transition group-hover:bg-tangerine-100 group-hover:ring-tangerine-200">
                 {cat.emoji}
               </span>
-              <h3 className="mt-2 text-sm font-medium leading-snug text-ink-900">
+              <h3 className="mt-2 text-sm font-bold leading-snug text-ink-900">
                 {cat.name}
               </h3>
               <p className="text-[11px] leading-snug text-ink-400 line-clamp-2">
@@ -49,11 +53,11 @@ export function SectionHeader({
   return (
     <div className={align === "center" ? "text-center" : ""}>
       {eyebrow && (
-        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-pinky-500">
+        <span className="chip mb-3 inline-flex uppercase tracking-wider">
           {eyebrow}
-        </p>
+        </span>
       )}
-      <h2 className="font-display text-3xl text-ink-900 sm:text-4xl">
+      <h2 className="font-display text-3xl font-bold text-ink-900 sm:text-4xl">
         {title}
       </h2>
       {subtitle && (

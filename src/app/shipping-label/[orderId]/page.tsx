@@ -4,6 +4,7 @@ import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import ShippingLabel from "@/components/ShippingLabel";
 import { getLocalOrder } from "@/lib/orders";
+import { useLang } from "@/context/LanguageContext";
 import type { Order } from "@/types";
 
 export default function ShippingLabelPage({
@@ -12,6 +13,7 @@ export default function ShippingLabelPage({
   params: Promise<{ orderId: string }>;
 }) {
   const { orderId } = use(params);
+  const { t } = useLang();
   const [order, setOrder] = useState<Order | undefined>();
 
   useEffect(() => {
@@ -21,9 +23,7 @@ export default function ShippingLabelPage({
   if (!order) {
     return (
       <div className="container-soft py-20 text-center">
-        <p className="text-sm text-ink-400">
-          Loading label for {orderId}…
-        </p>
+        <p className="text-sm text-ink-400">{t.label_loading(orderId)}</p>
       </div>
     );
   }
@@ -31,14 +31,14 @@ export default function ShippingLabelPage({
   return (
     <div className="bg-warmwhite py-8 print:py-0">
       <div className="no-print container-soft mb-6 flex items-center justify-between">
-        <Link href="/admin" className="text-xs text-ink-400 hover:text-ink-900">
-          ← Back to admin
-        </Link>
-        <button
-          onClick={() => window.print()}
-          className="btn-primary text-xs"
+        <Link
+          href="/admin"
+          className="text-xs font-semibold text-ink-400 hover:text-grass-600"
         >
-          🖨 Print label
+          {t.label_back}
+        </Link>
+        <button onClick={() => window.print()} className="btn-primary text-xs">
+          {t.label_print}
         </button>
       </div>
       <ShippingLabel order={order} />

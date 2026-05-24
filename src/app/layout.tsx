@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { ToastProvider } from "@/context/ToastContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MobileNav from "@/components/MobileNav";
@@ -10,15 +11,15 @@ import CartDrawer from "@/components/CartDrawer";
 
 export const metadata: Metadata = {
   title: {
-    default: "Baby Mo — small comforts for your everyday moments",
+    default: "Baby Mo — kenyamanan kecil untuk hari-hari kamu",
     template: "%s · Baby Mo",
   },
   description:
-    "Baby Mo creates emotional journals, mood stickers, affirmation cards, and cozy lifestyle products designed to make your everyday a little softer.",
+    "Baby Mo membuat jurnal emosional, mood stickers, kartu afirmasi, dan barang lifestyle lembut untuk membuat harimu sedikit lebih hangat.",
   keywords: [
     "baby mo",
     "babymo",
-    "emotional journal",
+    "jurnal emosional",
     "self care indonesia",
     "stationery",
     "wellness",
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://babymo.id",
   ),
   openGraph: {
-    title: "Baby Mo — small comforts for your everyday moments",
+    title: "Baby Mo — kenyamanan kecil untuk hari-hari kamu",
     description:
-      "Emotional journals, mood stickers, affirmation cards and cozy little things.",
+      "Jurnal emosional, mood stickers, kartu afirmasi, dan barang lembut lainnya.",
     type: "website",
     siteName: "Baby Mo",
     locale: "id_ID",
@@ -38,13 +39,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Baby Mo",
-    description: "Small comforts for your everyday moments.",
+    description: "Kenyamanan kecil untuk hari-hari kamu.",
   },
   icons: {
     icon: [
       {
         url:
-          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B7%3C/text%3E%3C/svg%3E",
+          "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F58A2E'/%3E%3Ctext y='.9em' font-size='80' x='12' fill='white'%3E%F0%9F%8C%B1%3C/text%3E%3C/svg%3E",
         type: "image/svg+xml",
       },
     ],
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FBF6EE",
+  themeColor: "#2BB14C",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -73,21 +74,28 @@ export default function RootLayout({
           crossOrigin=""
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin=""
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
       <body className="min-h-dvh">
-        <ToastProvider>
-          <CartProvider>
-            <Header />
-            <main className="pb-32 sm:pb-12">{children}</main>
-            <Footer />
-            <MobileNav />
-            <FloatingCartButton />
-            <CartDrawer />
-          </CartProvider>
-        </ToastProvider>
+        <LanguageProvider>
+          <ToastProvider>
+            <CartProvider>
+              <Header />
+              <main className="pb-32 sm:pb-12">{children}</main>
+              <Footer />
+              <MobileNav />
+              <FloatingCartButton />
+              <CartDrawer />
+            </CartProvider>
+          </ToastProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

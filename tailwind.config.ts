@@ -10,48 +10,78 @@ const config: Config = {
     extend: {
       colors: {
         cream: {
-          50: "#FFFCF8",
-          100: "#FBF6EE",
-          200: "#F5ECD9",
+          50: "#FBF7EC",
+          100: "#F5EFE0",
+          200: "#EFE6CB",
         },
-        warmwhite: "#FAF7F2",
-        pinky: {
-          50: "#FFF5F6",
-          100: "#FCE7EB",
-          200: "#F9D2DA",
-          300: "#F2B3C0",
-          400: "#E891A4",
-          500: "#D26C84",
+        warmwhite: "#FBF7EC",
+        // Baby Mo signature green
+        grass: {
+          50: "#EAF7EC",
+          100: "#CCEBD2",
+          200: "#9BD7A6",
+          300: "#5FC371",
+          400: "#2BB14C",
+          500: "#1F9A3F",
+          600: "#178533",
+          700: "#0F6826",
+          800: "#0A4D1B",
+          900: "#073A14",
         },
-        lavender: {
-          50: "#F7F3FB",
-          100: "#EDE3F5",
-          200: "#DCC9EC",
-          300: "#C7AADD",
-          400: "#A989C8",
-          500: "#8C6BB1",
+        // Warm playful orange
+        tangerine: {
+          50: "#FFF2E5",
+          100: "#FFE0C2",
+          200: "#FFC68F",
+          300: "#FFA85C",
+          400: "#F58A2E",
+          500: "#E07020",
+          600: "#C5651C",
         },
-        beige: {
-          50: "#FBF8F3",
-          100: "#F2EBDD",
-          200: "#E6D9BF",
+        // Sunny yellow highlight
+        sunny: {
+          200: "#FFE57A",
+          300: "#FFD93D",
+          400: "#F5C518",
         },
+        // Soft pastel sky used in tiny accents
+        sky: {
+          100: "#E5F2FF",
+          200: "#BFE0FF",
+        },
+        // Deep forest text
         ink: {
-          50: "#F8F6F2",
-          200: "#D8D2C7",
-          400: "#8A8275",
-          600: "#52483A",
-          900: "#2A241D",
+          50: "#F1F5EE",
+          200: "#C8D2BD",
+          400: "#6E7E66",
+          600: "#3B5036",
+          700: "#27381F",
+          900: "#162818",
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: [
+          "var(--font-display)",
+          "Fredoka",
+          "Baloo 2",
+          "system-ui",
+          "sans-serif",
+        ],
+        sans: [
+          "var(--font-sans)",
+          "Nunito",
+          "Plus Jakarta Sans",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
       },
       boxShadow: {
-        soft: "0 6px 24px -8px rgba(160, 130, 130, 0.18)",
-        glow: "0 10px 40px -12px rgba(210, 108, 132, 0.35)",
-        card: "0 2px 14px -6px rgba(120, 100, 90, 0.18)",
+        soft: "0 6px 20px -8px rgba(23, 133, 51, 0.22)",
+        glow: "0 12px 40px -14px rgba(43, 177, 76, 0.45)",
+        card: "0 3px 16px -6px rgba(23, 56, 31, 0.18)",
+        pop: "0 4px 0 0 #178533",
+        "pop-orange": "0 4px 0 0 #C5651C",
       },
       borderRadius: {
         xl2: "1.25rem",
@@ -63,6 +93,7 @@ const config: Config = {
         "slide-in-right": "slideInRight 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
+        wiggle: "wiggle 1s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -85,12 +116,18 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
       },
       backgroundImage: {
-        "soft-gradient":
-          "linear-gradient(135deg, #FFF5F6 0%, #F7F3FB 50%, #FBF8F3 100%)",
+        "hero-grass":
+          "radial-gradient(circle at 20% 20%, #5FC371 0%, #2BB14C 45%, #1F9A3F 100%)",
         "warm-gradient":
-          "linear-gradient(135deg, #FCE7EB 0%, #EDE3F5 100%)",
+          "linear-gradient(135deg, #FFE0C2 0%, #FFC68F 100%)",
+        "soft-gradient":
+          "linear-gradient(135deg, #FBF7EC 0%, #F5EFE0 50%, #EAF7EC 100%)",
       },
     },
   },

@@ -2,10 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
+import { useLang } from "@/context/LanguageContext";
 import { formatIDR } from "@/lib/utils";
 
 export default function FloatingCartButton() {
   const { count, subtotal, open } = useCart();
+  const { t } = useLang();
   const pathname = usePathname();
 
   if (count === 0) return null;
@@ -21,14 +23,14 @@ export default function FloatingCartButton() {
   return (
     <button
       onClick={open}
-      className="fixed bottom-20 right-4 z-30 hidden animate-slide-up items-center gap-3 rounded-full bg-ink-900 px-5 py-3 text-sm text-cream-50 shadow-glow transition hover:bg-ink-600 sm:flex sm:bottom-6"
+      className="fixed bottom-20 right-4 z-30 hidden animate-slide-up items-center gap-3 rounded-full bg-grass-400 px-5 py-3 text-sm font-bold text-white shadow-pop transition hover:-translate-y-0.5 hover:bg-grass-500 sm:flex sm:bottom-6"
     >
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-pinky-300 text-ink-900 font-medium">
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-grass-700">
         {count}
       </span>
-      <span>View cart</span>
+      <span>{t.cart_view}</span>
       <span className="opacity-80">·</span>
-      <span className="font-medium">{formatIDR(subtotal)}</span>
+      <span>{formatIDR(subtotal)}</span>
     </button>
   );
 }

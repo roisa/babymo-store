@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import ProductGrid from "@/components/ProductGrid";
 import { CATEGORIES, SAMPLE_PRODUCTS, searchProducts } from "@/lib/products";
+import { useLang } from "@/context/LanguageContext";
 
 function ProductsInner() {
   const sp = useSearchParams();
   const filter = sp.get("filter");
+  const { t } = useLang();
 
   const [q, setQ] = useState("");
   const [activeCat, setActiveCat] = useState<string>("all");
@@ -23,17 +25,14 @@ function ProductsInner() {
   return (
     <div className="container-soft pt-8 pb-16">
       <div className="mb-6 max-w-2xl">
-        <p className="text-xs font-medium uppercase tracking-widest text-pinky-500">
-          shop
-        </p>
-        <h1 className="mt-2 font-display text-4xl text-ink-900 sm:text-5xl">
+        <span className="chip uppercase tracking-wider">{t.nav_shop}</span>
+        <h1 className="mt-3 font-display text-4xl font-bold text-ink-900 sm:text-5xl">
           {filter === "bestseller"
-            ? "What our community loves most."
-            : "Soft little things, all in one place."}
+            ? t.product_bestseller_title
+            : t.product_listing_title}
         </h1>
         <p className="mt-2 text-sm text-ink-600">
-          Browse {SAMPLE_PRODUCTS.length} carefully chosen products — designed to
-          make your every day a little more comforting.
+          {t.product_listing_subtitle}
         </p>
       </div>
 
@@ -45,13 +44,13 @@ function ProductsInner() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search journals, stickers, candles…"
+            placeholder={t.product_search_placeholder}
             className="input pl-11"
           />
         </div>
         <div className="mt-3 flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
           <Pill active={activeCat === "all"} onClick={() => setActiveCat("all")}>
-            All
+            {t.product_filter_all}
           </Pill>
           {CATEGORIES.map((c) => (
             <Pill
@@ -66,10 +65,10 @@ function ProductsInner() {
       </div>
 
       {filter === "bestseller" && (
-        <p className="mb-4 inline-flex items-center gap-2 rounded-full bg-pinky-100 px-3 py-1 text-xs text-pinky-500">
-          Showing bestsellers ·{" "}
+        <p className="chip-orange mb-4 inline-flex items-center gap-2">
+          {t.product_bestseller_active}{" "}
           <Link href="/products" className="underline">
-            clear
+            {t.product_clear}
           </Link>
         </p>
       )}
@@ -81,7 +80,13 @@ function ProductsInner() {
 
 export default function ProductsPage() {
   return (
-    <Suspense fallback={<div className="container-soft py-20 text-center text-ink-400">Loading…</div>}>
+    <Suspense
+      fallback={
+        <div className="container-soft py-20 text-center text-ink-400">
+          Loading…
+        </div>
+      }
+    >
       <ProductsInner />
     </Suspense>
   );
@@ -99,10 +104,10 @@ function Pill({
   return (
     <button
       onClick={onClick}
-      className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-medium transition ${
+      className={`whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition ${
         active
-          ? "bg-ink-900 text-cream-50"
-          : "bg-white text-ink-600 ring-1 ring-ink-900/10 hover:bg-cream-100"
+          ? "bg-grass-400 text-white shadow-pop"
+          : "bg-white text-ink-600 ring-2 ring-grass-100 hover:bg-grass-50"
       }`}
     >
       {children}
@@ -112,7 +117,7 @@ function Pill({
 
 function SearchIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <circle cx="11" cy="11" r="7" />
       <path d="m20 20-3.5-3.5" strokeLinecap="round" />
     </svg>
