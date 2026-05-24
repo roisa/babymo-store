@@ -137,6 +137,17 @@ body::before {
   color: #162818;
 }
 
+/* respect users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
 /* print styles */
 @media print {
   body::before { display: none; }

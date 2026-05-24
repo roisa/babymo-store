@@ -27,13 +27,18 @@ export default function Marquee({
   );
 
   return (
-    <section aria-hidden className="relative overflow-hidden py-6">
-      {/* edge fades */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-warmwhite to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-warmwhite to-transparent" />
-
+    <section
+      aria-hidden
+      className="relative overflow-hidden py-6"
+      style={{
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
+        maskImage:
+          "linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%)",
+      }}
+    >
       <div
-        className="flex w-max animate-marquee"
+        className="flex w-max animate-marquee motion-reduce:animate-none"
         style={{ animationDuration: `${speed}s` }}
       >
         {row}

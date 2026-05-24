@@ -18,18 +18,27 @@ export default function CategoryGrid() {
           />
         </Reveal>
 
-        {/* mobile: edge-to-edge horizontal scroll with proper end padding + fade hint
-            desktop: grid */}
-        <div className="relative mt-10 sm:hidden">
-          <div className="-mx-5 overflow-x-auto pb-2 hide-scrollbar">
-            <div className="flex gap-3 px-5 pr-10">
+        {/* mobile: edge-to-edge horizontal scroll with mask-fade + scroll-snap.
+            mask-image truly fades the clipped card to transparent (no visible
+            ring stripe), and scroll-snap-x keeps the scroll feeling intentional. */}
+        <div className="-mx-5 mt-10 sm:hidden">
+          <div
+            className="overflow-x-auto pb-2 hide-scrollbar"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 56px), transparent 100%)",
+              maskImage:
+                "linear-gradient(to right, transparent 0, #000 24px, #000 calc(100% - 56px), transparent 100%)",
+            }}
+          >
+            <div className="flex snap-x snap-mandatory gap-3 px-5 pr-16">
               {CATEGORIES.slice(0, 10).map((cat, i) => (
-                <CategoryCard key={cat.slug} cat={cat} index={i} />
+                <div key={cat.slug} className="snap-start">
+                  <CategoryCard cat={cat} index={i} />
+                </div>
               ))}
             </div>
           </div>
-          {/* right fade — hint that there's more to scroll */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-warmwhite to-transparent" />
         </div>
 
         <div className="mt-10 hidden gap-4 sm:grid sm:grid-cols-3 lg:grid-cols-5">

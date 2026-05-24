@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLang } from "@/context/LanguageContext";
 import WordRotator from "./WordRotator";
 import AnimatedCounter from "./AnimatedCounter";
+import AuroraCanvas from "./AuroraCanvas";
 
 export default function Hero() {
   const { t, lang } = useLang();
@@ -21,27 +22,16 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden px-3 pt-3 sm:px-5 sm:pt-5">
       <div className="relative overflow-hidden rounded-ios-4xl shadow-ios-xl ring-1 ring-ink-900/5">
-        {/* base soft cream */}
+        {/* warm cream backdrop */}
         <div className="absolute inset-0 bg-hero-cream" />
-        {/* animated aurora wash */}
-        <div className="absolute inset-0 bg-aurora bg-[length:200%_200%] animate-aurora-shift opacity-90" />
+        {/* live Canvas aurora — drifts smoothly, pauses off-screen */}
+        <AuroraCanvas />
 
-        {/* drifting blurred orbs — keep it alive without being noisy */}
-        <Orb className="-left-16 top-10 h-60 w-60 bg-grass-300/30 animate-drift-slow" />
-        <Orb
-          className="-right-20 top-32 h-72 w-72 bg-tangerine-300/30 animate-drift-slow"
-          style={{ animationDelay: "-6s" }}
-        />
-        <Orb
-          className="bottom-0 left-1/2 h-52 w-52 -translate-x-1/2 bg-sunny-300/25 animate-drift-slow"
-          style={{ animationDelay: "-12s" }}
-        />
-
-        {/* floating particles */}
+        {/* gentle floating particles for foreground depth */}
         {PARTICLES.map((p, i) => (
           <span
             key={i}
-            className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-white/70 shadow-sm animate-float"
+            className="pointer-events-none absolute h-1.5 w-1.5 rounded-full bg-white/70 shadow-sm animate-float motion-reduce:animate-none"
             style={{
               top: p.top,
               left: p.left,
@@ -180,21 +170,6 @@ function Stat({
       {value}
       <p className="mt-0.5 text-[11px] font-medium text-ink-400">{label}</p>
     </div>
-  );
-}
-
-function Orb({
-  className = "",
-  style,
-}: {
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <div
-      className={`pointer-events-none absolute rounded-full blur-3xl ${className}`}
-      style={style}
-    />
   );
 }
 
