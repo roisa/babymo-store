@@ -10,10 +10,15 @@ export default function MobileNav() {
   const { open, count } = useCart();
   const { t } = useLang();
 
+  // Hide on screens that already have their own primary action bar:
+  // - /products/[slug] uses StickyCheckoutBar
+  // - /payment, /shipping-label, /admin keep a focused mode
+  const onProductDetail = pathname?.startsWith("/products/") ?? false;
   if (
     pathname?.startsWith("/payment") ||
     pathname?.startsWith("/shipping-label") ||
-    pathname?.startsWith("/admin")
+    pathname?.startsWith("/admin") ||
+    onProductDetail
   ) {
     return null;
   }

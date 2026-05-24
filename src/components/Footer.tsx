@@ -30,26 +30,34 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/categories/emotional-journals"
+                  href="/categories/buku-cerita"
                   className="transition hover:text-grass-700"
                 >
-                  Journals
+                  Buku Cerita
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/categories/mood-stickers"
+                  href="/categories/buku-mewarnai"
                   className="transition hover:text-grass-700"
                 >
-                  Stickers
+                  Buku Mewarnai
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/categories/self-care-kits"
+                  href="/categories/kaos"
                   className="transition hover:text-grass-700"
                 >
-                  Self-care
+                  Kaos & Apparel
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/categories/boneka"
+                  className="transition hover:text-grass-700"
+                >
+                  Boneka
                 </Link>
               </li>
             </ul>

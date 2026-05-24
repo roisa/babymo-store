@@ -3,111 +3,160 @@ import type { Category, Product } from "@/types";
 /**
  * Baby Mo — sample catalogue.
  *
- * Brand: warm, calm, slow-parenting lifestyle.
- * Vibe references: Muji, Kinfolk, Korean parenting brands, Montessori homes,
- * Pinterest cozy aesthetic.
+ * Categories mirror the real merchandise lineup
+ * (BABY_MO_IP/MERCHANDISE):
+ *   01_STICKER, 02_APPAREL (KAOS), 03_POSTER, 04_BUKU CERITA ANAK,
+ *   05_BUKU MEWARNAI, 06_STICKER DOA HARIAN ANAK, 07_BONEKA,
+ *   08_KEYCHAIN, 09_PIN.
  *
- * Product naming is emotional (never generic). Descriptions feel like a
- * gentle conversation with the parent, not a feature list.
+ * Product naming is emotional (never generic). Descriptions feel like
+ * a gentle conversation with the parent, not a feature list.
  *
- * Imagery direction (when swapped for real photography):
- * - Kids Books → cozy reading corner, warm sunlight, soft blankets, wooden
- *   bookshelf, Scandinavian nursery.
- * - Activity Books → crayons, wooden desk, soft natural lighting, child
- *   drawing peacefully.
- * - Flashcards → Montessori shelf, wooden toys, soft neutral tones, parent
- *   and child together.
- * - Toddler T-Shirts → Korean kidswear, oversized fit, natural movement,
- *   playful warm atmosphere.
- * - Parenting Merch → cafe table, journaling setup, cozy workspace, soft
- *   sunlight.
- *
- * The image URLs below are tasteful Unsplash stand-ins in the same mood —
- * swap them for the merchant's real product photography before going live.
+ * Imagery direction (for the real photo shoot — these Unsplash URLs
+ * are stand-ins in the right mood until the merchant's photos drop):
+ * - Buku Cerita    → cozy reading corner, warm sunlight, soft blanket,
+ *                    wooden bookshelf, Scandinavian nursery.
+ * - Buku Mewarnai  → crayons, wooden desk, soft natural light, child
+ *                    drawing peacefully.
+ * - Stiker         → flat-lay sticker sheets on cream paper.
+ * - Stiker Doa     → tiny prayer cards / hijaiyah cards, Islamic motifs
+ *                    in pastel.
+ * - Kaos & Apparel → Korean-kidswear-style: oversized fit, natural
+ *                    movement, playful warm atmosphere.
+ * - Poster         → minimal pastel print on textured wall, wooden
+ *                    frame.
+ * - Boneka         → mascot plush on linen, soft daylight.
+ * - Aksesoris      → tiny enamel pins / keychains on cream surface.
  */
 
 const IMG = {
-  notebook1:
-    "https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&q=80",
-  notebook2:
-    "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80",
-  notebook3:
-    "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=900&q=80",
-  stickers1:
+  // ── Buku Cerita Anak ─────────────────────────────────────────────
+  bookOpen:
+    "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&q=80",
+  bookKid:
+    "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=80",
+  bookStack:
+    "https://images.unsplash.com/photo-1543248939-4296e1fbd757?w=900&q=80",
+  bookBed:
+    "https://images.unsplash.com/photo-1474447976065-67d23accb1e3?w=900&q=80",
+  bookFlat:
+    "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?w=900&q=80",
+
+  // ── Buku Mewarnai ────────────────────────────────────────────────
+  crayons1:
+    "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=900&q=80",
+  drawKid:
+    "https://images.unsplash.com/photo-1502740479091-635887520276?w=900&q=80",
+  crayons2:
+    "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&q=80",
+
+  // ── Stiker ──────────────────────────────────────────────────────
+  sticker1:
     "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=80",
-  stickers2:
+  sticker2:
     "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=900&q=80",
-  cards1:
+  stickerSheet:
+    "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=900&q=80",
+
+  // ── Stiker Doa Harian (Islamic / Hijaiyah-pastel mood) ───────────
+  doaSticker1:
+    "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=900&q=80",
+  doaSticker2:
     "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=900&q=80",
-  cards2:
-    "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=900&q=80",
-  cozy1:
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
-  cozy2:
-    "https://images.unsplash.com/photo-1542435503-956c469947f6?w=900&q=80",
-  plush:
+
+  // ── Kaos & Apparel ───────────────────────────────────────────────
+  tee1: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=900&q=80",
+  tee2: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80",
+  teeKid:
+    "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=900&q=80",
+
+  // ── Poster ──────────────────────────────────────────────────────
+  posterArt:
+    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80",
+  posterFrame:
+    "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=900&q=80",
+  posterWall:
+    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80",
+
+  // ── Boneka (Plush) ───────────────────────────────────────────────
+  plush1:
     "https://images.unsplash.com/photo-1559563458-527698bf5295?w=900&q=80",
   plush2:
     "https://images.unsplash.com/photo-1620421680010-0766ff230392?w=900&q=80",
-  stickyNotes:
-    "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=900&q=80",
-  mug1: "https://images.unsplash.com/photo-1602874801007-aa377efa0bc4?w=900&q=80",
-  mug2: "https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=900&q=80",
-  kit: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
-  kit2: "https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=900&q=80",
-  wallpaper:
-    "https://images.unsplash.com/photo-1486916856361-bf2999da9d57?w=900&q=80",
-  poster:
-    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80",
+  plush3:
+    "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=900&q=80",
+
+  // ── Aksesoris (Keychain & Pin) ───────────────────────────────────
+  key1: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=900&q=80",
+  pin1: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&q=80",
+  key2: "https://images.unsplash.com/photo-1593726852316-7ea4dec0aa9f?w=900&q=80",
 };
 
 export const CATEGORIES: Category[] = [
   {
-    slug: "kids-books",
-    name: "Buku Anak",
+    slug: "buku-cerita",
+    name: "Buku Cerita",
     emoji: "📖",
     description: "cerita lembut untuk hati yang sedang tumbuh.",
   },
   {
-    slug: "activity-books",
-    name: "Buku Aktivitas",
+    slug: "buku-mewarnai",
+    name: "Buku Mewarnai",
     emoji: "🖍️",
     description: "halaman tenang untuk sore yang pelan.",
   },
   {
-    slug: "flashcards",
-    name: "Flashcards",
-    emoji: "🃏",
-    description: "kartu kecil untuk rasa ingin tahu yang besar.",
+    slug: "stiker",
+    name: "Stiker",
+    emoji: "✨",
+    description: "stiker mungil untuk hari-hari yang manis.",
   },
   {
-    slug: "toddler-tshirts",
-    name: "Baju Mungil",
+    slug: "stiker-doa",
+    name: "Stiker Doa Harian",
+    emoji: "🌙",
+    description: "pengingat lembut untuk doa-doa kecil.",
+  },
+  {
+    slug: "kaos",
+    name: "Kaos & Apparel",
     emoji: "👕",
     description: "kain lembut untuk hari-hari kecil.",
   },
   {
-    slug: "parenting-merch",
-    name: "Untuk Orang Tua",
-    emoji: "☕",
-    description: "barang hangat untuk pagi yang pelan.",
+    slug: "poster",
+    name: "Poster",
+    emoji: "🖼️",
+    description: "cetakan hangat untuk dinding rumah.",
+  },
+  {
+    slug: "boneka",
+    name: "Boneka",
+    emoji: "🧸",
+    description: "teman pelukan yang selalu siap.",
+  },
+  {
+    slug: "aksesoris",
+    name: "Aksesoris",
+    emoji: "🔑",
+    description: "pin dan gantungan kunci si kecil.",
   },
 ];
 
 export const SAMPLE_PRODUCTS: Product[] = [
   // ═══════════════════════════════════════════
-  // Kids Books
+  // Buku Cerita
   // ═══════════════════════════════════════════
   {
     id: "p-101",
     name: "Tiny Brave Steps",
     slug: "tiny-brave-steps",
-    category: "kids-books",
+    category: "buku-cerita",
     price: 109000,
     description:
       "Cerita lembut tentang langkah pertama si kecil — keberanian yang tumbuh perlahan, satu halaman setiap malam. Kertas tebal, ilustrasi pastel, dan kata-kata yang menenangkan.",
     tagline: "small stories for growing hearts",
-    images: [IMG.notebook1, IMG.notebook3, IMG.cozy1],
+    images: [IMG.bookOpen, IMG.bookStack, IMG.bookBed],
     stock: 28,
     bestseller: true,
     featured: true,
@@ -116,12 +165,12 @@ export const SAMPLE_PRODUCTS: Product[] = [
     id: "p-102",
     name: "Goodnight Little Moon",
     slug: "goodnight-little-moon",
-    category: "kids-books",
+    category: "buku-cerita",
     price: 119000,
     description:
       "Ritual menjelang tidur yang menenangkan — buku rima lembut untuk dibaca bersama saat lampu malam mulai redup. Sampul kain, sudut tumpul, aman untuk tangan mungil.",
     tagline: "for cozy bedtime moments",
-    images: [IMG.notebook3, IMG.poster, IMG.cozy2],
+    images: [IMG.bookBed, IMG.bookFlat, IMG.bookKid],
     stock: 24,
     featured: true,
   },
@@ -129,259 +178,298 @@ export const SAMPLE_PRODUCTS: Product[] = [
     id: "p-103",
     name: "Quiet Morning Stories",
     slug: "quiet-morning-stories",
-    category: "kids-books",
+    category: "buku-cerita",
     price: 99000,
     description:
-      "Kumpulan cerita pendek untuk pagi yang pelan. Cocok dibaca sambil sarapan, saat cahaya hangat baru menembus tirai. 32 halaman, 8 cerita.",
+      "Kumpulan delapan cerita pendek untuk pagi yang pelan. Cocok dibaca sambil sarapan, saat cahaya hangat baru menembus tirai. 32 halaman, kertas matte.",
     tagline: "gentle learning for little minds",
-    images: [IMG.notebook2, IMG.cozy1],
+    images: [IMG.bookFlat, IMG.bookKid],
     stock: 32,
   },
   {
     id: "p-104",
     name: "My First Feelings Book",
     slug: "my-first-feelings-book",
-    category: "kids-books",
+    category: "buku-cerita",
     price: 115000,
     description:
       "Buku interaktif untuk mengenalkan perasaan pertama — senang, sedih, takut, tenang — dengan ilustrasi lembut dan halaman touch & feel.",
     tagline: "small stories for growing hearts",
-    images: [IMG.notebook3, IMG.notebook1],
+    images: [IMG.bookStack, IMG.bookOpen],
     stock: 18,
     bestseller: true,
   },
-  {
-    id: "p-105",
-    name: "Little Explorer Journal",
-    slug: "little-explorer-journal",
-    category: "kids-books",
-    price: 95000,
-    description:
-      "Jurnal mungil untuk mencatat hal baru yang ditemukan si kecil hari ini — dari bentuk daun di kebun sampai bunyi hujan di jendela. Diisi bersama orang tua.",
-    tagline: "gentle learning for little minds",
-    images: [IMG.notebook2, IMG.cozy2],
-    stock: 26,
-  },
 
   // ═══════════════════════════════════════════
-  // Activity Books
+  // Buku Mewarnai
   // ═══════════════════════════════════════════
   {
     id: "p-201",
     name: "Calm Coloring Time",
     slug: "calm-coloring-time",
-    category: "activity-books",
+    category: "buku-mewarnai",
     price: 69000,
     description:
-      "Halaman mewarnai bermotif lembut dengan garis tebal dan ruang luas — dirancang untuk anak yang baru belajar memegang krayon. 48 halaman, kertas matte tebal.",
+      "Halaman mewarnai bermotif lembut dengan garis tebal dan ruang luas — dirancang untuk anak yang baru belajar memegang krayon. 48 halaman, kertas tebal yang tidak tembus.",
     tagline: "quiet little moments of creativity",
-    images: [IMG.stickers1, IMG.stickers2, IMG.notebook2],
+    images: [IMG.crayons1, IMG.drawKid, IMG.crayons2],
     stock: 45,
     bestseller: true,
     featured: true,
   },
   {
     id: "p-202",
-    name: "Rainy Day Workbook",
-    slug: "rainy-day-workbook",
-    category: "activity-books",
-    price: 79000,
+    name: "Rainy Day Coloring Pages",
+    slug: "rainy-day-coloring-pages",
+    category: "buku-mewarnai",
+    price: 65000,
     description:
-      "Kumpulan aktivitas tenang untuk sore yang mendung — labirin lembut, titik-titik, dan teka-teki ringan. Ditemani secangkir cokelat hangat lebih baik lagi.",
+      "Halaman mewarnai bertema awan, hujan, dan teh hangat — untuk sore yang mendung. Ditemani secangkir cokelat hangat lebih baik lagi.",
     tagline: "for slow afternoon learning",
-    images: [IMG.notebook2, IMG.stickyNotes],
-    stock: 34,
+    images: [IMG.crayons2, IMG.drawKid],
+    stock: 38,
   },
   {
     id: "p-203",
-    name: "Play & Learn Journal",
-    slug: "play-and-learn-journal",
-    category: "activity-books",
-    price: 85000,
+    name: "Tiny Hands Coloring Book",
+    slug: "tiny-hands-coloring-book",
+    category: "buku-mewarnai",
+    price: 79000,
     description:
-      "Gabungan halaman menggambar, menulis, dan bermain peran — untuk anak usia 4–7 tahun yang sedang ingin tahu segalanya. 64 halaman penuh kemungkinan.",
+      "Buku mewarnai pertama dengan motif sederhana — pas untuk tangan mungil yang sedang belajar mengontrol gerakan. Bebas BPA, tinta water-based.",
     tagline: "playful pages for curious hands",
-    images: [IMG.notebook1, IMG.cozy1],
-    stock: 28,
+    images: [IMG.drawKid, IMG.crayons1],
+    stock: 30,
     featured: true,
-  },
-  {
-    id: "p-204",
-    name: "Tiny Focus Book",
-    slug: "tiny-focus-book",
-    category: "activity-books",
-    price: 55000,
-    description:
-      "Buku saku untuk melatih fokus — pola sederhana yang ditelusuri dengan jari, ideal untuk perjalanan singkat atau menunggu di restoran. Ukuran pas di tangan kecil.",
-    tagline: "quiet little moments of creativity",
-    images: [IMG.notebook2, IMG.notebook3],
-    stock: 60,
   },
 
   // ═══════════════════════════════════════════
-  // Flashcards
+  // Stiker
   // ═══════════════════════════════════════════
   {
     id: "p-301",
-    name: "Little Words Flashcards",
-    slug: "little-words-flashcards",
-    category: "flashcards",
-    price: 89000,
+    name: "Tiny Wins Sticker Pack",
+    slug: "tiny-wins-sticker-pack",
+    category: "stiker",
+    price: 35000,
     description:
-      "60 kartu dua bahasa (ID/EN) dengan kata-kata pertama — keluarga, perasaan, alam — dicetak di kertas matte tebal dan dilaminasi. Dikemas dalam kotak kayu mini.",
-    tagline: "small cards for curious minds",
-    images: [IMG.cards1, IMG.cards2],
-    stock: 38,
+      "30 stiker waterproof untuk merayakan kemenangan kecil — 'kamu hebat hari ini', 'istirahat dulu yuk', dan banyak lagi. Tempel di laptop, botol minum, atau jurnal.",
+    tagline: "little things that feel comforting",
+    images: [IMG.sticker1, IMG.sticker2, IMG.stickerSheet],
+    stock: 80,
     bestseller: true,
     featured: true,
   },
   {
     id: "p-302",
-    name: "Tiny Nature Cards",
-    slug: "tiny-nature-cards",
-    category: "flashcards",
-    price: 95000,
+    name: "Soft Words Stickers",
+    slug: "soft-words-stickers",
+    category: "stiker",
+    price: 39000,
     description:
-      "Kartu kenalan dengan alam — daun, bunga, batu, awan. Foto natural berlatar tenang, cocok untuk dibawa berjalan-jalan di taman bersama si kecil.",
-    tagline: "learning gently, one card at a time",
-    images: [IMG.kit, IMG.kit2],
-    stock: 30,
+      "Stiker dengan kata-kata penyemangat lembut dalam Bahasa Indonesia dan English — cocok ditempel di jurnal, kotak makan, atau laptop kerja.",
+    tagline: "small notes for soft days",
+    images: [IMG.sticker2, IMG.sticker1],
+    stock: 65,
   },
   {
     id: "p-303",
-    name: "Animal Friends Learning Set",
-    slug: "animal-friends-learning-set",
-    category: "flashcards",
-    price: 115000,
+    name: "Tiny Mo Sticker Sheet",
+    slug: "tiny-mo-sticker-sheet",
+    category: "stiker",
+    price: 29000,
     description:
-      "Set kartu Montessori-inspired berisi 48 hewan — dengan nama, suara, dan habitat. Dikemas dalam kotak kain lembut yang bisa dipakai berkali-kali.",
-    tagline: "small cards for curious minds",
-    images: [IMG.plush, IMG.plush2],
-    stock: 20,
-    featured: true,
-  },
-  {
-    id: "p-304",
-    name: "First Alphabet Moments",
-    slug: "first-alphabet-moments",
-    category: "flashcards",
-    price: 75000,
-    description:
-      "26 kartu huruf dengan ilustrasi pastel untuk diperkenalkan satu per satu — A untuk awan, B untuk bunga, C untuk cahaya pagi.",
-    tagline: "learning gently, one card at a time",
-    images: [IMG.cards1, IMG.wallpaper],
-    stock: 42,
+      "Lembar stiker dengan ilustrasi Mo si maskot dalam berbagai pose — untuk dipajang, dikoleksi, atau dibagikan ke teman sekolah.",
+    tagline: "little Mo, little smiles",
+    images: [IMG.stickerSheet, IMG.sticker1],
+    stock: 90,
   },
 
   // ═══════════════════════════════════════════
-  // Toddler T-Shirts
+  // Stiker Doa Harian
   // ═══════════════════════════════════════════
   {
     id: "p-401",
-    name: "Soft Sunday Tee",
-    slug: "soft-sunday-tee",
-    category: "toddler-tshirts",
-    price: 139000,
+    name: "Doa Harian Sticker Set",
+    slug: "doa-harian-sticker-set",
+    category: "stiker-doa",
+    price: 45000,
     description:
-      "Kaos katun supima organik dengan potongan oversized lembut — sempurna untuk hari Minggu di rumah. Jahitan rata, label dari kain lembut. Ukuran 1–6 tahun.",
-    tagline: "tiny clothes for cozy days",
-    images: [IMG.plush, IMG.kit, IMG.cozy2],
-    stock: 22,
+      "Stiker pengingat doa harian untuk anak — sebelum makan, sebelum tidur, masuk dan keluar rumah. Ilustrasi pastel lembut, ukuran pas untuk dinding kamar.",
+    tagline: "soft reminders, small prayers",
+    images: [IMG.doaSticker1, IMG.doaSticker2],
+    stock: 50,
     bestseller: true,
     featured: true,
   },
   {
     id: "p-402",
+    name: "Adab Pagi Stickers",
+    slug: "adab-pagi-stickers",
+    category: "stiker-doa",
+    price: 49000,
+    description:
+      "Stiker adab pagi untuk si kecil — bangun tidur, sarapan, bersiap berangkat. Cocok ditempel di kulkas atau cermin kamar mandi sebagai pengingat lembut.",
+    tagline: "tiny habits, gentle days",
+    images: [IMG.doaSticker2, IMG.doaSticker1],
+    stock: 40,
+  },
+
+  // ═══════════════════════════════════════════
+  // Kaos & Apparel
+  // ═══════════════════════════════════════════
+  {
+    id: "p-501",
+    name: "Soft Sunday Tee",
+    slug: "soft-sunday-tee",
+    category: "kaos",
+    price: 139000,
+    description:
+      "Kaos katun supima organik dengan potongan oversized lembut — sempurna untuk hari Minggu di rumah. Jahitan rata, label dari kain lembut. Ukuran 1–6 tahun.",
+    tagline: "tiny clothes for cozy days",
+    images: [IMG.tee1, IMG.teeKid, IMG.tee2],
+    stock: 22,
+    bestseller: true,
+    featured: true,
+  },
+  {
+    id: "p-502",
     name: "Tiny Explorer Shirt",
     slug: "tiny-explorer-shirt",
-    category: "toddler-tshirts",
+    category: "kaos",
     price: 149000,
     description:
       "Kaos lengan pendek dengan sablon lembut bertuliskan 'tiny explorer' — kain bernapas dan ringan, untuk anak aktif yang suka berlari di rumput.",
     tagline: "soft cotton for tiny adventures",
-    images: [IMG.plush2, IMG.kit2],
+    images: [IMG.tee2, IMG.teeKid],
     stock: 26,
   },
   {
-    id: "p-403",
-    name: "Warm Hug Club",
-    slug: "warm-hug-club",
-    category: "toddler-tshirts",
+    id: "p-503",
+    name: "Warm Hug Club Tee",
+    slug: "warm-hug-club-tee",
+    category: "kaos",
     price: 159000,
     description:
       "Kaos panjang katun lembut dengan motif 'warm hug club' di dada — cocok untuk hari sejuk atau dipakai berlapis dengan jaket favoritnya.",
     tagline: "tiny clothes for cozy days",
-    images: [IMG.kit, IMG.plush],
+    images: [IMG.teeKid, IMG.tee1],
     stock: 18,
     featured: true,
   },
+
+  // ═══════════════════════════════════════════
+  // Poster
+  // ═══════════════════════════════════════════
   {
-    id: "p-404",
-    name: "Little Dreamer Tee",
-    slug: "little-dreamer-tee",
-    category: "toddler-tshirts",
-    price: 129000,
+    id: "p-601",
+    name: "Tiny Morning Wall Art",
+    slug: "tiny-morning-wall-art",
+    category: "poster",
+    price: 89000,
     description:
-      "Pewarnaan natural plant-based, jahitan halus, dan label dari bahan lembut — tidak menggesek kulit. Untuk anak yang lagi rajin bermimpi.",
-    tagline: "soft cotton for tiny adventures",
-    images: [IMG.plush2, IMG.cozy2],
-    stock: 24,
+      "Poster minimal dengan ilustrasi pagi yang tenang — secangkir teh, tirai yang terbuka, cahaya hangat. Ukuran A3, dicetak di kertas matte premium.",
+    tagline: "gentle art for soft rooms",
+    images: [IMG.posterArt, IMG.posterFrame],
+    stock: 35,
+    bestseller: true,
+  },
+  {
+    id: "p-602",
+    name: "Slow Living Print",
+    slug: "slow-living-print",
+    category: "poster",
+    price: 95000,
+    description:
+      "Poster tipografi 'slow living' dengan warna pastel lembut — untuk mengingatkan diri sendiri agar tidak buru-buru. A3, kertas matte 200gsm.",
+    tagline: "a soft reminder on the wall",
+    images: [IMG.posterFrame, IMG.posterWall],
+    stock: 40,
+    featured: true,
+  },
+  {
+    id: "p-603",
+    name: "Asmaul Husna Pastel Poster",
+    slug: "asmaul-husna-pastel-poster",
+    category: "poster",
+    price: 119000,
+    description:
+      "Poster Asmaul Husna dengan kaligrafi modern dan warna pastel hangat — pas untuk kamar anak. Dicetak di kertas matte premium ukuran A3.",
+    tagline: "soft words for warm walls",
+    images: [IMG.posterWall, IMG.posterArt],
+    stock: 28,
   },
 
   // ═══════════════════════════════════════════
-  // Parenting Merchandise
+  // Boneka
   // ═══════════════════════════════════════════
   {
-    id: "p-501",
-    name: "Warm Hug Tote Bag",
-    slug: "warm-hug-tote-bag",
-    category: "parenting-merch",
-    price: 89000,
+    id: "p-701",
+    name: "Mo Plush",
+    slug: "mo-plush",
+    category: "boneka",
+    price: 169000,
     description:
-      "Tote bag kanvas tebal dengan sablon 'warm hug' — cukup besar untuk perlengkapan anak, buku, dan satu termos hangat. Pegangan lembut yang tidak menggores bahu.",
-    tagline: "little things that feel comforting",
-    images: [IMG.cozy1, IMG.kit2],
-    stock: 40,
+      "Boneka maskot Mo setinggi 25cm — kain bulu lembut, isi serat poliester anti-alergi, jahitan ganda. Teman pelukan si kecil di kasur atau di perjalanan.",
+    tagline: "your tiny pocket comfort",
+    images: [IMG.plush1, IMG.plush2, IMG.plush3],
+    stock: 24,
     bestseller: true,
-  },
-  {
-    id: "p-502",
-    name: "Soft Morning Mug",
-    slug: "soft-morning-mug",
-    category: "parenting-merch",
-    price: 99000,
-    description:
-      "Mug keramik dengan glaze matte krem dan ilustrasi mini di sisi dalam — untuk teh hangat sebelum si kecil bangun. Kapasitas 320 ml, aman dishwasher.",
-    tagline: "for slow mornings and warm drinks",
-    images: [IMG.mug1, IMG.mug2],
-    stock: 30,
     featured: true,
   },
   {
-    id: "p-503",
-    name: "Tiny Wins Sticker Pack",
-    slug: "tiny-wins-sticker-pack",
-    category: "parenting-merch",
-    price: 35000,
+    id: "p-702",
+    name: "Little Hug Plushie",
+    slug: "little-hug-plushie",
+    category: "boneka",
+    price: 129000,
     description:
-      "30 stiker waterproof untuk merayakan kemenangan kecil — 'kamu hebat hari ini', 'istirahat dulu yuk', dan banyak lagi. Tempel di laptop, botol minum, atau jurnal.",
-    tagline: "little things that feel comforting",
-    images: [IMG.stickers1, IMG.stickers2],
-    stock: 80,
-    bestseller: true,
+      "Versi mini dari Mo Plush — setinggi 15cm, cukup kecil untuk masuk tas sekolah. Bisa dicuci dengan mesin (gentle cycle), aman untuk bayi.",
+    tagline: "small hugs, anywhere",
+    images: [IMG.plush2, IMG.plush3],
+    stock: 30,
   },
+
+  // ═══════════════════════════════════════════
+  // Aksesoris (Keychain & Pin)
+  // ═══════════════════════════════════════════
   {
-    id: "p-504",
-    name: "Notes for Gentle Days",
-    slug: "notes-for-gentle-days",
-    category: "parenting-merch",
+    id: "p-801",
+    name: "Tiny Mo Keychain",
+    slug: "tiny-mo-keychain",
+    category: "aksesoris",
     price: 49000,
     description:
-      "Catatan adhesif pastel dengan kata-kata penyemangat lembut — cocok ditempel di kulkas, laptop, atau lunch box anak. 50 lembar per pack.",
-    tagline: "for slow mornings and warm drinks",
-    images: [IMG.stickyNotes, IMG.notebook2],
-    stock: 55,
+      "Gantungan kunci Mo dari acrylic glossy dengan rantai logam berlapis emas — cocok untuk kunci rumah, tas sekolah, atau tas si kecil.",
+    tagline: "carry a little softness",
+    images: [IMG.key1, IMG.key2],
+    stock: 60,
+    bestseller: true,
+  },
+  {
+    id: "p-802",
+    name: "Soft Days Enamel Pin",
+    slug: "soft-days-enamel-pin",
+    category: "aksesoris",
+    price: 39000,
+    description:
+      "Pin enamel keras dengan ilustrasi Mo dan tulisan 'soft days' — 25mm, warna pastel matte. Pas disematkan di tas, jaket, atau topi favorit.",
+    tagline: "little wins, worn proudly",
+    images: [IMG.pin1, IMG.key1],
+    stock: 70,
     featured: true,
+  },
+  {
+    id: "p-803",
+    name: "Warm Hug Keychain Set",
+    slug: "warm-hug-keychain-set",
+    category: "aksesoris",
+    price: 59000,
+    description:
+      "Set tiga gantungan kunci berbeda warna — krem, sage, dan tangerine pastel. Cocok dibagi dengan teman atau dikoleksi sendiri.",
+    tagline: "tiny things for everyday",
+    images: [IMG.key2, IMG.pin1],
+    stock: 45,
   },
 ];
 

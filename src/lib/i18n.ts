@@ -281,7 +281,7 @@ export const STRINGS: Record<Lang, Dict> = {
     section_related_title: "Dari rak hangat yang sama.",
     see_all: "Lihat semua →",
 
-    product_search_placeholder: "Cari buku, flashcard, baju mungil…",
+    product_search_placeholder: "Cari buku, stiker, kaos, boneka…",
     product_filter_all: "Semua",
     product_listing_title: "Rak lengkap untuk hari-hari kecil.",
     product_listing_subtitle:
@@ -521,7 +521,7 @@ export const STRINGS: Record<Lang, Dict> = {
     section_related_title: "From the same warm shelf.",
     see_all: "See all →",
 
-    product_search_placeholder: "Search storybooks, flashcards, tiny tees…",
+    product_search_placeholder: "Search storybooks, stickers, tees, plush…",
     product_filter_all: "All",
     product_listing_title: "Our full shelf for small days.",
     product_listing_subtitle:

@@ -18,7 +18,7 @@ export default function StickyCheckoutBar({
 }: Props) {
   const { t } = useLang();
   return (
-    <div className="fixed inset-x-0 bottom-[80px] z-30 px-4 sm:hidden">
+    <div className="fixed inset-x-0 bottom-3 z-30 px-4 pb-[max(0px,env(safe-area-inset-bottom))] sm:hidden">
       <div className="mx-auto flex max-w-md items-center gap-2.5 rounded-full glass-thick p-1.5">
         <div className="flex items-center gap-1 rounded-full bg-ink-900/[0.05] p-0.5">
           <button

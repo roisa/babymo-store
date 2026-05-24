@@ -49,19 +49,29 @@ function ProductsInner() {
               className="input pl-11"
             />
           </div>
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-0.5 hide-scrollbar">
-            <Pill active={activeCat === "all"} onClick={() => setActiveCat("all")}>
-              {t.product_filter_all}
-            </Pill>
-            {CATEGORIES.map((c) => (
-              <Pill
-                key={c.slug}
-                active={activeCat === c.slug}
-                onClick={() => setActiveCat(c.slug)}
-              >
-                <span className="mr-1">{c.emoji}</span> {c.name}
+          <div
+            className="mt-3 -mx-3 overflow-x-auto pb-0.5 hide-scrollbar"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0, #000 12px, #000 calc(100% - 28px), transparent 100%)",
+              maskImage:
+                "linear-gradient(to right, transparent 0, #000 12px, #000 calc(100% - 28px), transparent 100%)",
+            }}
+          >
+            <div className="flex gap-2 px-3 pr-8">
+              <Pill active={activeCat === "all"} onClick={() => setActiveCat("all")}>
+                {t.product_filter_all}
               </Pill>
-            ))}
+              {CATEGORIES.map((c) => (
+                <Pill
+                  key={c.slug}
+                  active={activeCat === c.slug}
+                  onClick={() => setActiveCat(c.slug)}
+                >
+                  <span className="mr-1">{c.emoji}</span> {c.name}
+                </Pill>
+              ))}
+            </div>
           </div>
         </div>
       </div>
