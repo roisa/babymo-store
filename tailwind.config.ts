@@ -105,6 +105,10 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
         "press-in": "pressIn 0.2s ease-out",
+        marquee: "marquee linear infinite",
+        "drift-slow": "drift 18s ease-in-out infinite",
+        "aurora-shift": "auroraShift 14s ease-in-out infinite",
+        "pulse-soft": "pulseSoft 2.4s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: { from: { opacity: "0" }, to: { opacity: "1" } },
@@ -127,6 +131,27 @@ const config: Config = {
         pressIn: {
           "0%": { transform: "scale(1)" },
           "100%": { transform: "scale(0.96)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(20px, -10px) scale(1.05)" },
+          "66%": { transform: "translate(-15px, 12px) scale(0.97)" },
+        },
+        auroraShift: {
+          "0%, 100%": {
+            backgroundPosition: "0% 0%, 100% 0%, 50% 100%",
+          },
+          "50%": {
+            backgroundPosition: "15% 10%, 85% 20%, 60% 90%",
+          },
+        },
+        pulseSoft: {
+          "0%, 100%": { opacity: "1", transform: "scale(1)" },
+          "50%": { opacity: "0.85", transform: "scale(1.08)" },
         },
       },
       backgroundImage: {

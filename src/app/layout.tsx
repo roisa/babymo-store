@@ -88,7 +88,7 @@ export default function RootLayout({
           <ToastProvider>
             <CartProvider>
               <Header />
-              <main className="pb-32 sm:pb-12">{children}</main>
+              <main>{children}</main>
               <Footer />
               <MobileNav />
               <FloatingCartButton />

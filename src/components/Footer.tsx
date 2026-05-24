@@ -8,7 +8,7 @@ import { SOCIAL } from "@/lib/social";
 export default function Footer() {
   const { t } = useLang();
   return (
-    <footer className="mt-24 border-t border-ink-900/6 bg-warmwhite/60 backdrop-blur-xl">
+    <footer className="mt-24 border-t border-ink-900/[0.06] bg-warmwhite/60 backdrop-blur-xl pb-[max(7rem,calc(env(safe-area-inset-bottom)+6rem))] sm:pb-0">
       <div className="container-soft py-14 sm:py-16">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
