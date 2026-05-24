@@ -20,9 +20,10 @@ export default function Header() {
 
   return (
     <header
+      style={{ willChange: "background-color", transform: "translateZ(0)" }}
       className={`sticky top-0 z-40 transition-all duration-300 ease-spring ${
         scrolled
-          ? "bg-warmwhite/70 backdrop-blur-2xl backdrop-saturate-150"
+          ? "bg-warmwhite/80 backdrop-blur-xl backdrop-saturate-150"
           : "bg-transparent"
       }`}
     >

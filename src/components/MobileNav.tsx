@@ -22,8 +22,11 @@ export default function MobileNav() {
     pathname === href || (href !== "/" && pathname?.startsWith(href));
 
   return (
-    <nav className="fixed inset-x-0 bottom-3 z-30 px-4 pb-[max(0px,env(safe-area-inset-bottom))] sm:hidden">
-      <div className="mx-auto flex max-w-md items-center justify-around rounded-full glass-thick px-2 py-1.5">
+    <nav
+      style={{ willChange: "transform", transform: "translateZ(0)" }}
+      className="fixed inset-x-0 bottom-3 z-30 px-4 pb-[max(0px,env(safe-area-inset-bottom))] sm:hidden"
+    >
+      <div className="mx-auto flex max-w-md items-center justify-around rounded-full bg-white/85 px-2 py-1.5 ring-1 ring-ink-900/[0.06] shadow-ios-lg backdrop-blur-xl backdrop-saturate-150">
         <Tab href="/" active={pathname === "/"} label={t.nav_home}>
           <HomeIcon />
         </Tab>
