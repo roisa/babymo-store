@@ -5,20 +5,20 @@ import { useLang } from "@/context/LanguageContext";
 
 const QUOTES = {
   id: [
-    "kamu sudah melakukan lebih banyak dari yang kamu pikir.",
-    "kelembutan juga adalah kekuatan.",
-    "perasaanmu pantas mendapat ruang yang aman.",
-    "hari-hari kecil juga berarti.",
-    "jadi teman yang dulu kamu butuhkan.",
-    "istirahat itu diperbolehkan, selalu.",
+    "tumbuh pelan-pelan itu boleh.",
+    "hari yang tenang bukan hari yang kosong.",
+    "belajar bisa dimulai dari pelukan.",
+    "anak-anak ingat momen, bukan barang.",
+    "kasih sayang sederhana sudah cukup.",
+    "rumah hangat dimulai dari hati yang tenang.",
   ],
   en: [
-    "you are doing more than you think you are.",
-    "softness is also strength.",
-    "your feelings deserve a safe little space.",
-    "small days matter too.",
-    "be the friend you needed.",
-    "rest is allowed. always.",
+    "growing slowly is allowed.",
+    "calm days aren't empty days.",
+    "learning can begin with a hug.",
+    "kids remember moments, not things.",
+    "simple love is more than enough.",
+    "warm homes start with calm hearts.",
   ],
 };
 

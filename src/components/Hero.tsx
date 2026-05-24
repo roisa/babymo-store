@@ -9,15 +9,14 @@ import AuroraCanvas from "./AuroraCanvas";
 export default function Hero() {
   const { t, lang } = useLang();
 
+  // Last word rotates; period stays attached so the headline never feels open.
   const rotatorWords =
     lang === "id"
-      ? ["lembut", "hangat", "tenang", "sederhana"]
-      : ["soft", "warm", "calm", "simple"];
+      ? ["lembut.", "hangat.", "tenang.", "pelan.", "sederhana."]
+      : ["soft.", "warm.", "gentle.", "slow.", "simple."];
 
-  const subjectBefore =
-    lang === "id" ? "Kenyamanan kecil yang" : "Small comforts that feel";
-  const subjectAfter =
-    lang === "id" ? "untuk hari-hari kamu." : "for your every day.";
+  const subjectBefore = lang === "id" ? "Sesuatu yang" : "Something";
+  const subjectAfter = "";
 
   return (
     <section className="relative overflow-hidden px-3 pt-3 sm:px-5 sm:pt-5">

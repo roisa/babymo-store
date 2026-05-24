@@ -6,46 +6,46 @@ import { useLang } from "@/context/LanguageContext";
 const TESTIMONIALS = {
   id: [
     {
-      name: "Rana, 21",
-      location: "Jakarta",
-      text: "Bukunya cantik banget dan affirmation card-nya bener-bener bikin tenang waktu hari berat 🥹",
-    },
-    {
-      name: "Naomi, 26",
-      location: "Bandung",
-      text: "Packaging-nya bikin happy. Berasa unboxing hadiah dari diri sendiri ✨ love love love.",
-    },
-    {
-      name: "Salwa, 19",
+      name: "Rina",
       location: "Surabaya",
-      text: "Mood sticker pack-nya lucu banget, tempel di laptop bikin kerja jadi lebih lembut rasanya.",
+      text: "Anakku jadi lebih suka belajar dengan santai. Buku aktivitasnya jadi ritual sore favorit kami sekarang.",
     },
     {
-      name: "Kayla, 24",
+      name: "Dita",
+      location: "Bandung",
+      text: "Rasanya seperti punya quality time yang hangat. Pelan-pelan tapi penuh.",
+    },
+    {
+      name: "Maya",
+      location: "Jakarta",
+      text: "Flashcard-nya bikin belajar terasa lebih lembut — anakku malah yang minta lanjut.",
+    },
+    {
+      name: "Sarah",
       location: "Yogyakarta",
-      text: "Worth every rupiah. Self care kit-nya jadi ritual mingguan favorit aku sekarang.",
+      text: "Buku ceritanya jadi ritual sebelum tidur favorit kami. Kualitas kertasnya juga lembut di tangan.",
     },
   ],
   en: [
     {
-      name: "Rana, 21",
-      location: "Jakarta",
-      text: "The journal is gorgeous and the affirmation cards genuinely calm me down on the hard days 🥹",
-    },
-    {
-      name: "Naomi, 26",
-      location: "Bandung",
-      text: "The packaging makes me happy. It really feels like unboxing a gift to myself ✨ love love love.",
-    },
-    {
-      name: "Salwa, 19",
+      name: "Rina",
       location: "Surabaya",
-      text: "The mood sticker pack is so cute — sticking them on my laptop makes work feel a bit softer.",
+      text: "My little one actually enjoys learning at her own pace now. The activity book became our favourite afternoon ritual.",
     },
     {
-      name: "Kayla, 24",
+      name: "Dita",
+      location: "Bandung",
+      text: "It feels like having a warm quality time together. Slow but full.",
+    },
+    {
+      name: "Maya",
+      location: "Jakarta",
+      text: "The flashcards make learning feel gentle — she's the one asking to keep going.",
+    },
+    {
+      name: "Sarah",
       location: "Yogyakarta",
-      text: "Worth every rupiah. The self-care kit is my new weekly ritual.",
+      text: "The storybook is now our favourite bedtime ritual. The paper feels soft in our hands too.",
     },
   ],
 };
@@ -66,7 +66,7 @@ export default function Testimonials() {
           {list.map((item) => (
             <figure
               key={item.name}
-              className="rounded-ios-2xl bg-white p-5 ring-1 ring-ink-900/6 shadow-ios transition hover:-translate-y-0.5 hover:shadow-ios-lg"
+              className="rounded-ios-2xl bg-white p-5 ring-1 ring-ink-900/[0.06] shadow-ios transition hover:-translate-y-0.5 hover:shadow-ios-lg"
             >
               <div className="flex gap-0.5 text-tangerine-400">
                 {[0, 1, 2, 3, 4].map((i) => (

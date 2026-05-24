@@ -11,27 +11,30 @@ import CartDrawer from "@/components/CartDrawer";
 
 export const metadata: Metadata = {
   title: {
-    default: "Baby Mo — kenyamanan kecil untuk hari-hari kamu",
+    default: "Baby Mo — sesuatu yang lembut untuk hari-hari kecil",
     template: "%s · Baby Mo",
   },
   description:
-    "Baby Mo membuat jurnal emosional, mood stickers, kartu afirmasi, dan barang lifestyle lembut untuk membuat harimu sedikit lebih hangat.",
+    "Buku cerita anak, buku aktivitas, flashcards Montessori, baju mungil katun organik, dan barang hangat untuk orang tua — dipilih dengan tenang untuk keluarga yang tumbuh pelan-pelan.",
   keywords: [
     "baby mo",
     "babymo",
-    "jurnal emosional",
-    "self care indonesia",
-    "stationery",
-    "wellness",
-    "cozy lifestyle",
+    "buku anak",
+    "buku aktivitas anak",
+    "flashcard montessori",
+    "baju anak katun organik",
+    "homeschool indonesia",
+    "parenting lifestyle",
+    "slow parenting",
+    "tote bag parenting",
   ],
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://babymo.id",
   ),
   openGraph: {
-    title: "Baby Mo — kenyamanan kecil untuk hari-hari kamu",
+    title: "Baby Mo — sesuatu yang lembut untuk hari-hari kecil",
     description:
-      "Jurnal emosional, mood stickers, kartu afirmasi, dan barang lembut lainnya.",
+      "Buku cerita, kartu belajar, baju mungil, dan barang hangat untuk keluarga yang tumbuh pelan-pelan.",
     type: "website",
     siteName: "Baby Mo",
     locale: "id_ID",
@@ -39,7 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Baby Mo",
-    description: "Kenyamanan kecil untuk hari-hari kamu.",
+    description: "Sesuatu yang lembut untuk hari-hari kecil.",
   },
   icons: {
     icon: [
