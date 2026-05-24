@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Plus Jakarta Sans", "SF Pro Text", system-ui, sans-serif;
+  --font-display: "DM Serif Display", "Times New Roman", serif;
+}
+
+html,
+body {
+  background: #faf7f2;
+  color: #2a241d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+}
+
+/* subtle pastel grain — adds warmth without busy-ness */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(
+      circle at 10% 10%,
+      rgba(252, 231, 235, 0.55),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(237, 227, 245, 0.55),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(251, 246, 238, 0.6),
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+@layer components {
+  .container-soft {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-ink-900 text-cream-50 hover:bg-ink-600 hover:shadow-glow;
+  }
+  .btn-pink {
+    @apply btn bg-pinky-300 text-ink-900 hover:bg-pinky-400 hover:shadow-glow;
+  }
+  .btn-soft {
+    @apply btn bg-white/80 backdrop-blur text-ink-900 ring-1 ring-ink-900/10 hover:bg-white hover:ring-ink-900/20;
+  }
+  .btn-ghost {
+    @apply btn text-ink-600 hover:bg-cream-100;
+  }
+
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl ring-1 ring-white/60 shadow-soft;
+  }
+
+  .card {
+    @apply rounded-3xl bg-white shadow-card ring-1 ring-ink-900/5;
+  }
+
+  .input {
+    @apply w-full rounded-2xl border-0 bg-white/80 px-4 py-3 text-sm text-ink-900 placeholder:text-ink-400 ring-1 ring-ink-900/10 outline-none transition focus:ring-2 focus:ring-pinky-300;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-medium text-ink-600;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-cream-100 px-3 py-1 text-xs text-ink-600 ring-1 ring-ink-900/5;
+  }
+
+  .skeleton {
+    @apply rounded-2xl bg-gradient-to-r from-cream-100 via-cream-50 to-cream-100 bg-[length:200%_100%] animate-shimmer;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* print styles for shipping label */
+@media print {
+  body::before {
+    display: none;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  @page {
+    margin: 5mm;
+    size: 100mm 150mm;
+  }
+}
