@@ -54,7 +54,7 @@ const FAQS = {
 export default function FAQ() {
   const { lang, t } = useLang();
   return (
-    <section id="faq" className="py-14">
+    <section id="faq" className="py-16 sm:py-20">
       <div className="container-soft max-w-3xl">
         <SectionHeader
           eyebrow={t.section_faq_eyebrow}
@@ -62,9 +62,14 @@ export default function FAQ() {
           align="center"
         />
 
-        <div className="mt-8 space-y-3">
+        <div className="mt-10 overflow-hidden rounded-ios-2xl bg-white ring-1 ring-ink-900/6 shadow-ios">
           {FAQS[lang].map((item, i) => (
-            <FAQItem key={i} q={item.q} a={item.a} />
+            <FAQItem
+              key={i}
+              q={item.q}
+              a={item.a}
+              divider={i < FAQS[lang].length - 1}
+            />
           ))}
         </div>
       </div>
@@ -72,31 +77,43 @@ export default function FAQ() {
   );
 }
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({
+  q,
+  a,
+  divider,
+}: {
+  q: string;
+  a: string;
+  divider: boolean;
+}) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-card ring-2 ring-grass-100">
+    <div className={divider ? "border-b border-ink-900/[0.06]" : ""}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition hover:bg-ink-900/[0.02]"
         aria-expanded={open}
       >
-        <span className="text-sm font-bold text-ink-900">{q}</span>
+        <span className="text-[14.5px] font-semibold tracking-[-0.01em] text-ink-900">
+          {q}
+        </span>
         <span
-          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-grass-100 font-bold text-grass-700 transition-transform duration-300 ${
-            open ? "rotate-45 bg-tangerine-400 text-white" : ""
+          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink-900/[0.06] font-semibold text-ink-700 transition-all duration-300 ease-spring ${
+            open ? "rotate-45 bg-grass-fade text-white shadow-ios-grass" : ""
           }`}
         >
           +
         </span>
       </button>
       <div
-        className={`grid transition-all duration-300 ${
+        className={`grid transition-all duration-300 ease-spring ${
           open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
         <div className="overflow-hidden">
-          <p className="px-5 pb-4 text-sm leading-relaxed text-ink-600">{a}</p>
+          <p className="px-5 pb-5 text-[14px] leading-relaxed text-ink-600">
+            {a}
+          </p>
         </div>
       </div>
     </div>

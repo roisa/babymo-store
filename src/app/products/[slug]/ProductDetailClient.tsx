@@ -26,28 +26,28 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
   return (
     <article className="container-soft pt-6 pb-32 sm:pb-16">
-      <nav className="mb-4 text-xs font-semibold text-ink-400">
-        <Link href="/" className="hover:text-grass-600">
+      <nav className="mb-5 text-[12px] font-medium text-ink-400">
+        <Link href="/" className="transition hover:text-ink-700">
           {t.pdp_breadcrumb_home}
         </Link>{" "}
-        <span className="opacity-50">/</span>{" "}
-        <Link href="/products" className="hover:text-grass-600">
+        <span className="text-ink-200">/</span>{" "}
+        <Link href="/products" className="transition hover:text-ink-700">
           {t.pdp_breadcrumb_shop}
         </Link>{" "}
-        <span className="opacity-50">/</span>{" "}
+        <span className="text-ink-200">/</span>{" "}
         <span className="text-ink-600">{product.name}</span>
       </nav>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
         <div>
-          <div className="relative aspect-square overflow-hidden rounded-[2rem] bg-cream-100 ring-2 ring-grass-100">
+          <div className="relative aspect-square overflow-hidden rounded-ios-3xl bg-ink-900/[0.04] ring-1 ring-ink-900/6 shadow-ios">
             <Image
               src={product.images[active] ?? product.images[0]}
               alt={product.name}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 600px"
-              className="object-cover transition-opacity duration-500"
+              className="object-cover transition-opacity duration-500 ease-spring"
             />
           </div>
           {product.images.length > 1 && (
@@ -56,10 +56,10 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 <button
                   key={i}
                   onClick={() => setActive(i)}
-                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl ring-2 transition ${
+                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-ios transition-all ease-spring ${
                     i === active
-                      ? "ring-tangerine-400 ring-offset-2 ring-offset-warmwhite"
-                      : "ring-grass-100 hover:ring-grass-300"
+                      ? "ring-2 ring-grass-400 ring-offset-2 ring-offset-warmwhite"
+                      : "ring-1 ring-ink-900/6 hover:ring-ink-900/15"
                   }`}
                 >
                   <Image src={src} alt="" fill className="object-cover" sizes="80px" />
@@ -69,33 +69,36 @@ export default function ProductDetailClient({ product }: { product: Product }) {
           )}
         </div>
 
-        <div className="lg:pl-4">
+        <div className="lg:pl-2">
           {product.bestseller && (
-            <span className="chip-orange mb-2 inline-flex">
+            <span className="chip mb-3 inline-flex uppercase tracking-[0.12em]">
               ✨ {t.product_badge_bestseller}
             </span>
           )}
-          <h1 className="font-display text-3xl font-bold text-ink-900 sm:text-4xl">
+          <h1 className="font-display text-[2rem] font-bold leading-[1.05] tracking-[-0.025em] text-ink-900 sm:text-[2.5rem]">
             {product.name}
           </h1>
           {product.tagline && (
-            <p className="mt-1 text-sm italic text-ink-400">{product.tagline}</p>
+            <p className="mt-2 text-[14px] text-ink-400">{product.tagline}</p>
           )}
 
-          <p className="mt-5 font-display text-4xl font-bold text-grass-600">
-            {formatIDR(product.price)}
-          </p>
+          <div className="mt-6 flex items-baseline gap-2">
+            <p className="font-display text-[2rem] font-bold tracking-tight tabular-nums text-ink-900">
+              {formatIDR(product.price)}
+            </p>
+            <span className="text-[12px] font-medium text-ink-400">IDR</span>
+          </div>
 
-          <div className="mt-6 rounded-3xl bg-grass-50 p-5 ring-2 ring-grass-100">
-            <span className="chip-orange uppercase tracking-wider">
+          <div className="mt-6 rounded-ios-2xl glass-thick p-5">
+            <span className="chip uppercase tracking-[0.12em]">
               {t.pdp_story_eyebrow}
             </span>
-            <p className="mt-2 text-sm leading-relaxed text-ink-900">
+            <p className="mt-3 text-[14.5px] leading-relaxed text-ink-700">
               {product.description}
             </p>
           </div>
 
-          <ul className="mt-5 grid grid-cols-2 gap-3 text-xs text-ink-600">
+          <ul className="mt-5 grid grid-cols-2 gap-2.5">
             <Info icon="📦" title={t.pdp_info_packing} sub={t.pdp_info_packing_sub} />
             <Info icon="🚚" title={t.pdp_info_eta} sub={t.pdp_info_eta_sub} />
             <Info icon="💬" title={t.pdp_info_support} sub={t.pdp_info_support_sub} />
@@ -106,19 +109,21 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             />
           </ul>
 
-          <div className="mt-6 hidden flex-wrap items-center gap-3 sm:flex">
-            <div className="flex items-center gap-2 rounded-full bg-cream-100 p-1 ring-1 ring-grass-100">
+          <div className="mt-7 hidden flex-wrap items-center gap-2.5 sm:flex">
+            <div className="flex items-center gap-1 rounded-full bg-ink-900/[0.05] p-0.5">
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold shadow-sm active:scale-95"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-semibold shadow-ios active:scale-95"
                 aria-label="−"
               >
                 −
               </button>
-              <span className="min-w-8 text-center text-sm font-bold">{qty}</span>
+              <span className="min-w-7 text-center text-[14px] font-semibold tabular-nums">
+                {qty}
+              </span>
               <button
                 onClick={() => setQty((q) => q + 1)}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-sm font-bold shadow-sm active:scale-95"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-semibold shadow-ios active:scale-95"
                 aria-label="+"
               >
                 +
@@ -126,7 +131,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             </div>
             <button
               onClick={() => handleAdd(true)}
-              className="btn-primary flex-1 min-w-[200px]"
+              className="btn-primary flex-1 min-w-[220px] text-[15px] py-3.5"
             >
               {t.pdp_add_to_bag} · {formatIDR(product.price * qty)}
             </button>
@@ -136,22 +141,24 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             href={buildSimpleConsultLink(product.name)}
             target="_blank"
             rel="noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink-600 hover:text-grass-600"
+            className="mt-5 inline-flex items-center gap-2 text-[13px] font-medium text-ink-600 transition hover:text-grass-700"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-grass-100 text-grass-700">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-grass-50 text-grass-700 ring-1 ring-grass-100">
               💬
             </span>
             {t.pdp_consult}
           </a>
 
-          <div className="mt-8 rounded-3xl bg-white p-5 ring-2 ring-grass-100">
+          <div className="mt-8 rounded-ios-2xl bg-white p-5 ring-1 ring-ink-900/6 shadow-ios">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-bold text-ink-900">{t.pdp_reviews}</p>
-              <span className="text-xs font-semibold text-tangerine-500">
-                {t.pdp_reviews_meta}
+              <p className="text-[13.5px] font-semibold tracking-[-0.01em] text-ink-900">
+                {t.pdp_reviews}
+              </p>
+              <span className="text-[12px] font-semibold tabular-nums text-tangerine-500">
+                ★ {t.pdp_reviews_meta}
               </span>
             </div>
-            <p className="mt-2 text-xs italic text-ink-400">
+            <p className="mt-2 text-[12.5px] italic text-ink-400">
               {t.pdp_reviews_placeholder}
             </p>
           </div>
@@ -178,10 +185,12 @@ function Info({
   sub: string;
 }) {
   return (
-    <li className="flex items-center gap-2 rounded-2xl bg-white p-3 ring-2 ring-grass-100">
+    <li className="flex items-center gap-2.5 rounded-ios bg-white p-3 ring-1 ring-ink-900/6 shadow-ios">
       <span className="text-base">{icon}</span>
       <div>
-        <p className="text-xs font-bold text-ink-900">{title}</p>
+        <p className="text-[12.5px] font-semibold tracking-[-0.01em] text-ink-900">
+          {title}
+        </p>
         <p className="text-[11px] text-ink-400">{sub}</p>
       </div>
     </li>

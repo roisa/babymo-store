@@ -102,17 +102,17 @@ export default function AdminPage() {
 
   if (!unlocked) {
     return (
-      <div className="container-soft max-w-md py-24 text-center">
-        <h1 className="font-display text-3xl font-bold text-ink-900">
+      <div className="container-soft max-w-sm py-24 text-center">
+        <h1 className="font-display text-[2rem] font-bold tracking-[-0.025em] text-ink-900">
           {t.admin_title}
         </h1>
-        <p className="mt-2 text-sm text-ink-400">{t.admin_subtitle}</p>
+        <p className="mt-2 text-[13.5px] text-ink-400">{t.admin_subtitle}</p>
         <input
           type="password"
           value={passcode}
           onChange={(e) => setPasscode(e.target.value)}
           placeholder={t.admin_passcode_ph}
-          className="input mt-6 text-center tracking-widest"
+          className="input mt-6 text-center tracking-[0.3em]"
         />
         <button
           onClick={() => {
@@ -133,18 +133,18 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="container-soft py-8 sm:py-10">
+    <div className="container-soft py-10 sm:py-12">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <span className="chip uppercase tracking-wider">
+          <span className="chip uppercase tracking-[0.12em]">
             {t.admin_dashboard_eyebrow}
           </span>
-          <h1 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">
+          <h1 className="mt-4 font-display text-[2rem] font-bold tracking-[-0.025em] text-ink-900 sm:text-[2.5rem]">
             {t.admin_dashboard_title}
           </h1>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={refresh} className="btn-soft text-xs">
+        <div className="flex items-center gap-1.5">
+          <button onClick={refresh} className="btn-soft text-[12px] px-4 py-2">
             {t.admin_refresh}
           </button>
           <button
@@ -152,7 +152,7 @@ export default function AdminPage() {
               sessionStorage.removeItem("babymo:admin");
               setUnlocked(false);
             }}
-            className="btn-ghost text-xs"
+            className="btn-ghost text-[12px] px-4 py-2"
           >
             {t.admin_lock}
           </button>
@@ -164,19 +164,19 @@ export default function AdminPage() {
           <button
             key={tabItem.key}
             onClick={() => setTab(tabItem.key)}
-            className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition ${
+            className={`flex shrink-0 items-center gap-2 rounded-full px-3.5 py-2 text-[12px] font-semibold transition-all ease-spring active:scale-95 ${
               tab === tabItem.key
-                ? "bg-grass-400 text-white shadow-pop"
-                : "bg-white text-ink-600 ring-2 ring-grass-100 hover:bg-grass-50"
+                ? "bg-ink-900 text-white shadow-ios"
+                : "bg-white text-ink-600 ring-1 ring-ink-900/8 hover:bg-ink-900/[0.03]"
             }`}
           >
             <span>{tabItem.emoji}</span>
             {tabItem.label}
             <span
-              className={`rounded-full px-2 py-0.5 text-[10px] ${
+              className={`rounded-full px-1.5 py-0.5 text-[10px] tabular-nums ${
                 tab === tabItem.key
                   ? "bg-white/20 text-white"
-                  : "bg-grass-50 text-grass-700"
+                  : "bg-ink-900/[0.05] text-ink-600"
               }`}
             >
               {counts[tabItem.key] || 0}
@@ -189,19 +189,19 @@ export default function AdminPage() {
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder={t.admin_search_ph}
-        className="input mt-2"
+        className="input mt-3"
       />
 
       {filtered.length === 0 ? (
-        <div className="mt-8 rounded-3xl bg-white p-12 text-center shadow-card ring-2 ring-grass-100">
+        <div className="mt-8 rounded-ios-2xl bg-white p-12 text-center shadow-ios ring-1 ring-ink-900/6">
           <p className="text-3xl">🌸</p>
-          <p className="mt-2 font-display text-xl font-bold text-ink-900">
+          <p className="mt-3 font-display text-[18px] font-bold tracking-[-0.02em] text-ink-900">
             {t.admin_empty_title}
           </p>
-          <p className="mt-1 text-sm text-ink-400">{t.admin_empty_sub}</p>
+          <p className="mt-2 text-[13px] text-ink-400">{t.admin_empty_sub}</p>
         </div>
       ) : (
-        <div className="mt-4 space-y-3">
+        <div className="mt-5 space-y-3">
           {filtered.map((o) => (
             <OrderCard
               key={o.order_id}
@@ -242,19 +242,19 @@ function OrderCard({
   };
 
   return (
-    <article className="overflow-hidden rounded-3xl bg-white shadow-card ring-2 ring-grass-100">
+    <article className="overflow-hidden rounded-ios-2xl bg-white shadow-ios ring-1 ring-ink-900/6">
       <button
         onClick={onToggle}
-        className="grid w-full grid-cols-[1fr_auto] gap-2 px-5 py-4 text-left"
+        className="grid w-full grid-cols-[1fr_auto] gap-2 px-5 py-4 text-left transition hover:bg-ink-900/[0.02]"
       >
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-ink-400">
+            <span className="font-mono text-[11px] font-semibold text-ink-400">
               {order.order_id}
             </span>
             <StatusBadge status={order.order_status} />
           </div>
-          <p className="mt-1 truncate text-sm font-bold text-ink-900">
+          <p className="mt-1 truncate text-[14px] font-semibold tracking-[-0.01em] text-ink-900">
             {order.customer_name} · {order.city}
           </p>
           <p className="text-[11px] text-ink-400">
@@ -263,21 +263,23 @@ function OrderCard({
           </p>
         </div>
         <div className="text-right">
-          <p className="font-display text-lg font-bold text-grass-600">
+          <p className="font-display text-[17px] font-bold tracking-tight tabular-nums text-ink-900">
             {formatIDR(order.total_payment)}
           </p>
-          <p className="text-[11px] text-ink-400">+{order.unique_code}</p>
+          <p className="text-[11px] tabular-nums text-ink-400">
+            +{order.unique_code}
+          </p>
         </div>
       </button>
 
       {open && (
-        <div className="border-t-2 border-grass-100 bg-cream-50/60 px-5 py-5">
+        <div className="border-t border-ink-900/6 bg-warmwhite/40 px-5 py-5 backdrop-blur-xl">
           <div className="grid gap-5 sm:grid-cols-[1fr_220px]">
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-widest text-grass-700">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-400">
                 {t.admin_card_items}
               </h4>
-              <ul className="mt-2 space-y-1.5 text-sm">
+              <ul className="mt-2 space-y-1.5 text-[13.5px]">
                 {order.items.map((i) => (
                   <li
                     key={i.productId}
@@ -286,33 +288,33 @@ function OrderCard({
                     <span className="text-ink-700">
                       {i.quantity}× {i.name}
                     </span>
-                    <span className="font-semibold text-ink-600">
+                    <span className="font-medium tabular-nums text-ink-600">
                       {formatIDR(i.price * i.quantity)}
                     </span>
                   </li>
                 ))}
               </ul>
 
-              <h4 className="mt-5 text-xs font-bold uppercase tracking-widest text-grass-700">
+              <h4 className="mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-ink-400">
                 {t.admin_card_shipping}
               </h4>
-              <p className="mt-1 text-sm font-semibold text-ink-700">
+              <p className="mt-1 text-[13.5px] font-semibold text-ink-700">
                 {order.customer_name}
               </p>
-              <p className="text-sm text-ink-700">{order.whatsapp}</p>
-              <p className="text-sm text-ink-700">{order.address}</p>
-              <p className="text-sm text-ink-700">
+              <p className="text-[13.5px] text-ink-700">{order.whatsapp}</p>
+              <p className="text-[13.5px] text-ink-700">{order.address}</p>
+              <p className="text-[13.5px] text-ink-700">
                 {order.city} {order.postal_code}
               </p>
               {order.delivery_notes && (
-                <p className="mt-2 rounded-2xl bg-tangerine-100 p-3 text-sm italic text-ink-700 ring-1 ring-tangerine-200">
+                <p className="mt-2 rounded-ios bg-tangerine-50 p-3 text-[13px] italic text-ink-700 ring-1 ring-tangerine-100">
                   &ldquo;{order.delivery_notes}&rdquo;
                 </p>
               )}
             </div>
 
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-widest text-grass-700">
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-400">
                 {t.admin_card_proof}
               </h4>
               {order.proof_image ? (
@@ -321,11 +323,11 @@ function OrderCard({
                   <img
                     src={order.proof_image}
                     alt="proof"
-                    className="mt-2 max-h-40 w-full rounded-2xl object-contain ring-2 ring-grass-100"
+                    className="mt-2 max-h-40 w-full rounded-ios object-contain ring-1 ring-ink-900/8"
                   />
                 </a>
               ) : (
-                <div className="mt-2 rounded-2xl bg-white p-4 text-center text-xs text-ink-400 ring-2 ring-dashed ring-grass-200">
+                <div className="mt-2 rounded-ios bg-white p-4 text-center text-[11px] text-ink-400 ring-1 ring-dashed ring-ink-900/15">
                   {t.admin_card_proof_empty}
                 </div>
               )}
@@ -340,17 +342,17 @@ function OrderCard({
               )}
               target="_blank"
               rel="noreferrer"
-              className="btn-soft text-xs"
+              className="btn-soft text-[12px] px-4 py-2"
             >
               {t.admin_action_wa}
             </a>
-            <button onClick={copyAddress} className="btn-soft text-xs">
+            <button onClick={copyAddress} className="btn-soft text-[12px] px-4 py-2">
               {t.admin_action_copy}
             </button>
             <Link
               href={`/shipping-label/${order.order_id}`}
               target="_blank"
-              className="btn-soft text-xs"
+              className="btn-soft text-[12px] px-4 py-2"
             >
               {t.admin_action_label}
             </Link>
@@ -365,7 +367,7 @@ function OrderCard({
                       verified_at: new Date().toISOString(),
                     })
                   }
-                  className="btn-primary text-xs"
+                  className="btn-primary text-[12px] px-4 py-2"
                 >
                   {t.admin_action_approve}
                 </button>
@@ -376,7 +378,7 @@ function OrderCard({
                       payment_status: "rejected",
                     })
                   }
-                  className="btn-ghost text-xs"
+                  className="btn-ghost text-[12px] px-4 py-2"
                 >
                   {t.admin_action_reject}
                 </button>
@@ -385,7 +387,7 @@ function OrderCard({
             {order.order_status === "paid" && (
               <button
                 onClick={() => onUpdate({ order_status: "packed" })}
-                className="btn-primary text-xs"
+                className="btn-primary text-[12px] px-4 py-2"
               >
                 {t.admin_action_packed}
               </button>
@@ -393,7 +395,7 @@ function OrderCard({
             {order.order_status === "packed" && (
               <button
                 onClick={() => onUpdate({ order_status: "shipped" })}
-                className="btn-primary text-xs"
+                className="btn-primary text-[12px] px-4 py-2"
               >
                 {t.admin_action_shipped}
               </button>
@@ -401,7 +403,7 @@ function OrderCard({
             {order.order_status === "shipped" && (
               <button
                 onClick={() => onUpdate({ order_status: "completed" })}
-                className="btn-primary text-xs"
+                className="btn-primary text-[12px] px-4 py-2"
               >
                 {t.admin_action_completed}
               </button>
@@ -415,21 +417,21 @@ function OrderCard({
 
 function StatusBadge({ status }: { status: OrderStatus }) {
   const map: Record<OrderStatus, { label: string; cls: string }> = {
-    pending_payment: { label: "pending", cls: "bg-cream-100 text-ink-600" },
+    pending_payment: { label: "pending", cls: "bg-ink-900/[0.06] text-ink-600" },
     waiting_verification: {
       label: "verify",
-      cls: "bg-tangerine-100 text-tangerine-600",
+      cls: "bg-tangerine-50 text-tangerine-600 ring-1 ring-tangerine-100",
     },
-    paid: { label: "paid", cls: "bg-grass-100 text-grass-700" },
+    paid: { label: "paid", cls: "bg-grass-50 text-grass-700 ring-1 ring-grass-100" },
     packed: { label: "packed", cls: "bg-sky-100 text-ink-700" },
-    shipped: { label: "shipped", cls: "bg-grass-200 text-grass-900" },
-    completed: { label: "completed", cls: "bg-grass-400 text-white" },
-    cancelled: { label: "cancelled", cls: "bg-red-100 text-red-700" },
+    shipped: { label: "shipped", cls: "bg-grass-100 text-grass-800" },
+    completed: { label: "completed", cls: "bg-grass-fade text-white" },
+    cancelled: { label: "cancelled", cls: "bg-red-50 text-red-700 ring-1 ring-red-100" },
   };
   const s = map[status];
   return (
     <span
-      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${s.cls}`}
+      className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.08em] ${s.cls}`}
     >
       {s.label}
     </span>

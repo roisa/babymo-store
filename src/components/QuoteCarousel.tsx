@@ -22,47 +22,44 @@ const QUOTES = {
   ],
 };
 
-const COLORS = [
-  "bg-grass-100",
-  "bg-tangerine-100",
-  "bg-sunny-200",
-  "bg-cream-100",
-];
-
 export default function QuoteCarousel() {
   const { lang } = useLang();
   const quotes = QUOTES[lang];
   const [i, setI] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setI((v) => (v + 1) % quotes.length), 4200);
+    const id = setInterval(() => setI((v) => (v + 1) % quotes.length), 4500);
     return () => clearInterval(id);
   }, [quotes.length]);
 
   return (
     <section className="py-12">
       <div className="container-soft">
-        <div
-          className={`relative overflow-hidden rounded-[2rem] p-8 ring-2 ring-grass-100 transition-colors duration-700 sm:p-14 ${COLORS[i % COLORS.length]}`}
-        >
-          <span className="absolute -left-2 top-2 select-none text-8xl text-white/70">
-            &ldquo;
-          </span>
+        <div className="relative overflow-hidden rounded-ios-3xl bg-grass-fade p-10 shadow-ios-lg sm:p-16">
+          {/* aurora overlay */}
+          <div className="absolute inset-0 bg-aurora opacity-50" />
+          <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -bottom-24 -left-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+
           <div className="relative">
+            <span className="chip-frost mb-5 inline-flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-sunny-300" />
+              {lang === "id" ? "pengingat lembut" : "soft reminder"}
+            </span>
             <p
               key={i}
-              className="animate-fade-in font-display text-2xl font-bold leading-snug text-ink-900 sm:text-4xl"
+              className="animate-fade-in font-display text-[26px] font-semibold leading-snug tracking-[-0.025em] text-white sm:text-[40px]"
             >
-              {quotes[i]}
+              &ldquo;{quotes[i]}&rdquo;
             </p>
-            <div className="mt-6 flex items-center gap-2">
+            <div className="mt-7 flex items-center gap-1.5">
               {quotes.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setI(idx)}
                   aria-label={`Quote ${idx + 1}`}
-                  className={`h-2 rounded-full transition-all ${
-                    idx === i ? "w-8 bg-grass-600" : "w-2 bg-grass-600/30"
+                  className={`h-1.5 rounded-full transition-all duration-300 ease-spring ${
+                    idx === i ? "w-7 bg-white" : "w-1.5 bg-white/35"
                   }`}
                 />
               ))}

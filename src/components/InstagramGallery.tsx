@@ -2,6 +2,7 @@
 
 import { SectionHeader } from "./CategoryGrid";
 import { useLang } from "@/context/LanguageContext";
+import { SOCIAL } from "@/lib/social";
 
 const SHOTS = [
   "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&q=80",
@@ -15,39 +16,39 @@ const SHOTS = [
 export default function InstagramGallery() {
   const { t } = useLang();
   return (
-    <section className="py-14">
+    <section className="py-16 sm:py-20">
       <div className="container-soft">
         <div className="flex items-end justify-between gap-4">
           <SectionHeader
-            eyebrow={t.section_ig_eyebrow}
+            eyebrow="@babymo.official"
             title={t.section_ig_title}
           />
           <a
-            href="https://instagram.com/babymo.id"
+            href={SOCIAL.instagram}
             target="_blank"
             rel="noreferrer"
-            className="hidden text-sm font-semibold text-grass-600 hover:underline sm:inline"
+            className="hidden text-[13px] font-semibold text-grass-700 hover:text-grass-800 sm:inline"
           >
             {t.section_ig_cta}
           </a>
         </div>
 
-        <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-3 md:grid-cols-6">
+        <div className="mt-8 grid grid-cols-3 gap-2 sm:gap-3 md:grid-cols-6">
           {SHOTS.map((src, i) => (
             <a
               key={i}
-              href="https://instagram.com/babymo.id"
+              href={SOCIAL.instagram}
               target="_blank"
               rel="noreferrer"
-              className="group relative block aspect-square overflow-hidden rounded-2xl bg-cream-100 ring-2 ring-grass-100 transition hover:ring-tangerine-300"
+              className="group relative block aspect-square overflow-hidden rounded-ios bg-ink-900/[0.04] ring-1 ring-ink-900/6 transition hover:-translate-y-0.5 hover:shadow-ios-lg"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={src}
                 alt={`Baby Mo on Instagram ${i + 1}`}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="h-full w-full object-cover transition-transform duration-500 ease-spring group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-tangerine-400/0 transition group-hover:bg-tangerine-400/20" />
+              <div className="absolute inset-0 bg-ink-900/0 transition group-hover:bg-ink-900/15" />
             </a>
           ))}
         </div>

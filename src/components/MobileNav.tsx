@@ -22,8 +22,8 @@ export default function MobileNav() {
     pathname === href || (href !== "/" && pathname?.startsWith(href));
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t-2 border-grass-100 bg-warmwhite/95 backdrop-blur-xl sm:hidden">
-      <div className="grid grid-cols-4 items-center px-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">
+    <nav className="fixed inset-x-0 bottom-3 z-30 px-4 pb-[max(0px,env(safe-area-inset-bottom))] sm:hidden">
+      <div className="mx-auto flex max-w-md items-center justify-around rounded-full glass-thick px-2 py-1.5">
         <Tab href="/" active={pathname === "/"} label={t.nav_home}>
           <HomeIcon />
         </Tab>
@@ -35,13 +35,13 @@ export default function MobileNav() {
         </Tab>
         <button
           onClick={open}
-          className="relative flex flex-col items-center gap-1 rounded-2xl px-2 py-1.5 text-[11px] font-semibold text-grass-700 transition active:scale-95"
+          className="relative flex flex-1 flex-col items-center gap-0.5 rounded-full px-2 py-1.5 text-[10px] font-semibold text-ink-600 transition active:scale-95"
           aria-label={t.nav_cart}
         >
           <span className="relative">
             <BagIcon />
             {count > 0 && (
-              <span className="absolute -right-2 -top-1.5 rounded-full bg-tangerine-400 px-1.5 text-[10px] font-bold text-white ring-2 ring-white">
+              <span className="absolute -right-1.5 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-grass-400 px-1 text-[9px] font-bold text-white ring-2 ring-white">
                 {count}
               </span>
             )}
@@ -66,8 +66,8 @@ export default function MobileNav() {
     return (
       <Link
         href={href}
-        className={`flex flex-col items-center gap-1 rounded-2xl px-2 py-1.5 text-[11px] font-semibold transition ${
-          active ? "text-grass-600" : "text-ink-400 hover:text-grass-600"
+        className={`flex flex-1 flex-col items-center gap-0.5 rounded-full px-2 py-1.5 text-[10px] font-semibold transition ${
+          active ? "text-grass-700" : "text-ink-400 hover:text-ink-600"
         }`}
       >
         {children}
@@ -79,14 +79,14 @@ export default function MobileNav() {
 
 function HomeIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <path d="M4 11 12 4l8 7v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1v-9Z" strokeLinejoin="round" />
     </svg>
   );
 }
 function ShopIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <path d="M5 8h14l-1 12H6L5 8Z" strokeLinejoin="round" />
       <path d="M9 8a3 3 0 1 1 6 0" strokeLinecap="round" />
     </svg>
@@ -94,7 +94,7 @@ function ShopIcon() {
 }
 function HelpIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <circle cx="12" cy="12" r="9" />
       <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01" strokeLinecap="round" />
     </svg>
@@ -102,7 +102,7 @@ function HelpIcon() {
 }
 function BagIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <path d="M6 8h12l-1 12H7L6 8Z" strokeLinejoin="round" />
       <path d="M9 8a3 3 0 1 1 6 0" strokeLinecap="round" />
     </svg>

@@ -25,7 +25,7 @@ export default function HomePageClient({
     <>
       <Hero />
 
-      <section className="py-10 sm:py-14">
+      <section className="py-14 sm:py-20">
         <div className="container-soft">
           <div className="flex items-end justify-between gap-3">
             <SectionHeader
@@ -35,12 +35,12 @@ export default function HomePageClient({
             />
             <Link
               href="/products"
-              className="hidden text-sm font-semibold text-grass-600 hover:underline sm:inline"
+              className="hidden text-[13px] font-semibold text-grass-700 hover:text-grass-800 sm:inline"
             >
               {t.see_all}
             </Link>
           </div>
-          <div className="mt-8">
+          <div className="mt-10">
             <ProductGrid products={featured} priorityFirst />
           </div>
         </div>
@@ -48,13 +48,13 @@ export default function HomePageClient({
 
       <CategoryGrid />
 
-      <section id="bestsellers" className="py-12">
+      <section id="bestsellers" className="py-14 sm:py-16">
         <div className="container-soft">
           <SectionHeader
             eyebrow={t.section_bestsellers_eyebrow}
             title={t.section_bestsellers_title}
           />
-          <div className="mt-8">
+          <div className="mt-10">
             <ProductGrid products={bestsellers} />
           </div>
         </div>

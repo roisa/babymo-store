@@ -18,26 +18,28 @@ export default function StickyCheckoutBar({
 }: Props) {
   const { t } = useLang();
   return (
-    <div className="fixed inset-x-0 bottom-[64px] z-30 border-t-2 border-grass-100 bg-warmwhite/95 px-4 py-3 backdrop-blur-xl sm:hidden">
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5 rounded-full bg-cream-100 p-1 ring-1 ring-grass-100">
+    <div className="fixed inset-x-0 bottom-[80px] z-30 px-4 sm:hidden">
+      <div className="mx-auto flex max-w-md items-center gap-2.5 rounded-full glass-thick p-1.5">
+        <div className="flex items-center gap-1 rounded-full bg-ink-900/[0.05] p-0.5">
           <button
             onClick={() => onChangeQty(Math.max(1, qty - 1))}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold shadow-sm active:scale-95"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[13px] font-semibold shadow-ios transition active:scale-95"
             aria-label="−"
           >
             −
           </button>
-          <span className="min-w-6 text-center text-sm font-bold">{qty}</span>
+          <span className="min-w-6 text-center text-[12.5px] font-semibold tabular-nums">
+            {qty}
+          </span>
           <button
             onClick={() => onChangeQty(qty + 1)}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm font-bold shadow-sm active:scale-95"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[13px] font-semibold shadow-ios transition active:scale-95"
             aria-label="+"
           >
             +
           </button>
         </div>
-        <button onClick={onAdd} className="btn-primary flex-1 text-sm">
+        <button onClick={onAdd} className="btn-primary flex-1 text-[13.5px] py-3">
           {t.pdp_add_to_bag} · {formatIDR(price * qty)}
         </button>
       </div>

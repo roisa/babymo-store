@@ -23,14 +23,14 @@ export default function FloatingCartButton() {
   return (
     <button
       onClick={open}
-      className="fixed bottom-20 right-4 z-30 hidden animate-slide-up items-center gap-3 rounded-full bg-grass-400 px-5 py-3 text-sm font-bold text-white shadow-pop transition hover:-translate-y-0.5 hover:bg-grass-500 sm:flex sm:bottom-6"
+      className="fixed bottom-6 right-5 z-30 hidden animate-slide-up items-center gap-2.5 rounded-full bg-grass-fade px-4 py-3 text-[13px] font-semibold text-white shadow-ios-grass transition hover:-translate-y-0.5 sm:flex"
     >
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-grass-700">
+      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/25 text-[11px] font-bold tabular-nums backdrop-blur">
         {count}
       </span>
       <span>{t.cart_view}</span>
-      <span className="opacity-80">·</span>
-      <span>{formatIDR(subtotal)}</span>
+      <span className="opacity-70">·</span>
+      <span className="tabular-nums">{formatIDR(subtotal)}</span>
     </button>
   );
 }

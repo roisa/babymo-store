@@ -111,14 +111,14 @@ export default function CheckoutPage() {
   if (hydrated && items.length === 0) {
     return (
       <div className="container-soft py-24 text-center">
-        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-grass-100 text-4xl">
+        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-grass-50 text-4xl ring-1 ring-grass-100">
           🌱
         </div>
-        <h1 className="mt-6 font-display text-2xl font-bold text-ink-900">
+        <h1 className="mt-6 font-display text-[1.75rem] font-bold tracking-[-0.02em] text-ink-900">
           {t.checkout_empty_title}
         </h1>
-        <p className="mt-1 text-sm text-ink-400">{t.checkout_empty_sub}</p>
-        <Link href="/products" className="btn-orange mt-6 inline-flex">
+        <p className="mt-2 text-[14px] text-ink-400">{t.checkout_empty_sub}</p>
+        <Link href="/products" className="btn-primary mt-6 inline-flex">
           {t.checkout_empty_cta}
         </Link>
       </div>
@@ -126,20 +126,20 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="container-soft py-8 sm:py-12">
-      <span className="chip uppercase tracking-wider">
+    <div className="container-soft py-10 sm:py-14">
+      <span className="chip uppercase tracking-[0.12em]">
         {t.checkout_eyebrow}
       </span>
-      <h1 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">
+      <h1 className="mt-4 font-display text-[2.25rem] font-bold leading-[1.05] tracking-[-0.03em] text-ink-900 sm:text-[2.75rem]">
         {t.checkout_title}
       </h1>
-      <p className="mt-1 max-w-md text-sm text-ink-600">
+      <p className="mt-3 max-w-md text-[14.5px] leading-relaxed text-ink-600">
         {t.checkout_subtitle}
       </p>
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_380px]">
-        <div className="card p-5 sm:p-7">
-          <h2 className="font-display text-xl font-bold text-ink-900">
+      <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_380px]">
+        <div className="card p-6 sm:p-7">
+          <h2 className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink-900">
             {t.checkout_form_title}
           </h2>
           <div className="mt-5 grid gap-4">
@@ -199,37 +199,37 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        <aside className="space-y-4">
-          <div className="card p-5">
-            <h2 className="font-display text-xl font-bold text-ink-900">
+        <aside className="space-y-3 lg:sticky lg:top-[80px] lg:self-start">
+          <div className="card p-6">
+            <h2 className="font-display text-[18px] font-bold tracking-[-0.02em] text-ink-900">
               {t.summary_title}
             </h2>
             <ul className="mt-4 space-y-3">
               {items.map((i) => (
                 <li
                   key={i.productId}
-                  className="flex items-center justify-between gap-3 text-sm"
+                  className="flex items-center justify-between gap-3 text-[13.5px]"
                 >
                   <div className="min-w-0">
-                    <p className="line-clamp-1 font-semibold text-ink-900">
+                    <p className="line-clamp-1 font-medium text-ink-900">
                       {i.name}
                     </p>
-                    <p className="text-xs text-ink-400">× {i.quantity}</p>
+                    <p className="text-[11.5px] text-ink-400">× {i.quantity}</p>
                   </div>
-                  <span className="font-semibold text-ink-900">
+                  <span className="font-medium tabular-nums text-ink-900">
                     {formatIDR(i.price * i.quantity)}
                   </span>
                 </li>
               ))}
             </ul>
-            <hr className="my-4 border-grass-100" />
-            <div className="space-y-1.5 text-sm">
+            <hr className="my-4 border-ink-900/8" />
+            <div className="space-y-2 text-[13.5px]">
               <Row label={t.summary_subtotal} value={formatIDR(subtotal)} />
               <Row
                 label={
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1.5">
                     {t.summary_unique}
-                    <span className="rounded-full bg-tangerine-100 px-1.5 py-0.5 text-[10px] font-bold text-tangerine-600">
+                    <span className="rounded-full bg-tangerine-50 px-1.5 py-0.5 text-[10px] font-semibold text-tangerine-600 ring-1 ring-tangerine-100">
                       {t.summary_unique_chip}
                     </span>
                   </span>
@@ -242,12 +242,12 @@ export default function CheckoutPage() {
                 subtle
               />
             </div>
-            <hr className="my-4 border-grass-100" />
+            <hr className="my-4 border-ink-900/8" />
             <div className="flex items-end justify-between">
-              <span className="text-sm font-semibold text-ink-600">
+              <span className="text-[13px] font-medium text-ink-600">
                 {t.summary_total}
               </span>
-              <span className="font-display text-3xl font-bold text-grass-600">
+              <span className="font-display text-[26px] font-bold tracking-tight tabular-nums text-ink-900">
                 {formatIDR(total)}
               </span>
             </div>
@@ -259,7 +259,7 @@ export default function CheckoutPage() {
           <button
             onClick={handleCheckout}
             disabled={submitting}
-            className="btn-primary w-full text-base"
+            className="btn-primary w-full text-[15px] py-3.5"
           >
             {submitting ? t.checkout_btn_loading : t.checkout_btn}
             <Wa />

@@ -22,38 +22,39 @@ export default function OrderSuccessPage({
   }, [orderId]);
 
   return (
-    <div className="container-soft max-w-xl py-16 text-center">
-      <div className="relative mx-auto h-24 w-24">
-        <div className="absolute inset-0 animate-pulse rounded-full bg-grass-200/60" />
-        <div className="absolute inset-2 rounded-full bg-grass-100" />
-        <div className="absolute inset-0 flex items-center justify-center text-4xl">
+    <div className="container-soft max-w-xl py-16 sm:py-20 text-center">
+      <div className="relative mx-auto h-28 w-28">
+        <div className="absolute inset-0 animate-pulse rounded-full bg-grass-200/40 blur-xl" />
+        <div className="absolute inset-0 flex items-center justify-center rounded-full bg-grass-fade text-4xl shadow-ios-grass">
           🌱
         </div>
       </div>
 
-      <span className="chip mt-6 inline-flex uppercase tracking-wider">
+      <span className="chip mt-8 inline-flex uppercase tracking-[0.12em]">
         {t.success_eyebrow}
       </span>
-      <h1 className="mt-3 font-display text-3xl font-bold text-ink-900 sm:text-4xl">
+      <h1 className="mt-4 font-display text-[2rem] font-bold leading-[1.05] tracking-[-0.025em] text-ink-900 sm:text-[2.5rem]">
         {t.success_title}
       </h1>
-      <p className="mt-2 text-sm text-ink-600">{t.success_subtitle}</p>
+      <p className="mt-3 text-[14.5px] leading-relaxed text-ink-600">
+        {t.success_subtitle}
+      </p>
 
       {order && (
-        <div className="mt-8 rounded-3xl bg-white p-5 text-left shadow-card ring-2 ring-grass-100">
+        <div className="mt-10 rounded-ios-2xl bg-white p-6 text-left shadow-ios ring-1 ring-ink-900/6">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-widest text-ink-400">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-400">
               {t.success_order_label}
             </p>
-            <span className="rounded-full bg-grass-100 px-3 py-1 text-[11px] font-bold text-grass-700">
+            <span className="chip uppercase tracking-[0.12em]">
               {order.order_status.replace("_", " ")}
             </span>
           </div>
-          <p className="mt-1 font-mono text-sm font-bold text-ink-900">
+          <p className="mt-1 font-mono text-[13px] font-semibold tabular-nums text-ink-900">
             {order.order_id}
           </p>
 
-          <ul className="mt-4 space-y-2 text-sm">
+          <ul className="mt-5 space-y-2 text-[13.5px]">
             {order.items.map((i) => (
               <li
                 key={i.productId}
@@ -62,25 +63,25 @@ export default function OrderSuccessPage({
                 <span className="line-clamp-1">
                   {i.quantity}× {i.name}
                 </span>
-                <span className="font-semibold">
+                <span className="font-medium tabular-nums">
                   {formatIDR(i.price * i.quantity)}
                 </span>
               </li>
             ))}
           </ul>
-          <hr className="my-4 border-grass-100" />
-          <div className="flex items-center justify-between text-sm">
-            <span className="font-semibold text-ink-600">
+          <hr className="my-4 border-ink-900/8" />
+          <div className="flex items-end justify-between">
+            <span className="text-[13px] font-medium text-ink-600">
               {t.success_total_label}
             </span>
-            <span className="font-display text-2xl font-bold text-grass-600">
+            <span className="font-display text-[22px] font-bold tracking-tight tabular-nums text-ink-900">
               {formatIDR(order.total_payment)}
             </span>
           </div>
         </div>
       )}
 
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+      <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:justify-center">
         <Link href="/products" className="btn-soft">
           {t.success_keep_browsing}
         </Link>
@@ -91,7 +92,7 @@ export default function OrderSuccessPage({
             )}
             target="_blank"
             rel="noreferrer"
-            className="btn-orange"
+            className="btn-primary"
           >
             {t.success_msg}
           </a>
