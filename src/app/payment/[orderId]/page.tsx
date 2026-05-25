@@ -8,6 +8,7 @@ import { useToast } from "@/context/ToastContext";
 import { useLang } from "@/context/LanguageContext";
 import { formatIDR } from "@/lib/utils";
 import { buildWhatsAppLink, getStoreWhatsApp } from "@/lib/whatsapp";
+import QrisImage from "@/components/QrisImage";
 import type { Order } from "@/types";
 
 export default function PaymentPage({
@@ -149,8 +150,8 @@ export default function PaymentPage({
         </div>
 
         <div className="flex flex-col items-center px-6 py-10">
-          <div className="relative flex h-56 w-56 items-center justify-center rounded-ios-2xl bg-warmwhite ring-1 ring-ink-900/8 shadow-ios">
-            <QrisPlaceholder />
+          <div className="relative flex h-56 w-56 items-center justify-center rounded-ios-2xl bg-warmwhite ring-1 ring-ink-900/[0.08] shadow-ios">
+            <QrisImage />
             <span className="absolute -bottom-3 rounded-full bg-grass-fade px-3 py-1 text-[9px] font-bold uppercase tracking-[0.16em] text-white shadow-ios-grass">
               QRIS
             </span>
@@ -245,38 +246,3 @@ function Step({ n, children }: { n: number; children: React.ReactNode }) {
   );
 }
 
-function QrisPlaceholder() {
-  return (
-    <svg viewBox="0 0 100 100" className="h-40 w-40" aria-hidden>
-      {Array.from({ length: 12 }).map((_, y) =>
-        Array.from({ length: 12 }).map((__, x) => {
-          const v = (x * 7 + y * 13 + x * y) % 5;
-          const filled = v < 2 || (x + y) % 6 === 0;
-          if (!filled) return null;
-          return (
-            <rect
-              key={`${x}-${y}`}
-              x={x * 8 + 2}
-              y={y * 8 + 2}
-              width="7"
-              height="7"
-              rx="1"
-              fill="#162818"
-            />
-          );
-        }),
-      )}
-      {[
-        [2, 2],
-        [74, 2],
-        [2, 74],
-      ].map(([cx, cy], i) => (
-        <g key={i}>
-          <rect x={cx} y={cy} width="24" height="24" rx="4" fill="#178533" />
-          <rect x={cx + 4} y={cy + 4} width="16" height="16" rx="2" fill="#fff" />
-          <rect x={cx + 8} y={cy + 8} width="8" height="8" rx="1" fill="#178533" />
-        </g>
-      ))}
-    </svg>
-  );
-}
