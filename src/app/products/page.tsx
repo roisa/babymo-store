@@ -49,35 +49,24 @@ function ProductsInner() {
               className="input pl-11"
             />
           </div>
-          <div
-            className="mt-3 -mx-3 overflow-x-auto pb-1 hide-scrollbar"
-            style={{
-              WebkitMaskImage:
-                "linear-gradient(to right, #000 0, #000 calc(100% - 72px), transparent 100%)",
-              maskImage:
-                "linear-gradient(to right, #000 0, #000 calc(100% - 72px), transparent 100%)",
-            }}
-          >
-            <div className="flex snap-x snap-mandatory gap-2 px-3 pr-4">
-              <div className="snap-start">
-                <Pill
-                  active={activeCat === "all"}
-                  onClick={() => setActiveCat("all")}
-                >
-                  {t.product_filter_all}
-                </Pill>
-              </div>
-              {CATEGORIES.map((c) => (
-                <div key={c.slug} className="snap-start">
-                  <Pill
-                    active={activeCat === c.slug}
-                    onClick={() => setActiveCat(c.slug)}
-                  >
-                    <span className="mr-1">{c.emoji}</span> {c.name}
-                  </Pill>
-                </div>
-              ))}
-            </div>
+          {/* Wrap onto multiple rows so every category is fully visible —
+              no horizontal scroll, no half-clipped labels. */}
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            <Pill
+              active={activeCat === "all"}
+              onClick={() => setActiveCat("all")}
+            >
+              {t.product_filter_all}
+            </Pill>
+            {CATEGORIES.map((c) => (
+              <Pill
+                key={c.slug}
+                active={activeCat === c.slug}
+                onClick={() => setActiveCat(c.slug)}
+              >
+                <span className="mr-1">{c.emoji}</span> {c.name}
+              </Pill>
+            ))}
           </div>
         </div>
       </div>

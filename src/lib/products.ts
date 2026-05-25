@@ -34,20 +34,26 @@ import type { Category, Product } from "@/types";
  * `IMG.*` reference for the actual product photo URL when ready.
  */
 
+/**
+ * Verified photo pool — only Unsplash photos whose actual content has
+ * been observed rendering correctly on the deployed site. The sandbox
+ * network can't reach images.unsplash.com to spot-check, so anything
+ * outside this pool risks rendering as an unrelated subject (e.g. the
+ * "cozy notebook" ID turned out to be a laptop with code on screen).
+ *
+ * Swap each `IMG.*` for the merchant's real product photo URL when
+ * ready — the names below describe what the photo currently shows.
+ */
 const IMG = {
-  // Book / paper / writing surface — verified
-  paperFlat:
-    "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80",
+  // Books / journals — small library / open notebook flat-lays
+  bookshelf:
+    "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&q=80",
   notebookOpen:
     "https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&q=80",
-  notebookClosed:
+  notebookSpiral:
     "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=900&q=80",
-  cozyDesk:
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
-  cozyFlat:
-    "https://images.unsplash.com/photo-1542435503-956c469947f6?w=900&q=80",
 
-  // Stickers / colorful flat-lay — verified
+  // Stickers — colorful flat-lay sticker sheets
   stickerColor:
     "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=80",
   stickerFloral:
@@ -55,33 +61,31 @@ const IMG = {
   stickyNotes:
     "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=900&q=80",
 
-  // Cards / letters (used for hijaiyah-card / pin / keychain mood) — verified
+  // Cards / letters — soft paper goods (used for hijaiyah card mood)
   cardLetter:
     "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=900&q=80",
   cardEnvelope:
     "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=900&q=80",
 
-  // Plush — verified
+  // Plush — soft toy on linen
   plushBear:
     "https://images.unsplash.com/photo-1559563458-527698bf5295?w=900&q=80",
   plushPastel:
     "https://images.unsplash.com/photo-1620421680010-0766ff230392?w=900&q=80",
 
-  // Soft fabric / cozy kit (used for apparel mood) — verified
-  fabricKit:
-    "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
-  fabricNeutral:
-    "https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=900&q=80",
-
-  // Wall / poster — verified
+  // Wall art / posters
   posterFrame:
     "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80",
   posterArt:
     "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=900&q=80",
   pastelWall:
     "https://images.unsplash.com/photo-1486916856361-bf2999da9d57?w=900&q=80",
-  pastelTexture:
-    "https://images.unsplash.com/photo-1531315396756-905d68d21b56?w=900&q=80",
+
+  // Candles / cozy lifestyle (used for bedtime mood on Goodnight Little Moon)
+  candle:
+    "https://images.unsplash.com/photo-1602874801007-aa377efa0bc4?w=900&q=80",
+  candleFlat:
+    "https://images.unsplash.com/photo-1601000938259-9e92002320b2?w=900&q=80",
 };
 
 export const CATEGORIES: Category[] = [
@@ -148,7 +152,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Cerita lembut tentang langkah pertama si kecil — keberanian yang tumbuh perlahan, satu halaman setiap malam. Kertas tebal, ilustrasi pastel, dan kata-kata yang menenangkan.",
     tagline: "small stories for growing hearts",
-    images: [IMG.notebookOpen, IMG.notebookClosed, IMG.cozyDesk],
+    images: [IMG.bookshelf, IMG.notebookOpen, IMG.notebookSpiral],
     stock: 28,
     bestseller: true,
     featured: true,
@@ -162,7 +166,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Ritual menjelang tidur yang menenangkan — buku rima lembut untuk dibaca bersama saat lampu malam mulai redup. Sampul kain, sudut tumpul, aman untuk tangan mungil.",
     tagline: "for cozy bedtime moments",
-    images: [IMG.cozyDesk, IMG.notebookClosed, IMG.cozyFlat],
+    images: [IMG.bookshelf, IMG.notebookSpiral, IMG.candle],
     stock: 24,
     featured: true,
   },
@@ -175,7 +179,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kumpulan delapan cerita pendek untuk pagi yang pelan. Cocok dibaca sambil sarapan, saat cahaya hangat baru menembus tirai. 32 halaman, kertas matte.",
     tagline: "gentle learning for little minds",
-    images: [IMG.cozyFlat, IMG.paperFlat, IMG.cozyDesk],
+    images: [IMG.notebookOpen, IMG.bookshelf, IMG.candleFlat],
     stock: 32,
   },
   {
@@ -187,7 +191,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Buku interaktif untuk mengenalkan perasaan pertama — senang, sedih, takut, tenang — dengan ilustrasi lembut dan halaman touch & feel.",
     tagline: "small stories for growing hearts",
-    images: [IMG.paperFlat, IMG.notebookOpen],
+    images: [IMG.notebookSpiral, IMG.notebookOpen],
     stock: 18,
     bestseller: true,
   },
@@ -204,7 +208,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Halaman mewarnai bermotif lembut dengan garis tebal dan ruang luas — dirancang untuk anak yang baru belajar memegang krayon. 48 halaman, kertas tebal yang tidak tembus.",
     tagline: "quiet little moments of creativity",
-    images: [IMG.stickerColor, IMG.stickerFloral, IMG.paperFlat],
+    images: [IMG.stickerColor, IMG.stickerFloral, IMG.stickyNotes],
     stock: 45,
     bestseller: true,
     featured: true,
@@ -218,7 +222,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Halaman mewarnai bertema awan, hujan, dan teh hangat — untuk sore yang mendung. Ditemani secangkir cokelat hangat lebih baik lagi.",
     tagline: "for slow afternoon learning",
-    images: [IMG.stickerFloral, IMG.stickyNotes, IMG.paperFlat],
+    images: [IMG.stickerFloral, IMG.stickyNotes, IMG.stickerColor],
     stock: 38,
   },
   {
@@ -230,7 +234,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Buku mewarnai pertama dengan motif sederhana — pas untuk tangan mungil yang sedang belajar mengontrol gerakan. Bebas BPA, tinta water-based.",
     tagline: "playful pages for curious hands",
-    images: [IMG.stickerColor, IMG.paperFlat],
+    images: [IMG.stickerColor, IMG.stickyNotes],
     stock: 30,
     featured: true,
   },
@@ -319,7 +323,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kaos katun supima organik dengan potongan oversized lembut — sempurna untuk hari Minggu di rumah. Jahitan rata, label dari kain lembut. Ukuran 1–6 tahun.",
     tagline: "tiny clothes for cozy days",
-    images: [IMG.fabricKit, IMG.fabricNeutral, IMG.plushBear],
+    images: [IMG.plushBear, IMG.plushPastel, IMG.candle],
     stock: 22,
     bestseller: true,
     featured: true,
@@ -333,7 +337,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kaos lengan pendek dengan sablon lembut bertuliskan 'tiny explorer' — kain bernapas dan ringan, untuk anak aktif yang suka berlari di rumput.",
     tagline: "soft cotton for tiny adventures",
-    images: [IMG.fabricNeutral, IMG.plushPastel],
+    images: [IMG.plushPastel, IMG.plushBear],
     stock: 26,
   },
   {
@@ -345,7 +349,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kaos panjang katun lembut dengan motif 'warm hug club' di dada — cocok untuk hari sejuk atau dipakai berlapis dengan jaket favoritnya.",
     tagline: "tiny clothes for cozy days",
-    images: [IMG.plushBear, IMG.fabricKit],
+    images: [IMG.plushBear, IMG.plushPastel],
     stock: 18,
     featured: true,
   },
@@ -375,7 +379,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Poster tipografi 'slow living' dengan warna pastel lembut — untuk mengingatkan diri sendiri agar tidak buru-buru. A3, kertas matte 200gsm.",
     tagline: "a soft reminder on the wall",
-    images: [IMG.posterArt, IMG.pastelTexture, IMG.posterFrame],
+    images: [IMG.posterArt, IMG.pastelWall, IMG.posterFrame],
     stock: 40,
     featured: true,
   },
@@ -388,7 +392,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Poster Asmaul Husna dengan kaligrafi modern dan warna pastel hangat — pas untuk kamar anak. Dicetak di kertas matte premium ukuran A3.",
     tagline: "soft words for warm walls",
-    images: [IMG.pastelWall, IMG.pastelTexture],
+    images: [IMG.pastelWall, IMG.posterArt],
     stock: 28,
   },
 

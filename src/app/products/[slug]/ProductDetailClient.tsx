@@ -105,12 +105,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             <p className="mt-2 text-[14px] text-ink-400">{product.tagline}</p>
           )}
 
-          <div className="mt-6 flex items-baseline gap-2">
-            <p className="font-display text-[2rem] font-bold tracking-tight tabular-nums text-ink-900">
-              {formatIDR(product.price)}
-            </p>
-            <span className="text-[12px] font-medium text-ink-400">IDR</span>
-          </div>
+          <p className="mt-6 font-display text-[2rem] font-bold tracking-tight tabular-nums text-ink-900">
+            {formatIDR(product.price)}
+          </p>
 
           <div className="mt-6 rounded-ios-2xl glass-thick p-5">
             <span className="chip uppercase tracking-[0.12em]">
