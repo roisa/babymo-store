@@ -17,6 +17,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const { t } = useLang();
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
+  const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({});
+  const markImgError = (i: number) =>
+    setImgErrors((m) => ({ ...m, [i]: true }));
 
   const handleAdd = (alsoOpen = false) => {
     add(product, qty);
@@ -40,15 +43,22 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
         <div>
-          <div className="relative aspect-square overflow-hidden rounded-ios-3xl bg-ink-900/[0.04] ring-1 ring-ink-900/6 shadow-ios">
-            <Image
-              src={product.images[active] ?? product.images[0]}
-              alt={product.name}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 600px"
-              className="object-cover transition-opacity duration-500 ease-spring"
-            />
+          <div className="relative aspect-square overflow-hidden rounded-ios-3xl bg-cream-100 ring-1 ring-ink-900/6 shadow-ios">
+            {imgErrors[active] || !product.images[active] ? (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream-100 to-grass-50 text-7xl">
+                🌱
+              </div>
+            ) : (
+              <Image
+                src={product.images[active] ?? product.images[0]}
+                alt={product.name}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 600px"
+                className="object-cover transition-opacity duration-500 ease-spring"
+                onError={() => markImgError(active)}
+              />
+            )}
           </div>
           {product.images.length > 1 && (
             <div className="mt-3 flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
@@ -56,13 +66,26 @@ export default function ProductDetailClient({ product }: { product: Product }) {
                 <button
                   key={i}
                   onClick={() => setActive(i)}
-                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-ios transition-all ease-spring ${
+                  className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-ios bg-cream-100 transition-all ease-spring ${
                     i === active
                       ? "ring-2 ring-grass-400 ring-offset-2 ring-offset-warmwhite"
                       : "ring-1 ring-ink-900/6 hover:ring-ink-900/15"
                   }`}
                 >
-                  <Image src={src} alt="" fill className="object-cover" sizes="80px" />
+                  {imgErrors[i] ? (
+                    <div className="flex h-full w-full items-center justify-center text-lg">
+                      🌱
+                    </div>
+                  ) : (
+                    <Image
+                      src={src}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="80px"
+                      onError={() => markImgError(i)}
+                    />
+                  )}
                 </button>
               ))}
             </div>

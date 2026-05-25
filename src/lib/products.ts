@@ -12,8 +12,8 @@ import type { Category, Product } from "@/types";
  * Product naming is emotional (never generic). Descriptions feel like
  * a gentle conversation with the parent, not a feature list.
  *
- * Imagery direction (for the real photo shoot — these Unsplash URLs
- * are stand-ins in the right mood until the merchant's photos drop):
+ * Imagery direction (when swapped for the merchant's real product
+ * shots):
  * - Buku Cerita    → cozy reading corner, warm sunlight, soft blanket,
  *                    wooden bookshelf, Scandinavian nursery.
  * - Buku Mewarnai  → crayons, wooden desk, soft natural light, child
@@ -27,69 +27,61 @@ import type { Category, Product } from "@/types";
  *                    frame.
  * - Boneka         → mascot plush on linen, soft daylight.
  * - Aksesoris      → tiny enamel pins / keychains on cream surface.
+ *
+ * Note: the URLs below are a curated set of Unsplash photos that have
+ * been verified to render. They're stand-ins in the right mood until
+ * the merchant's real product photography is dropped in — swap each
+ * `IMG.*` reference for the actual product photo URL when ready.
  */
 
 const IMG = {
-  // ── Buku Cerita Anak ─────────────────────────────────────────────
-  bookOpen:
-    "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=900&q=80",
-  bookKid:
-    "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=80",
-  bookStack:
-    "https://images.unsplash.com/photo-1543248939-4296e1fbd757?w=900&q=80",
-  bookBed:
-    "https://images.unsplash.com/photo-1474447976065-67d23accb1e3?w=900&q=80",
-  bookFlat:
-    "https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?w=900&q=80",
+  // Book / paper / writing surface — verified
+  paperFlat:
+    "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&q=80",
+  notebookOpen:
+    "https://images.unsplash.com/photo-1517842645767-c639042777db?w=900&q=80",
+  notebookClosed:
+    "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=900&q=80",
+  cozyDesk:
+    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
+  cozyFlat:
+    "https://images.unsplash.com/photo-1542435503-956c469947f6?w=900&q=80",
 
-  // ── Buku Mewarnai ────────────────────────────────────────────────
-  crayons1:
-    "https://images.unsplash.com/photo-1551244072-5d12893278ab?w=900&q=80",
-  drawKid:
-    "https://images.unsplash.com/photo-1502740479091-635887520276?w=900&q=80",
-  crayons2:
-    "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&q=80",
-
-  // ── Stiker ──────────────────────────────────────────────────────
-  sticker1:
+  // Stickers / colorful flat-lay — verified
+  stickerColor:
     "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=80",
-  sticker2:
+  stickerFloral:
     "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=900&q=80",
-  stickerSheet:
-    "https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=900&q=80",
-
-  // ── Stiker Doa Harian (Islamic / Hijaiyah-pastel mood) ───────────
-  doaSticker1:
+  stickyNotes:
     "https://images.unsplash.com/photo-1606166325683-e6deb697d301?w=900&q=80",
-  doaSticker2:
+
+  // Cards / letters (used for hijaiyah-card / pin / keychain mood) — verified
+  cardLetter:
     "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=900&q=80",
+  cardEnvelope:
+    "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?w=900&q=80",
 
-  // ── Kaos & Apparel ───────────────────────────────────────────────
-  tee1: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=900&q=80",
-  tee2: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=80",
-  teeKid:
-    "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=900&q=80",
-
-  // ── Poster ──────────────────────────────────────────────────────
-  posterArt:
-    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80",
-  posterFrame:
-    "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=900&q=80",
-  posterWall:
-    "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80",
-
-  // ── Boneka (Plush) ───────────────────────────────────────────────
-  plush1:
+  // Plush — verified
+  plushBear:
     "https://images.unsplash.com/photo-1559563458-527698bf5295?w=900&q=80",
-  plush2:
+  plushPastel:
     "https://images.unsplash.com/photo-1620421680010-0766ff230392?w=900&q=80",
-  plush3:
-    "https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=900&q=80",
 
-  // ── Aksesoris (Keychain & Pin) ───────────────────────────────────
-  key1: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=900&q=80",
-  pin1: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&q=80",
-  key2: "https://images.unsplash.com/photo-1593726852316-7ea4dec0aa9f?w=900&q=80",
+  // Soft fabric / cozy kit (used for apparel mood) — verified
+  fabricKit:
+    "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=900&q=80",
+  fabricNeutral:
+    "https://images.unsplash.com/photo-1583209814683-c023dd293cc6?w=900&q=80",
+
+  // Wall / poster — verified
+  posterFrame:
+    "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80",
+  posterArt:
+    "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?w=900&q=80",
+  pastelWall:
+    "https://images.unsplash.com/photo-1486916856361-bf2999da9d57?w=900&q=80",
+  pastelTexture:
+    "https://images.unsplash.com/photo-1531315396756-905d68d21b56?w=900&q=80",
 };
 
 export const CATEGORIES: Category[] = [
@@ -156,7 +148,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Cerita lembut tentang langkah pertama si kecil — keberanian yang tumbuh perlahan, satu halaman setiap malam. Kertas tebal, ilustrasi pastel, dan kata-kata yang menenangkan.",
     tagline: "small stories for growing hearts",
-    images: [IMG.bookOpen, IMG.bookStack, IMG.bookBed],
+    images: [IMG.notebookOpen, IMG.notebookClosed, IMG.cozyDesk],
     stock: 28,
     bestseller: true,
     featured: true,
@@ -170,7 +162,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Ritual menjelang tidur yang menenangkan — buku rima lembut untuk dibaca bersama saat lampu malam mulai redup. Sampul kain, sudut tumpul, aman untuk tangan mungil.",
     tagline: "for cozy bedtime moments",
-    images: [IMG.bookBed, IMG.bookFlat, IMG.bookKid],
+    images: [IMG.cozyDesk, IMG.notebookClosed, IMG.cozyFlat],
     stock: 24,
     featured: true,
   },
@@ -183,7 +175,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kumpulan delapan cerita pendek untuk pagi yang pelan. Cocok dibaca sambil sarapan, saat cahaya hangat baru menembus tirai. 32 halaman, kertas matte.",
     tagline: "gentle learning for little minds",
-    images: [IMG.bookFlat, IMG.bookKid],
+    images: [IMG.cozyFlat, IMG.paperFlat, IMG.cozyDesk],
     stock: 32,
   },
   {
@@ -195,7 +187,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Buku interaktif untuk mengenalkan perasaan pertama — senang, sedih, takut, tenang — dengan ilustrasi lembut dan halaman touch & feel.",
     tagline: "small stories for growing hearts",
-    images: [IMG.bookStack, IMG.bookOpen],
+    images: [IMG.paperFlat, IMG.notebookOpen],
     stock: 18,
     bestseller: true,
   },
@@ -212,7 +204,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Halaman mewarnai bermotif lembut dengan garis tebal dan ruang luas — dirancang untuk anak yang baru belajar memegang krayon. 48 halaman, kertas tebal yang tidak tembus.",
     tagline: "quiet little moments of creativity",
-    images: [IMG.crayons1, IMG.drawKid, IMG.crayons2],
+    images: [IMG.stickerColor, IMG.stickerFloral, IMG.paperFlat],
     stock: 45,
     bestseller: true,
     featured: true,
@@ -226,7 +218,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Halaman mewarnai bertema awan, hujan, dan teh hangat — untuk sore yang mendung. Ditemani secangkir cokelat hangat lebih baik lagi.",
     tagline: "for slow afternoon learning",
-    images: [IMG.crayons2, IMG.drawKid],
+    images: [IMG.stickerFloral, IMG.stickyNotes, IMG.paperFlat],
     stock: 38,
   },
   {
@@ -238,7 +230,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Buku mewarnai pertama dengan motif sederhana — pas untuk tangan mungil yang sedang belajar mengontrol gerakan. Bebas BPA, tinta water-based.",
     tagline: "playful pages for curious hands",
-    images: [IMG.drawKid, IMG.crayons1],
+    images: [IMG.stickerColor, IMG.paperFlat],
     stock: 30,
     featured: true,
   },
@@ -255,7 +247,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "30 stiker waterproof untuk merayakan kemenangan kecil — 'kamu hebat hari ini', 'istirahat dulu yuk', dan banyak lagi. Tempel di laptop, botol minum, atau jurnal.",
     tagline: "little things that feel comforting",
-    images: [IMG.sticker1, IMG.sticker2, IMG.stickerSheet],
+    images: [IMG.stickerColor, IMG.stickerFloral, IMG.stickyNotes],
     stock: 80,
     bestseller: true,
     featured: true,
@@ -269,7 +261,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Stiker dengan kata-kata penyemangat lembut dalam Bahasa Indonesia dan English — cocok ditempel di jurnal, kotak makan, atau laptop kerja.",
     tagline: "small notes for soft days",
-    images: [IMG.sticker2, IMG.sticker1],
+    images: [IMG.stickyNotes, IMG.stickerFloral],
     stock: 65,
   },
   {
@@ -281,7 +273,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Lembar stiker dengan ilustrasi Mo si maskot dalam berbagai pose — untuk dipajang, dikoleksi, atau dibagikan ke teman sekolah.",
     tagline: "little Mo, little smiles",
-    images: [IMG.stickerSheet, IMG.sticker1],
+    images: [IMG.stickerFloral, IMG.stickerColor],
     stock: 90,
   },
 
@@ -297,7 +289,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Stiker pengingat doa harian untuk anak — sebelum makan, sebelum tidur, masuk dan keluar rumah. Ilustrasi pastel lembut, ukuran pas untuk dinding kamar.",
     tagline: "soft reminders, small prayers",
-    images: [IMG.doaSticker1, IMG.doaSticker2],
+    images: [IMG.cardLetter, IMG.cardEnvelope, IMG.stickyNotes],
     stock: 50,
     bestseller: true,
     featured: true,
@@ -311,7 +303,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Stiker adab pagi untuk si kecil — bangun tidur, sarapan, bersiap berangkat. Cocok ditempel di kulkas atau cermin kamar mandi sebagai pengingat lembut.",
     tagline: "tiny habits, gentle days",
-    images: [IMG.doaSticker2, IMG.doaSticker1],
+    images: [IMG.cardEnvelope, IMG.cardLetter],
     stock: 40,
   },
 
@@ -327,7 +319,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kaos katun supima organik dengan potongan oversized lembut — sempurna untuk hari Minggu di rumah. Jahitan rata, label dari kain lembut. Ukuran 1–6 tahun.",
     tagline: "tiny clothes for cozy days",
-    images: [IMG.tee1, IMG.teeKid, IMG.tee2],
+    images: [IMG.fabricKit, IMG.fabricNeutral, IMG.plushBear],
     stock: 22,
     bestseller: true,
     featured: true,
@@ -341,7 +333,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kaos lengan pendek dengan sablon lembut bertuliskan 'tiny explorer' — kain bernapas dan ringan, untuk anak aktif yang suka berlari di rumput.",
     tagline: "soft cotton for tiny adventures",
-    images: [IMG.tee2, IMG.teeKid],
+    images: [IMG.fabricNeutral, IMG.plushPastel],
     stock: 26,
   },
   {
@@ -353,7 +345,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Kaos panjang katun lembut dengan motif 'warm hug club' di dada — cocok untuk hari sejuk atau dipakai berlapis dengan jaket favoritnya.",
     tagline: "tiny clothes for cozy days",
-    images: [IMG.teeKid, IMG.tee1],
+    images: [IMG.plushBear, IMG.fabricKit],
     stock: 18,
     featured: true,
   },
@@ -370,7 +362,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Poster minimal dengan ilustrasi pagi yang tenang — secangkir teh, tirai yang terbuka, cahaya hangat. Ukuran A3, dicetak di kertas matte premium.",
     tagline: "gentle art for soft rooms",
-    images: [IMG.posterArt, IMG.posterFrame],
+    images: [IMG.posterFrame, IMG.posterArt, IMG.pastelWall],
     stock: 35,
     bestseller: true,
   },
@@ -383,7 +375,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Poster tipografi 'slow living' dengan warna pastel lembut — untuk mengingatkan diri sendiri agar tidak buru-buru. A3, kertas matte 200gsm.",
     tagline: "a soft reminder on the wall",
-    images: [IMG.posterFrame, IMG.posterWall],
+    images: [IMG.posterArt, IMG.pastelTexture, IMG.posterFrame],
     stock: 40,
     featured: true,
   },
@@ -396,7 +388,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Poster Asmaul Husna dengan kaligrafi modern dan warna pastel hangat — pas untuk kamar anak. Dicetak di kertas matte premium ukuran A3.",
     tagline: "soft words for warm walls",
-    images: [IMG.posterWall, IMG.posterArt],
+    images: [IMG.pastelWall, IMG.pastelTexture],
     stock: 28,
   },
 
@@ -412,7 +404,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Boneka maskot Mo setinggi 25cm — kain bulu lembut, isi serat poliester anti-alergi, jahitan ganda. Teman pelukan si kecil di kasur atau di perjalanan.",
     tagline: "your tiny pocket comfort",
-    images: [IMG.plush1, IMG.plush2, IMG.plush3],
+    images: [IMG.plushBear, IMG.plushPastel],
     stock: 24,
     bestseller: true,
     featured: true,
@@ -426,7 +418,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Versi mini dari Mo Plush — setinggi 15cm, cukup kecil untuk masuk tas sekolah. Bisa dicuci dengan mesin (gentle cycle), aman untuk bayi.",
     tagline: "small hugs, anywhere",
-    images: [IMG.plush2, IMG.plush3],
+    images: [IMG.plushPastel, IMG.plushBear],
     stock: 30,
   },
 
@@ -442,7 +434,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Gantungan kunci Mo dari acrylic glossy dengan rantai logam berlapis emas — cocok untuk kunci rumah, tas sekolah, atau tas si kecil.",
     tagline: "carry a little softness",
-    images: [IMG.key1, IMG.key2],
+    images: [IMG.stickyNotes, IMG.cardEnvelope],
     stock: 60,
     bestseller: true,
   },
@@ -455,7 +447,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Pin enamel keras dengan ilustrasi Mo dan tulisan 'soft days' — 25mm, warna pastel matte. Pas disematkan di tas, jaket, atau topi favorit.",
     tagline: "little wins, worn proudly",
-    images: [IMG.pin1, IMG.key1],
+    images: [IMG.cardEnvelope, IMG.stickyNotes],
     stock: 70,
     featured: true,
   },
@@ -468,7 +460,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     description:
       "Set tiga gantungan kunci berbeda warna — krem, sage, dan tangerine pastel. Cocok dibagi dengan teman atau dikoleksi sendiri.",
     tagline: "tiny things for everyday",
-    images: [IMG.key2, IMG.pin1],
+    images: [IMG.stickyNotes, IMG.cardLetter],
     stock: 45,
   },
 ];

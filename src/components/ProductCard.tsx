@@ -16,21 +16,29 @@ export default function ProductCard({ product, priority }: Props) {
   const { notify } = useToast();
   const { t } = useLang();
   const [wished, setWished] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   return (
     <div className="group relative flex flex-col">
       <Link
         href={`/products/${product.slug}`}
-        className="relative block aspect-square overflow-hidden rounded-ios-2xl bg-ink-900/[0.04] ring-1 ring-ink-900/6 transition-all duration-500 ease-spring group-hover:-translate-y-0.5 group-hover:shadow-ios-lg"
+        className="relative block aspect-square overflow-hidden rounded-ios-2xl bg-cream-100 ring-1 ring-ink-900/6 transition-all duration-500 ease-spring group-hover:-translate-y-0.5 group-hover:shadow-ios-lg"
       >
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          fill
-          priority={priority}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.06]"
-        />
+        {imgError || !product.images[0] ? (
+          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream-100 to-grass-50 text-5xl">
+            🌱
+          </div>
+        ) : (
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            fill
+            priority={priority}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-transform duration-700 ease-spring group-hover:scale-[1.06]"
+            onError={() => setImgError(true)}
+          />
+        )}
 
         {product.bestseller && (
           <span className="absolute left-3 top-3 rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-grass-700 ring-1 ring-grass-100 backdrop-blur-xl">
