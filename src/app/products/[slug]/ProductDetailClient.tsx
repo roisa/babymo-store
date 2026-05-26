@@ -11,6 +11,7 @@ import { useStock } from "@/hooks/useStock";
 import { formatIDR } from "@/lib/utils";
 import { buildSimpleConsultLink } from "@/lib/whatsapp";
 import StickyCheckoutBar from "@/components/StickyCheckoutBar";
+import Lightbox from "@/components/Lightbox";
 
 export default function ProductDetailClient({ product }: { product: Product }) {
   const { add, open } = useCart();
@@ -18,6 +19,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const { t } = useLang();
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
+  const [zoom, setZoom] = useState(false);
   const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({});
   const markImgError = (i: number) =>
     setImgErrors((m) => ({ ...m, [i]: true }));
@@ -49,23 +51,51 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
         <div>
-          <div className="relative aspect-square overflow-hidden rounded-ios-3xl bg-cream-100 ring-1 ring-ink-900/6 shadow-ios">
+          <button
+            type="button"
+            onClick={() => {
+              if (!imgErrors[active] && product.images[active]) setZoom(true);
+            }}
+            aria-label={
+              imgErrors[active] || !product.images[active]
+                ? product.name
+                : `${product.name} — tap to zoom`
+            }
+            className="group relative block aspect-square w-full overflow-hidden rounded-ios-3xl bg-cream-100 ring-1 ring-ink-900/[0.06] shadow-ios"
+          >
             {imgErrors[active] || !product.images[active] ? (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream-100 to-grass-50 text-7xl">
                 🌱
               </div>
             ) : (
-              <Image
-                src={product.images[active] ?? product.images[0]}
-                alt={product.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 600px"
-                className="object-cover transition-opacity duration-500 ease-spring"
-                onError={() => markImgError(active)}
-              />
+              <>
+                <Image
+                  src={product.images[active] ?? product.images[0]}
+                  alt={product.name}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 600px"
+                  className="object-cover transition-transform duration-500 ease-spring group-hover:scale-[1.02]"
+                  onError={() => markImgError(active)}
+                />
+                <span className="pointer-events-none absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/85 text-ink-700 ring-1 ring-ink-900/[0.06] backdrop-blur transition group-hover:bg-white">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m20 20-3.5-3.5M8 11h6M11 8v6" strokeLinecap="round" />
+                  </svg>
+                </span>
+              </>
             )}
-          </div>
+          </button>
+          {zoom && (
+            <Lightbox
+              images={product.images}
+              index={active}
+              alt={product.name}
+              onClose={() => setZoom(false)}
+              onIndexChange={setActive}
+            />
+          )}
           {product.images.length > 1 && (
             <div className="mt-3 flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
               {product.images.map((src, i) => (

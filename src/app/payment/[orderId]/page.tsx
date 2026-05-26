@@ -9,6 +9,7 @@ import { useLang } from "@/context/LanguageContext";
 import { formatIDR } from "@/lib/utils";
 import { buildWhatsAppLink, getStoreWhatsApp } from "@/lib/whatsapp";
 import QrisImage from "@/components/QrisImage";
+import OrderTimeline from "@/components/OrderTimeline";
 import type { Order } from "@/types";
 
 export default function PaymentPage({
@@ -132,7 +133,11 @@ export default function PaymentPage({
         </p>
       </div>
 
-      <div className="mt-8 overflow-hidden rounded-ios-3xl bg-white shadow-ios-xl ring-1 ring-ink-900/6">
+      <div className="mt-8 rounded-ios-2xl bg-white p-5 ring-1 ring-ink-900/[0.06] shadow-ios">
+        <OrderTimeline status={order.order_status} />
+      </div>
+
+      <div className="mt-6 overflow-hidden rounded-ios-3xl bg-white shadow-ios-xl ring-1 ring-ink-900/6">
         <div className="border-b border-ink-900/6 bg-warmwhite/60 px-6 py-4 backdrop-blur-xl">
           <div className="flex items-center justify-between">
             <div>

@@ -9,8 +9,17 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/admin", "/api/", "/payment/", "/shipping-label/"],
+        // /order is the public lookup page; /order/<id> is per-customer
+        // and lives behind localStorage, so it shouldn't be indexed.
+        allow: ["/", "/order"],
+        disallow: [
+          "/admin",
+          "/api/",
+          "/payment/",
+          "/shipping-label/",
+          "/invoice/",
+          "/order/",
+        ],
       },
     ],
     sitemap: `${base}/sitemap.xml`,

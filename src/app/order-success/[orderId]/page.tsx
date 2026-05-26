@@ -6,6 +6,7 @@ import { getLocalOrder } from "@/lib/orders";
 import { useLang } from "@/context/LanguageContext";
 import { formatIDR } from "@/lib/utils";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import OrderTimeline from "@/components/OrderTimeline";
 import type { Order } from "@/types";
 
 export default function OrderSuccessPage({
@@ -54,7 +55,13 @@ export default function OrderSuccessPage({
             {order.order_id}
           </p>
 
-          <ul className="mt-5 space-y-2 text-[13.5px]">
+          <div className="mt-5">
+            <OrderTimeline status={order.order_status} />
+          </div>
+
+          <hr className="my-4 border-ink-900/8" />
+
+          <ul className="space-y-2 text-[13.5px]">
             {order.items.map((i) => (
               <li
                 key={i.productId}

@@ -152,6 +152,29 @@ body::before {
     content-visibility: auto;
     contain-intrinsic-size: 1px 600px;
   }
+
+  /* Long-form static pages — about / shipping / privacy / terms */
+  .prose-content h2 {
+    @apply mt-10 font-display text-[1.5rem] font-bold tracking-[-0.02em] text-ink-900;
+  }
+  .prose-content h3 {
+    @apply mt-6 font-display text-[1.125rem] font-bold tracking-[-0.015em] text-ink-900;
+  }
+  .prose-content p {
+    @apply text-ink-700;
+  }
+  .prose-content ul {
+    @apply ml-5 list-disc space-y-1.5;
+  }
+  .prose-content ol {
+    @apply ml-5 list-decimal space-y-1.5;
+  }
+  .prose-content a {
+    @apply font-semibold text-grass-700 underline underline-offset-2 hover:text-grass-800;
+  }
+  .prose-content strong {
+    @apply font-semibold text-ink-900;
+  }
 }
 
 /* iOS-feel selection */

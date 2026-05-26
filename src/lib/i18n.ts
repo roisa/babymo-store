@@ -235,6 +235,11 @@ type Dict = {
   footer_help: string;
   footer_help_shipping: string;
   footer_help_wa: string;
+  footer_track_order: string;
+  footer_info: string;
+  footer_about: string;
+  footer_privacy: string;
+  footer_terms: string;
   footer_stay: string;
   footer_stay_sub: string;
   footer_rights: string;
@@ -492,6 +497,11 @@ export const STRINGS: Record<Lang, Dict> = {
     footer_help: "Bantuan",
     footer_help_shipping: "Pengiriman",
     footer_help_wa: "WhatsApp kami",
+    footer_track_order: "Lacak pesanan",
+    footer_info: "Tentang",
+    footer_about: "Tentang Baby Mo",
+    footer_privacy: "Kebijakan privasi",
+    footer_terms: "Syarat & ketentuan",
     footer_stay: "Tetap lembut",
     footer_stay_sub:
       "Ikuti @babymo.id untuk drop produk dan pengumuman lembut.",
@@ -746,6 +756,11 @@ export const STRINGS: Record<Lang, Dict> = {
     footer_help: "Help",
     footer_help_shipping: "Shipping",
     footer_help_wa: "WhatsApp us",
+    footer_track_order: "Track order",
+    footer_info: "About",
+    footer_about: "About Baby Mo",
+    footer_privacy: "Privacy policy",
+    footer_terms: "Terms & conditions",
     footer_stay: "Stay soft",
     footer_stay_sub:
       "Follow @babymo.id for gentle drops and quiet announcements.",

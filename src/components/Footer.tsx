@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer className="mt-24 border-t border-ink-900/[0.06] bg-warmwhite/60 backdrop-blur-xl pb-[max(7rem,calc(env(safe-area-inset-bottom)+6rem))] sm:pb-0">
       <div className="container-soft py-14 sm:py-16">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-5">
           <div>
             <BabyMoLogo size="lg" />
             <p className="mt-4 max-w-xs text-[13.5px] leading-relaxed text-ink-600">
@@ -69,12 +69,20 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-[13.5px] font-medium text-ink-600">
               <li>
+                <Link href="/order" className="transition hover:text-grass-700">
+                  {t.footer_track_order}
+                </Link>
+              </li>
+              <li>
                 <Link href="/#faq" className="transition hover:text-grass-700">
                   {t.nav_faq}
                 </Link>
               </li>
               <li>
-                <Link href="/#shipping" className="transition hover:text-grass-700">
+                <Link
+                  href="/shipping-info"
+                  className="transition hover:text-grass-700"
+                >
                   {t.footer_help_shipping}
                 </Link>
               </li>
@@ -87,6 +95,29 @@ export default function Footer() {
                 >
                   {t.footer_help_wa}
                 </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-3 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-400">
+              {t.footer_info}
+            </h4>
+            <ul className="space-y-2 text-[13.5px] font-medium text-ink-600">
+              <li>
+                <Link href="/about" className="transition hover:text-grass-700">
+                  {t.footer_about}
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="transition hover:text-grass-700">
+                  {t.footer_privacy}
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="transition hover:text-grass-700">
+                  {t.footer_terms}
+                </Link>
               </li>
             </ul>
           </div>
