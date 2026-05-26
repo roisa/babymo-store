@@ -146,6 +146,12 @@ body::before {
     @apply relative inline-flex items-center gap-1 font-display font-bold text-ink-900;
     letter-spacing: -0.025em;
   }
+
+  /* Skip layout/paint work for sections below the viewport until needed. */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
+  }
 }
 
 /* iOS-feel selection */

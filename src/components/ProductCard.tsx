@@ -8,6 +8,7 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { useLang } from "@/context/LanguageContext";
 import { useStock } from "@/hooks/useStock";
+import { useWishlistItem } from "@/hooks/useWishlist";
 import { formatIDR } from "@/lib/utils";
 
 type Props = { product: Product; priority?: boolean };
@@ -16,7 +17,7 @@ export default function ProductCard({ product, priority }: Props) {
   const { add, open } = useCart();
   const { notify } = useToast();
   const { t } = useLang();
-  const [wished, setWished] = useState(false);
+  const { wished, toggle: toggleWishlisted } = useWishlistItem(product.id);
   const [imgError, setImgError] = useState(false);
   const stock = useStock(product.id, product.stock);
   const soldOut = stock === 0;
@@ -65,13 +66,14 @@ export default function ProductCard({ product, priority }: Props) {
         <button
           onClick={(e) => {
             e.preventDefault();
-            setWished((v) => !v);
+            toggleWishlisted();
           }}
-          aria-label="Wishlist"
+          aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
+          aria-pressed={wished}
           className={`absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-xl transition-all ease-spring ${
             wished
               ? "bg-tangerine-400 text-white shadow-ios-tangerine"
-              : "bg-white/80 text-ink-600 ring-1 ring-ink-900/8 hover:text-tangerine-500"
+              : "bg-white/80 text-ink-600 ring-1 ring-ink-900/[0.08] hover:text-tangerine-500"
           }`}
         >
           <HeartIcon filled={wished} />

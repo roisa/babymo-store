@@ -205,6 +205,9 @@ type Dict = {
   admin_card_shipping: string;
   admin_card_proof: string;
   admin_card_proof_empty: string;
+  admin_card_expected: string;
+  admin_card_unique: string;
+  admin_export_csv_title: string;
   admin_action_wa: string;
   admin_action_copy: string;
   admin_action_label: string;
@@ -459,6 +462,9 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_card_shipping: "Pengiriman",
     admin_card_proof: "Bukti pembayaran",
     admin_card_proof_empty: "Belum ada bukti yang diunggah",
+    admin_card_expected: "Nominal yang diharapkan",
+    admin_card_unique: "(kode unik)",
+    admin_export_csv_title: "Unduh {n} pesanan sebagai CSV",
     admin_action_wa: "💬 WhatsApp customer",
     admin_action_copy: "📋 Salin alamat",
     admin_action_label: "🏷 Cetak label",
@@ -709,6 +715,9 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_card_shipping: "Shipping",
     admin_card_proof: "Payment proof",
     admin_card_proof_empty: "No proof uploaded yet",
+    admin_card_expected: "Expected amount",
+    admin_card_unique: "(unique code)",
+    admin_export_csv_title: "Download {n} orders as CSV",
     admin_action_wa: "💬 WhatsApp customer",
     admin_action_copy: "📋 Copy address",
     admin_action_label: "🏷 Print label",

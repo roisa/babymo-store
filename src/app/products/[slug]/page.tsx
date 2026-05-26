@@ -8,6 +8,7 @@ import {
 import ProductDetailClient from "./ProductDetailClient";
 import ProductGrid from "@/components/ProductGrid";
 import { SectionHeader } from "@/components/CategoryGrid";
+import RecentlyViewed from "@/components/RecentlyViewed";
 
 type Params = { slug: string };
 
@@ -47,14 +48,49 @@ export default async function ProductPage({
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
 
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://babymo-shop.vercel.app";
+
+  // Google Shopping / rich result eligibility
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.images,
+    sku: product.id,
+    brand: { "@type": "Brand", name: "Baby Mo" },
+    offers: {
+      "@type": "Offer",
+      url: `${baseUrl}/products/${product.slug}`,
+      priceCurrency: "IDR",
+      price: product.price,
+      availability:
+        product.stock > 0
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@type": "Organization", name: "Baby Mo" },
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <ProductDetailClient product={product} />
+
+      <RecentlyViewed currentProductId={product.id} />
 
       {related.length > 0 && (
         <section className="py-14">
           <div className="container-soft">
-            <SectionHeader eyebrow="you might also love" title="In the same gentle world." />
+            <SectionHeader
+              eyebrow="you might also love"
+              title="In the same gentle world."
+            />
             <div className="mt-8">
               <ProductGrid products={related} />
             </div>

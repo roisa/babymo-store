@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { readLocalOrders, updateLocalOrder, writeLocalOrders } from "@/lib/orders";
 import { decrementStockFor } from "@/lib/stock";
+import { downloadCSV, ordersToCSV } from "@/lib/csv";
 import { useToast } from "@/context/ToastContext";
 import { useLang } from "@/context/LanguageContext";
 import { formatDateID, formatIDR } from "@/lib/utils";
@@ -217,6 +218,18 @@ export default function AdminPage() {
           </h1>
         </div>
         <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => {
+              const today = new Date().toISOString().slice(0, 10);
+              downloadCSV(`babymo-orders-${today}.csv`, ordersToCSV(filtered));
+            }}
+            className="btn-soft text-[12px] px-4 py-2"
+            title={
+              t.admin_export_csv_title.replace("{n}", String(filtered.length))
+            }
+          >
+            ⬇ CSV
+          </button>
           <button onClick={refresh} className="btn-soft text-[12px] px-4 py-2">
             {t.admin_refresh}
           </button>
@@ -397,13 +410,32 @@ function OrderCard({
               <h4 className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-400">
                 {t.admin_card_proof}
               </h4>
+
+              {/* Expected amount — admin compares this to the uploaded proof */}
+              <div className="mt-2 rounded-ios bg-grass-50 px-3 py-2 ring-1 ring-grass-100">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-grass-700">
+                  {t.admin_card_expected}
+                </p>
+                <p className="mt-0.5 font-display text-[18px] font-bold tabular-nums text-ink-900">
+                  {formatIDR(order.total_payment)}
+                </p>
+                <p className="text-[10px] tabular-nums text-ink-400">
+                  +{order.unique_code} {t.admin_card_unique}
+                </p>
+              </div>
+
               {order.proof_image ? (
-                <a href={order.proof_image} target="_blank" rel="noreferrer">
+                <a
+                  href={order.proof_image}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-2 block"
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={order.proof_image}
                     alt="proof"
-                    className="mt-2 max-h-40 w-full rounded-ios object-contain ring-1 ring-ink-900/8"
+                    className="max-h-40 w-full rounded-ios object-contain ring-1 ring-ink-900/[0.08]"
                   />
                 </a>
               ) : (

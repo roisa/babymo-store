@@ -54,9 +54,16 @@ export default function AuroraCanvas({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const reduced =
+    // Honour reduced-motion AND Save-Data / metered-network mode.
+    const reducedMotion =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveData =
+      typeof navigator !== "undefined" &&
+      // NetworkInformation isn't in lib.dom yet
+      (navigator as { connection?: { saveData?: boolean } }).connection
+        ?.saveData === true;
+    const reduced = reducedMotion || saveData;
 
     const blobs = BLOBS.map((b) => ({ ...b }));
 

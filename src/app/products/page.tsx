@@ -7,20 +7,53 @@ import ProductGrid from "@/components/ProductGrid";
 import { CATEGORIES, SAMPLE_PRODUCTS, searchProducts } from "@/lib/products";
 import { useLang } from "@/context/LanguageContext";
 
+type SortKey = "default" | "bestseller" | "price-asc" | "price-desc";
+
+const SORT_LABEL: Record<"id" | "en", Record<SortKey, string>> = {
+  id: {
+    default: "Urutan default",
+    bestseller: "Terlaris dulu",
+    "price-asc": "Harga ↓",
+    "price-desc": "Harga ↑",
+  },
+  en: {
+    default: "Default order",
+    bestseller: "Bestsellers first",
+    "price-asc": "Price ↓",
+    "price-desc": "Price ↑",
+  },
+};
+
 function ProductsInner() {
   const sp = useSearchParams();
   const filter = sp.get("filter");
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const sortLabels = SORT_LABEL[lang];
 
   const [q, setQ] = useState("");
   const [activeCat, setActiveCat] = useState<string>("all");
+  const [sort, setSort] = useState<SortKey>("default");
 
   const products = useMemo(() => {
     let list = q ? searchProducts(q) : SAMPLE_PRODUCTS;
     if (activeCat !== "all") list = list.filter((p) => p.category === activeCat);
     if (filter === "bestseller") list = list.filter((p) => p.bestseller);
+    if (sort !== "default") {
+      list = [...list].sort((a, b) => {
+        switch (sort) {
+          case "price-asc":
+            return a.price - b.price;
+          case "price-desc":
+            return b.price - a.price;
+          case "bestseller":
+            return (b.bestseller ? 1 : 0) - (a.bestseller ? 1 : 0);
+          default:
+            return 0;
+        }
+      });
+    }
     return list;
-  }, [q, activeCat, filter]);
+  }, [q, activeCat, filter, sort]);
 
   return (
     <div className="container-soft pt-10 pb-16 sm:pt-12">
@@ -67,6 +100,35 @@ function ProductsInner() {
                 <span className="mr-1">{c.emoji}</span> {c.name}
               </Pill>
             ))}
+          </div>
+
+          {/* Sort + result count */}
+          <div className="mt-3 flex items-center justify-between gap-2 text-[12px] font-medium text-ink-400">
+            <span className="tabular-nums">
+              {products.length}{" "}
+              {lang === "id"
+                ? products.length === 1
+                  ? "produk"
+                  : "produk"
+                : products.length === 1
+                  ? "item"
+                  : "items"}
+            </span>
+            <label className="inline-flex items-center gap-2">
+              <span className="hidden sm:inline">
+                {lang === "id" ? "Urutkan" : "Sort"}
+              </span>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as SortKey)}
+                className="rounded-full bg-white px-3 py-1.5 text-[12px] font-semibold text-ink-700 ring-1 ring-ink-900/[0.08] outline-none transition focus:ring-2 focus:ring-grass-400"
+              >
+                <option value="default">{sortLabels.default}</option>
+                <option value="bestseller">{sortLabels.bestseller}</option>
+                <option value="price-asc">{sortLabels["price-asc"]}</option>
+                <option value="price-desc">{sortLabels["price-desc"]}</option>
+              </select>
+            </label>
           </div>
         </div>
       </div>

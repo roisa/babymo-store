@@ -96,21 +96,23 @@ export default function HomePageClient({
         </div>
       </section>
 
-      <Reveal>
-        <QuoteCarousel />
-      </Reveal>
-      <Reveal>
-        <Testimonials />
-      </Reveal>
-      <Reveal>
-        <InstagramGallery />
-      </Reveal>
-      <Reveal>
-        <TrustBadges />
-      </Reveal>
-      <Reveal>
-        <FAQ />
-      </Reveal>
+      <div className="cv-auto">
+        <Reveal>
+          <QuoteCarousel />
+        </Reveal>
+        <Reveal>
+          <Testimonials />
+        </Reveal>
+        <Reveal>
+          <InstagramGallery />
+        </Reveal>
+        <Reveal>
+          <TrustBadges />
+        </Reveal>
+        <Reveal>
+          <FAQ />
+        </Reveal>
+      </div>
     </>
   );
 }
