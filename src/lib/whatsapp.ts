@@ -34,7 +34,7 @@ export function buildCheckoutMessage(
   );
 
   return [
-    "Halo Baby Mo 🌷",
+    "Halo Baby Mo 🌱",
     "",
     `Saya ingin order (ID: ${orderId}):`,
     "",
@@ -62,7 +62,7 @@ export function buildWhatsAppLink(message: string, toNumber?: string): string {
 
 export function buildSimpleConsultLink(productName: string): string {
   return buildWhatsAppLink(
-    `Halo Baby Mo 🌷 saya ingin tanya tentang produk: ${productName}`,
+    `Halo Baby Mo 🌱 saya ingin tanya tentang produk: ${productName}`,
   );
 }
 
@@ -106,7 +106,7 @@ export async function sendMessage(
 
 export async function sendPaymentConfirmed(order: Order): Promise<SendResult> {
   const msg = [
-    `Halo ${order.customer_name} 🌷`,
+    `Halo ${order.customer_name} 🌱`,
     "",
     `Pembayaran untuk order ${order.order_id} sudah kami terima ✨`,
     "",
@@ -123,7 +123,7 @@ export async function sendOrderShipped(
   trackingNumber?: string,
 ): Promise<SendResult> {
   const msg = [
-    `Halo ${order.customer_name} 🌷`,
+    `Halo ${order.customer_name} 🌱`,
     "",
     `Order ${order.order_id} sudah dalam perjalanan menuju rumahmu 📦`,
     trackingNumber ? `\nNo. resi: ${trackingNumber}` : "",
@@ -138,7 +138,7 @@ export async function sendOrderShipped(
 
 export async function sendThankYouMessage(order: Order): Promise<SendResult> {
   const msg = [
-    `Halo ${order.customer_name} 🌷`,
+    `Halo ${order.customer_name} 🌱`,
     "",
     "Terima kasih sudah memilih Baby Mo ✨",
     "Kalau kamu sempat, kami akan senang sekali kalau kamu",

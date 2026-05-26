@@ -5,7 +5,6 @@ import Hero from "@/components/Hero";
 import QuoteCarousel from "@/components/QuoteCarousel";
 import CategoryGrid, { SectionHeader } from "@/components/CategoryGrid";
 import ProductGrid from "@/components/ProductGrid";
-import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import TrustBadges from "@/components/TrustBadges";
 import InstagramGallery from "@/components/InstagramGallery";
@@ -31,9 +30,8 @@ export default function HomePageClient({
           { icon: "💌", text: "Cinta di tiap box" },
           { icon: "🚚", text: "Kirim ke seluruh Indonesia" },
           { icon: "💬", text: "Bantuan via WhatsApp" },
-          { icon: "✨", text: "12.000+ pesanan" },
           { icon: "🎀", text: "Bungkus rapi untuk hadiah" },
-          { icon: "🌷", text: "Dibuat di Indonesia" },
+          { icon: "🌱", text: "Dibuat di Indonesia" },
         ]
       : [
           { icon: "🌱", text: "Handpicked & curated" },
@@ -41,9 +39,8 @@ export default function HomePageClient({
           { icon: "💌", text: "Care in every box" },
           { icon: "🚚", text: "Ships across Indonesia" },
           { icon: "💬", text: "WhatsApp support" },
-          { icon: "✨", text: "12,000+ orders shipped" },
           { icon: "🎀", text: "Gift-wrapped with love" },
-          { icon: "🌷", text: "Made in Indonesia" },
+          { icon: "🌱", text: "Made in Indonesia" },
         ];
 
   return (
@@ -99,9 +96,6 @@ export default function HomePageClient({
       <div className="cv-auto">
         <Reveal>
           <QuoteCarousel />
-        </Reveal>
-        <Reveal>
-          <Testimonials />
         </Reveal>
         <Reveal>
           <InstagramGallery />

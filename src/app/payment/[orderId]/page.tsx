@@ -24,21 +24,12 @@ export default function PaymentPage({
 
   const [order, setOrder] = useState<Order | undefined>(undefined);
   const [hydrated, setHydrated] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(60 * 60);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     setHydrated(true);
     setOrder(getLocalOrder(orderId));
   }, [orderId]);
-
-  useEffect(() => {
-    const id = setInterval(
-      () => setSecondsLeft((s) => Math.max(0, s - 1)),
-      1000,
-    );
-    return () => clearInterval(id);
-  }, []);
 
   if (hydrated && !order) {
     return (
@@ -108,9 +99,6 @@ export default function PaymentPage({
     }
   };
 
-  const mm = String(Math.floor(secondsLeft / 60)).padStart(2, "0");
-  const ss = String(secondsLeft % 60).padStart(2, "0");
-
   return (
     <div className="container-soft max-w-xl py-10 sm:py-14">
       <Link
@@ -148,8 +136,12 @@ export default function PaymentPage({
                 {order.order_id}
               </p>
             </div>
-            <div className="rounded-full bg-ink-900/[0.06] px-3 py-1 text-[11px] font-semibold tabular-nums text-ink-700">
-              ⏱ {mm}:{ss}
+            <div className="flex items-center gap-1.5 rounded-full bg-tangerine-50 px-3 py-1 text-[11px] font-semibold text-tangerine-600 ring-1 ring-tangerine-100">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inset-0 animate-pulse-soft rounded-full bg-tangerine-400" />
+                <span className="absolute inset-0 rounded-full bg-tangerine-400" />
+              </span>
+              {t.payment_waiting}
             </div>
           </div>
         </div>

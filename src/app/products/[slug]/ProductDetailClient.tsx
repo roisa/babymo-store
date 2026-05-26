@@ -163,7 +163,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
               title={
                 soldOut
                   ? t.product_badge_sold_out
-                  : t.pdp_info_stock(stock)
+                  : stock <= 5
+                    ? t.product_badge_low_stock(stock)
+                    : t.pdp_info_stock_available
               }
               sub={soldOut ? "—" : t.pdp_info_stock_sub}
             />
@@ -214,15 +216,10 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             {t.pdp_consult}
           </a>
 
-          <div className="mt-8 rounded-ios-2xl bg-white p-5 ring-1 ring-ink-900/6 shadow-ios">
-            <div className="flex items-center justify-between">
-              <p className="text-[13.5px] font-semibold tracking-[-0.01em] text-ink-900">
-                {t.pdp_reviews}
-              </p>
-              <span className="text-[12px] font-semibold tabular-nums text-tangerine-500">
-                ★ {t.pdp_reviews_meta}
-              </span>
-            </div>
+          <div className="mt-8 rounded-ios-2xl bg-white p-5 ring-1 ring-ink-900/[0.06] shadow-ios">
+            <p className="text-[13.5px] font-semibold tracking-[-0.01em] text-ink-900">
+              {t.pdp_reviews}
+            </p>
             <p className="mt-2 text-[12.5px] italic text-ink-400">
               {t.pdp_reviews_placeholder}
             </p>

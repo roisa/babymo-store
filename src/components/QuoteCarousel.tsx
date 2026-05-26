@@ -22,7 +22,7 @@ const QUOTES = {
   ],
 };
 
-const INTERVAL = 5200;
+const INTERVAL = 8500;
 
 export default function QuoteCarousel() {
   const { lang } = useLang();

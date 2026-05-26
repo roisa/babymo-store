@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { isAdmin } from "@/lib/admin-auth";
 import type { Order } from "@/types";
 
 export async function POST(req: Request) {
@@ -55,7 +56,11 @@ export async function POST(req: Request) {
   return NextResponse.json({ ok: true, persisted: true });
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  // Admin-only: only the dashboard should see the full order list.
+  if (!isAdmin(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const db = supabaseAdmin();
   if (!db) return NextResponse.json({ orders: [], persisted: false });
 

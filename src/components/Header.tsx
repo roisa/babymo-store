@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useLang } from "@/context/LanguageContext";
 import { useCartBump } from "@/hooks/useCartBump";
+import HeaderSearch from "./HeaderSearch";
 import LanguageToggle from "./LanguageToggle";
 
 export default function Header() {
@@ -44,23 +45,17 @@ export default function Header() {
           >
             {t.nav_bestsellers}
           </Link>
+          <Link href="/order" className="transition hover:text-ink-900">
+            {t.footer_track_order}
+          </Link>
           <Link href="/#faq" className="transition hover:text-ink-900">
             {t.nav_faq}
-          </Link>
-          <Link href="/admin" className="transition hover:text-ink-900">
-            {t.nav_admin}
           </Link>
         </nav>
 
         <div className="flex items-center gap-1.5">
           <LanguageToggle />
-          <Link
-            href="/products"
-            className="hidden h-9 w-9 items-center justify-center rounded-full bg-white/70 text-ink-700 ring-1 ring-ink-900/8 backdrop-blur-xl transition hover:bg-white sm:flex"
-            aria-label={t.nav_search}
-          >
-            <SearchIcon />
-          </Link>
+          <HeaderSearch />
           <button
             onClick={open}
             aria-label={t.nav_cart}
@@ -89,22 +84,6 @@ export function BabyMoLogo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
       </span>
       <span className="ml-1.5 tracking-tight">Baby Mo</span>
     </span>
-  );
-}
-
-function SearchIcon() {
-  return (
-    <svg
-      width="17"
-      height="17"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-    >
-      <circle cx="11" cy="11" r="7" />
-      <path d="m20 20-3.5-3.5" strokeLinecap="round" />
-    </svg>
   );
 }
 

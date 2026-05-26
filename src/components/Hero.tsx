@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useLang } from "@/context/LanguageContext";
 import WordRotator from "./WordRotator";
-import AnimatedCounter from "./AnimatedCounter";
 import AuroraCanvas from "./AuroraCanvas";
 
 export default function Hero() {
@@ -78,38 +77,13 @@ export default function Hero() {
               </Link>
             </div>
 
-            {/* animated stats */}
-            <div className="mt-9 grid max-w-md grid-cols-3 gap-4">
-              <Stat
-                value={
-                  <AnimatedCounter
-                    to={12483}
-                    suffix="+"
-                    className="font-display text-[1.5rem] font-bold tracking-tight text-ink-900"
-                  />
-                }
-                label={lang === "id" ? "pesanan dikirim" : "orders shipped"}
-              />
-              <Stat
-                value={
-                  <span className="font-display text-[1.5rem] font-bold tracking-tight text-ink-900">
-                    <AnimatedCounter to={49} format={(n) => (n / 10).toFixed(1)} />
-                  </span>
-                }
-                label={lang === "id" ? "rating rata-rata" : "average rating"}
-              />
-              <Stat
-                value={
-                  <AnimatedCounter
-                    to={98}
-                    suffix="%"
-                    className="font-display text-[1.5rem] font-bold tracking-tight text-ink-900"
-                  />
-                }
-                label={
-                  lang === "id" ? "pelanggan puas" : "happy customers"
-                }
-              />
+            {/* Honest trust strip — no fabricated numbers */}
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] font-semibold text-white/90">
+              <span>{t.hero_trust_orders}</span>
+              <span className="h-1 w-1 rounded-full bg-white/40" />
+              <span>{t.hero_trust_rating}</span>
+              <span className="h-1 w-1 rounded-full bg-white/40" />
+              <span>{t.hero_trust_packing}</span>
             </div>
           </div>
 
@@ -130,9 +104,11 @@ export default function Hero() {
                 <p className="font-display text-[15px] font-semibold leading-snug text-ink-900">
                   &ldquo;{t.hero_quote}&rdquo;
                 </p>
-                <p className="mt-1 text-[11px] font-medium text-ink-400">
-                  {t.hero_quote_author}
-                </p>
+                {t.hero_quote_author && (
+                  <p className="mt-1 text-[11px] font-medium text-ink-400">
+                    {t.hero_quote_author}
+                  </p>
+                )}
               </div>
 
               <div className="absolute -top-3 right-2 rounded-full glass-thick px-3 py-1.5 animate-float">
@@ -156,21 +132,6 @@ const PARTICLES = [
   { top: "85%", left: "78%", delay: 3, duration: 6 },
   { top: "20%", left: "45%", delay: 4, duration: 7.5 },
 ];
-
-function Stat({
-  value,
-  label,
-}: {
-  value: React.ReactNode;
-  label: string;
-}) {
-  return (
-    <div>
-      {value}
-      <p className="mt-0.5 text-[11px] font-medium text-ink-400">{label}</p>
-    </div>
-  );
-}
 
 function Arrow() {
   return (

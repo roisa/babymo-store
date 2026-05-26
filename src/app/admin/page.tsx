@@ -40,8 +40,13 @@ export default function AdminPage() {
     { key: "completed", label: t.admin_tab_completed, emoji: "🌱" },
   ];
 
+  // On mount, check the HttpOnly session cookie via the server.
   useEffect(() => {
-    if (sessionStorage.getItem("babymo:admin") === "1") setUnlocked(true);
+    fetch("/api/admin/me", { cache: "no-store" })
+      .then((r) => {
+        if (r.ok) setUnlocked(true);
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -54,6 +59,11 @@ export default function AdminPage() {
     let all = readLocalOrders();
     try {
       const res = await fetch("/api/orders", { cache: "no-store" });
+      if (res.status === 401) {
+        // session expired
+        setUnlocked(false);
+        return;
+      }
       const data = await res.json();
       if (Array.isArray(data.orders) && data.orders.length > 0) {
         all = data.orders as Order[];
@@ -189,13 +199,22 @@ export default function AdminPage() {
           className="input mt-6 text-center tracking-[0.3em]"
         />
         <button
-          onClick={() => {
-            const expected =
-              process.env.NEXT_PUBLIC_ADMIN_PASSCODE || "babymo2026";
-            if (passcode === expected) {
-              sessionStorage.setItem("babymo:admin", "1");
-              setUnlocked(true);
-            } else notify(t.toast_wrong_passcode, "error");
+          onClick={async () => {
+            try {
+              const res = await fetch("/api/admin/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ passcode }),
+              });
+              if (res.ok) {
+                setUnlocked(true);
+                setPasscode("");
+              } else {
+                notify(t.toast_wrong_passcode, "error");
+              }
+            } catch {
+              notify(t.toast_wrong_passcode, "error");
+            }
           }}
           className="btn-primary mt-3 w-full"
         >
@@ -234,8 +253,10 @@ export default function AdminPage() {
             {t.admin_refresh}
           </button>
           <button
-            onClick={() => {
-              sessionStorage.removeItem("babymo:admin");
+            onClick={async () => {
+              try {
+                await fetch("/api/admin/logout", { method: "POST" });
+              } catch {}
               setUnlocked(false);
             }}
             className="btn-ghost text-[12px] px-4 py-2"

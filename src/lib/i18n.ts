@@ -72,6 +72,7 @@ type Dict = {
   pdp_info_support: string;
   pdp_info_support_sub: string;
   pdp_info_stock: (n: number) => string;
+  pdp_info_stock_available: string;
   pdp_info_stock_sub: string;
   pdp_add_to_bag: string;
   pdp_sold_out: string;
@@ -269,11 +270,11 @@ export const STRINGS: Record<Lang, Dict> = {
       "Hal-hal kecil untuk hari yang terasa hangat — buku cerita, kartu belajar, dan barang lembut lainnya untuk keluarga yang tumbuh pelan-pelan.",
     hero_cta_shop: "Lihat koleksi",
     hero_cta_best: "Yang paling dicari",
-    hero_trust_orders: "🌱 12.000+ keluarga",
-    hero_trust_rating: "💌 rating 4,9",
-    hero_trust_packing: "📦 packing hari sama",
+    hero_trust_orders: "🌱 Dipilih dengan tenang",
+    hero_trust_rating: "💌 Bungkus dengan cinta",
+    hero_trust_packing: "📦 Packing hari sama",
     hero_quote: "Buku ceritanya jadi ritual sebelum tidur favorit kami.",
-    hero_quote_author: "— Sarah, Yogyakarta",
+    hero_quote_author: "",
 
     section_featured_eyebrow: "pilihan",
     section_featured_title: "Untuk hari yang lembut.",
@@ -324,14 +325,15 @@ export const STRINGS: Record<Lang, Dict> = {
     pdp_info_support: "Bantuan WhatsApp",
     pdp_info_support_sub: "manusia sungguhan",
     pdp_info_stock: (n) => `Stok: ${n}`,
+    pdp_info_stock_available: "Tersedia",
     pdp_info_stock_sub: "siap kirim",
     pdp_add_to_bag: "Masukkan keranjang",
     pdp_sold_out: "Stok habis",
     pdp_consult: "Tanya tentang produk ini di WhatsApp",
     pdp_reviews: "Ulasan",
-    pdp_reviews_meta: "4,9 · 128 ulasan",
+    pdp_reviews_meta: "",
     pdp_reviews_placeholder:
-      "Ulasan terverifikasi dari komunitas kami segera hadir 🌷",
+      "Ulasan terverifikasi dari komunitas kami segera hadir 🌱",
 
     cart_title: "Keranjangmu",
     cart_subtitle_empty: "Sedang tenang dan kosong di sini",
@@ -339,7 +341,7 @@ export const STRINGS: Record<Lang, Dict> = {
       `${n} produk sedang istirahat dengan tenang`,
     cart_notes_label: "Catatan pengiriman (opsional)",
     cart_notes_placeholder:
-      "mis. tolong bungkus rapi, ini hadiah 🌷",
+      "mis. tolong bungkus rapi, ini hadiah 🌱",
     cart_subtotal: "Subtotal",
     cart_checkout: "Checkout",
     cart_helper: "Ongkir dihitung saat checkout · Konfirmasi via WhatsApp",
@@ -350,13 +352,13 @@ export const STRINGS: Record<Lang, Dict> = {
     cart_empty_cta: "Jelajahi produk",
     cart_view: "Lihat keranjang",
 
-    toast_added: (name) => `${name} ditambahkan 🌷`,
-    toast_added_qty: (name, qty) => `${name} × ${qty} ditambahkan 🌷`,
-    toast_amount_copied: "Nominal disalin 🌷",
+    toast_added: (name) => `${name} ditambahkan 🌱`,
+    toast_added_qty: (name, qty) => `${name} × ${qty} ditambahkan 🌱`,
+    toast_amount_copied: "Nominal disalin 🌱",
     toast_amount_copy_fail: "Tidak bisa menyalin. Mohon salin manual.",
     toast_proof_uploaded:
       "Bukti diunggah — kami verifikasi segera 💌",
-    toast_order_updated: "Order diperbarui 🌷",
+    toast_order_updated: "Order diperbarui 🌱",
     toast_address_copied: "Alamat disalin 📋",
     toast_address_copy_fail: "Tidak bisa menyalin",
     toast_wrong_passcode: "Passcode salah",
@@ -384,7 +386,7 @@ export const STRINGS: Record<Lang, Dict> = {
     field_postal: "Kode pos",
     field_postal_ph: "40115",
     field_notes: "Catatan pengiriman (opsional)",
-    field_notes_ph: "tolong bungkus rapi, ini hadiah 🌷",
+    field_notes_ph: "tolong bungkus rapi, ini hadiah 🌱",
     summary_title: "Ringkasan pesanan",
     summary_subtotal: "Subtotal",
     summary_unique: "Kode unik",
@@ -448,7 +450,7 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_passcode_ph: "Passcode",
     admin_unlock: "Buka",
     admin_passcode_hint:
-      "Passcode dev default: babymo2026 — ubah via NEXT_PUBLIC_ADMIN_PASSCODE.",
+      "Passcode disimpan server-side. Set ADMIN_PASSCODE di Vercel untuk production.",
     admin_refresh: "Refresh",
     admin_lock: "Kunci",
     admin_dashboard_eyebrow: "dashboard",
@@ -479,7 +481,7 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_action_reject: "✗ Tolak",
     admin_action_packed: "📦 Tandai packed",
     admin_action_shipped: "🚚 Tandai dikirim",
-    admin_action_completed: "🌷 Tandai selesai",
+    admin_action_completed: "🌱 Tandai selesai",
 
     label_back: "← Kembali ke admin",
     label_print: "🖨 Cetak label",
@@ -488,7 +490,7 @@ export const STRINGS: Record<Lang, Dict> = {
     label_notes: "Catatan",
     label_items: "Produk",
     label_created: "Dibuat",
-    label_thanks: "terima kasih sudah memilih lembut 🌷",
+    label_thanks: "terima kasih sudah memilih lembut 🌱",
 
     footer_tagline:
       "Kenyamanan kecil untuk hari-hari kamu. Dibuat di Indonesia dengan banyak cinta.",
@@ -506,7 +508,7 @@ export const STRINGS: Record<Lang, Dict> = {
     footer_stay_sub:
       "Ikuti @babymo.id untuk drop produk dan pengumuman lembut.",
     footer_rights: "Dibuat dengan cinta di Indonesia.",
-    footer_motto: "Soft things for soft people. 🌷",
+    footer_motto: "Soft things for soft people. 🌱",
 
     lang_label: "Bahasa",
     loading: "Memuat…",
@@ -528,11 +530,11 @@ export const STRINGS: Record<Lang, Dict> = {
       "Tiny moments for growing hearts — storybooks, learning cards, and gentle things for families growing slowly.",
     hero_cta_shop: "Browse the shelf",
     hero_cta_best: "Most loved",
-    hero_trust_orders: "🌱 12,000+ families",
-    hero_trust_rating: "💌 4.9 average rating",
+    hero_trust_orders: "🌱 Chosen calmly",
+    hero_trust_rating: "💌 Wrapped with care",
     hero_trust_packing: "📦 Same-day packing",
     hero_quote: "The storybook is now our favourite bedtime ritual.",
-    hero_quote_author: "— Sarah, Yogyakarta",
+    hero_quote_author: "",
 
     section_featured_eyebrow: "this week",
     section_featured_title: "For softer days.",
@@ -582,14 +584,15 @@ export const STRINGS: Record<Lang, Dict> = {
     pdp_info_support: "WhatsApp support",
     pdp_info_support_sub: "real humans",
     pdp_info_stock: (n) => `Stock: ${n}`,
+    pdp_info_stock_available: "In stock",
     pdp_info_stock_sub: "ready to ship",
     pdp_add_to_bag: "Add to bag",
     pdp_sold_out: "Sold out",
     pdp_consult: "Ask about this product on WhatsApp",
     pdp_reviews: "Reviews",
-    pdp_reviews_meta: "4.9 · 128 reviews",
+    pdp_reviews_meta: "",
     pdp_reviews_placeholder:
-      "Verified reviews from our community coming soon 🌷",
+      "Verified reviews from our community coming soon 🌱",
 
     cart_title: "Your bag",
     cart_subtitle_empty: "It's quietly empty in here",
@@ -597,7 +600,7 @@ export const STRINGS: Record<Lang, Dict> = {
       `${n} item${n > 1 ? "s" : ""} resting softly`,
     cart_notes_label: "Delivery notes (optional)",
     cart_notes_placeholder:
-      "e.g. tolong bungkus rapi, ini hadiah 🌷",
+      "e.g. tolong bungkus rapi, ini hadiah 🌱",
     cart_subtotal: "Subtotal",
     cart_checkout: "Checkout",
     cart_helper: "Shipping calculated at checkout · WhatsApp confirmation",
@@ -608,13 +611,13 @@ export const STRINGS: Record<Lang, Dict> = {
     cart_empty_cta: "Browse products",
     cart_view: "View cart",
 
-    toast_added: (name) => `${name} added 🌷`,
-    toast_added_qty: (name, qty) => `${name} × ${qty} added 🌷`,
-    toast_amount_copied: "Amount copied 🌷",
+    toast_added: (name) => `${name} added 🌱`,
+    toast_added_qty: (name, qty) => `${name} × ${qty} added 🌱`,
+    toast_amount_copied: "Amount copied 🌱",
     toast_amount_copy_fail: "Couldn't copy. Please copy manually.",
     toast_proof_uploaded:
       "Proof uploaded — we'll verify shortly 💌",
-    toast_order_updated: "Order updated 🌷",
+    toast_order_updated: "Order updated 🌱",
     toast_address_copied: "Address copied 📋",
     toast_address_copy_fail: "Couldn't copy",
     toast_wrong_passcode: "Wrong passcode",
@@ -641,7 +644,7 @@ export const STRINGS: Record<Lang, Dict> = {
     field_postal: "Postal code",
     field_postal_ph: "40115",
     field_notes: "Delivery notes (optional)",
-    field_notes_ph: "tolong bungkus rapi, ini hadiah 🌷",
+    field_notes_ph: "tolong bungkus rapi, ini hadiah 🌱",
     summary_title: "Order summary",
     summary_subtotal: "Subtotal",
     summary_unique: "Unique code",
@@ -707,7 +710,7 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_passcode_ph: "Passcode",
     admin_unlock: "Unlock",
     admin_passcode_hint:
-      "Default dev passcode: babymo2026 — change via NEXT_PUBLIC_ADMIN_PASSCODE.",
+      "Passcode is checked server-side. Set ADMIN_PASSCODE on Vercel for production.",
     admin_refresh: "Refresh",
     admin_lock: "Lock",
     admin_dashboard_eyebrow: "dashboard",
@@ -738,7 +741,7 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_action_reject: "✗ Reject",
     admin_action_packed: "📦 Mark packed",
     admin_action_shipped: "🚚 Mark shipped",
-    admin_action_completed: "🌷 Mark completed",
+    admin_action_completed: "🌱 Mark completed",
 
     label_back: "← Back to admin",
     label_print: "🖨 Print label",
@@ -747,7 +750,7 @@ export const STRINGS: Record<Lang, Dict> = {
     label_notes: "Notes",
     label_items: "Items",
     label_created: "Created",
-    label_thanks: "thank you for choosing soft 🌷",
+    label_thanks: "thank you for choosing soft 🌱",
 
     footer_tagline:
       "Small comforts for your everyday moments. Designed in Indonesia, with so much love.",
@@ -765,7 +768,7 @@ export const STRINGS: Record<Lang, Dict> = {
     footer_stay_sub:
       "Follow @babymo.id for gentle drops and quiet announcements.",
     footer_rights: "Made with care in Indonesia.",
-    footer_motto: "Soft things for soft people. 🌷",
+    footer_motto: "Soft things for soft people. 🌱",
 
     lang_label: "Language",
     loading: "Loading…",

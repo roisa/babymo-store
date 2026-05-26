@@ -7,8 +7,7 @@ import {
   getProductsByCategory,
 } from "@/lib/products";
 import ProductDetailClient from "./ProductDetailClient";
-import ProductGrid from "@/components/ProductGrid";
-import { SectionHeader } from "@/components/CategoryGrid";
+import RelatedSection from "./RelatedSection";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { JsonLd, breadcrumbLd } from "@/lib/seo";
@@ -133,19 +132,7 @@ export default async function ProductPage({
 
       <RecentlyViewed currentProductId={product.id} />
 
-      {related.length > 0 && (
-        <section className="py-14">
-          <div className="container-soft">
-            <SectionHeader
-              eyebrow="you might also love"
-              title="In the same gentle world."
-            />
-            <div className="mt-8">
-              <ProductGrid products={related} />
-            </div>
-          </div>
-        </section>
-      )}
+      {related.length > 0 && <RelatedSection products={related} />}
     </>
   );
 }

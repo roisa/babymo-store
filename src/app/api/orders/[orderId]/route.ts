@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { isAdmin } from "@/lib/admin-auth";
 
 export async function PATCH(
   req: Request,
   { params }: { params: Promise<{ orderId: string }> },
 ) {
+  if (!isAdmin(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { orderId } = await params;
   const patch = await req.json();
 

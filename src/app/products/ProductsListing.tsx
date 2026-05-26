@@ -11,13 +11,13 @@ type SortKey = "default" | "bestseller" | "price-asc" | "price-desc";
 
 const SORT_LABEL: Record<"id" | "en", Record<SortKey, string>> = {
   id: {
-    default: "Urutan default",
+    default: "Direkomendasikan",
     bestseller: "Terlaris dulu",
     "price-asc": "Harga ↓",
     "price-desc": "Harga ↑",
   },
   en: {
-    default: "Default order",
+    default: "Recommended",
     bestseller: "Bestsellers first",
     "price-asc": "Price ↓",
     "price-desc": "Price ↑",
