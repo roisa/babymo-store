@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContentPage from "@/components/ContentPage";
+import Mascot from "@/components/Mascot";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,6 +17,9 @@ export default function AboutPage() {
       title="Sesuatu yang lembut, dibuat dengan hati."
       subtitle={`${SITE_NAME} adalah toko kecil yang percaya bahwa hari-hari kecil layak diisi dengan hal-hal yang lembut.`}
     >
+      <div className="not-prose -mt-2 mb-6 flex items-end justify-center">
+        <Mascot size={220} alt="Baby Mo mascot" />
+      </div>
       <p>
         Kami memulai Baby Mo karena ingin punya tempat berbelanja yang tidak
         terburu-buru — tempat orang tua bisa memilih buku cerita, kaos,

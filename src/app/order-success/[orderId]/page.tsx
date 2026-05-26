@@ -6,6 +6,7 @@ import { getLocalOrder } from "@/lib/orders";
 import { useLang } from "@/context/LanguageContext";
 import { formatIDR } from "@/lib/utils";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import Mascot from "@/components/Mascot";
 import OrderTimeline from "@/components/OrderTimeline";
 import type { Order } from "@/types";
 
@@ -24,11 +25,9 @@ export default function OrderSuccessPage({
 
   return (
     <div className="container-soft max-w-xl py-16 sm:py-20 text-center">
-      <div className="relative mx-auto h-28 w-28">
-        <div className="absolute inset-0 animate-pulse rounded-full bg-grass-200/40 blur-xl" />
-        <div className="absolute inset-0 flex items-center justify-center rounded-full bg-grass-fade text-4xl shadow-ios-grass">
-          🌱
-        </div>
+      <div className="relative mx-auto flex h-32 w-32 items-center justify-center">
+        <div className="absolute inset-0 animate-pulse rounded-full bg-grass-200/40 blur-2xl" />
+        <Mascot size={140} alt="Baby Mo" />
       </div>
 
       <span className="chip mt-8 inline-flex uppercase tracking-[0.12em]">

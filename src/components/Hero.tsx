@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useLang } from "@/context/LanguageContext";
 import WordRotator from "./WordRotator";
 import AuroraCanvas from "./AuroraCanvas";
+import Mascot from "./Mascot";
 
 export default function Hero() {
   const { t, lang } = useLang();
@@ -89,15 +90,19 @@ export default function Hero() {
 
           <div className="relative animate-slide-up">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-sm">
-              <div className="absolute inset-0 overflow-hidden rounded-ios-3xl ring-1 ring-ink-900/8 shadow-ios-xl">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-[8s] ease-spring hover:scale-105"
-                  style={{
-                    backgroundImage:
-                      "url('https://images.unsplash.com/photo-1559563458-527698bf5295?w=900&q=80')",
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink-900/35 via-ink-900/0 to-ink-900/0" />
+              {/* soft cream panel for the mascot to stand on */}
+              <div className="absolute inset-0 overflow-hidden rounded-ios-3xl bg-gradient-to-br from-warmwhite via-cream-100 to-grass-50 ring-1 ring-ink-900/[0.08] shadow-ios-xl">
+                {/* subtle sunburst behind the mascot */}
+                <div className="absolute inset-x-8 top-12 h-56 rounded-full bg-sunny-300/30 blur-3xl" />
+                {/* the mascot itself */}
+                <div className="absolute inset-0 flex items-end justify-center pb-10">
+                  <Mascot
+                    size={320}
+                    priority
+                    alt="Baby Mo mascot waving hello"
+                    className="animate-float drop-shadow-2xl"
+                  />
+                </div>
               </div>
 
               <div className="absolute -bottom-5 left-3 right-3 rounded-ios-xl glass-thick p-4 animate-slide-up">

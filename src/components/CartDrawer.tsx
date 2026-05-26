@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useLang } from "@/context/LanguageContext";
+import Mascot from "./Mascot";
 import { formatIDR } from "@/lib/utils";
 
 export default function CartDrawer() {
@@ -181,8 +182,8 @@ function EmptyCart({ onBrowse }: { onBrowse: () => void }) {
   const { t } = useLang();
   return (
     <div className="flex h-full flex-col items-center justify-center py-12 text-center">
-      <div className="relative mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-grass-50 text-4xl ring-1 ring-grass-100">
-        🌱
+      <div className="mb-3">
+        <Mascot size={132} alt="Baby Mo" />
       </div>
       <h3 className="font-display text-[20px] font-bold tracking-[-0.02em] text-ink-900">
         {t.cart_empty_title}

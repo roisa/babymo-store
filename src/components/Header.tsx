@@ -7,6 +7,7 @@ import { useLang } from "@/context/LanguageContext";
 import { useCartBump } from "@/hooks/useCartBump";
 import HeaderSearch from "./HeaderSearch";
 import LanguageToggle from "./LanguageToggle";
+import Mascot from "./Mascot";
 
 export default function Header() {
   const { count, open } = useCart();
@@ -75,14 +76,13 @@ export default function Header() {
 }
 
 export function BabyMoLogo({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
-  const sizeCls =
+  const textCls =
     size === "lg" ? "text-2xl" : size === "sm" ? "text-base" : "text-[17px]";
+  const mascotSize = size === "lg" ? 40 : size === "sm" ? 22 : 30;
   return (
-    <span className={`logo-badge ${sizeCls}`}>
-      <span className="flex h-6 w-6 items-center justify-center rounded-md bg-grass-fade text-[11px] font-bold text-white shadow-ios-grass">
-        M
-      </span>
-      <span className="ml-1.5 tracking-tight">Baby Mo</span>
+    <span className={`logo-badge ${textCls}`}>
+      <Mascot size={mascotSize} alt="Baby Mo mascot" />
+      <span className="ml-1 tracking-tight">Baby Mo</span>
     </span>
   );
 }

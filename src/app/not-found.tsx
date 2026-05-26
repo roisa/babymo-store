@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Mascot from "@/components/Mascot";
 
 export default function NotFound() {
   return (
     <div className="container-soft py-24 text-center">
-      <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-grass-fade text-4xl shadow-ios-grass">
-        🌱
+      <div className="mx-auto mb-6 flex items-center justify-center">
+        <Mascot size={140} alt="Baby Mo mascot" />
       </div>
       <h1 className="font-display text-[2rem] font-bold tracking-[-0.025em] text-ink-900 sm:text-[2.5rem]">
         Halaman ini tidak ditemukan.
