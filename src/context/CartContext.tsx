@@ -59,6 +59,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const add = useCallback((product: Product, quantity = 1) => {
     const next = addToStorage(product, quantity);
     setItems(next);
+    // Notify cart icons everywhere so they can play a tiny bump animation.
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("babymo:cart-bumped"));
+    }
   }, []);
 
   const remove = useCallback((productId: string) => {

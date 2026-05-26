@@ -4,11 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useLang } from "@/context/LanguageContext";
+import { useCartBump } from "@/hooks/useCartBump";
 
 export default function MobileNav() {
   const pathname = usePathname();
   const { open, count } = useCart();
   const { t } = useLang();
+  const bumped = useCartBump();
 
   // Hide on screens that already have their own primary action bar:
   // - /products/[slug] uses StickyCheckoutBar
@@ -46,7 +48,7 @@ export default function MobileNav() {
           className="relative flex flex-1 flex-col items-center gap-0.5 rounded-full px-2 py-1.5 text-[10px] font-semibold text-ink-600 transition active:scale-95"
           aria-label={t.nav_cart}
         >
-          <span className="relative">
+          <span className={`relative ${bumped ? "animate-bump" : ""}`}>
             <BagIcon />
             {count > 0 && (
               <span className="absolute -right-1.5 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-grass-400 px-1 text-[9px] font-bold text-white ring-2 ring-white">

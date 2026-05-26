@@ -176,5 +176,16 @@ body::before {
   body::before { display: none; }
   .no-print { display: none !important; }
   body { background: white; }
-  @page { margin: 5mm; size: 100mm 150mm; }
+}
+/* Thermal-label printers: 100x150 mm with tight margins. */
+@page {
+  margin: 5mm;
+  size: 100mm 150mm;
+}
+/* A4 invoice page: pages with [data-print="a4"] on a wrapper override
+   the default size via this nested rule. Components that need A4 add
+   the attribute on a wrapping div. */
+@media print {
+  [data-print="a4"] { page-break-after: always; }
+  [data-print="a4"]:last-of-type { page-break-after: auto; }
 }

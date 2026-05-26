@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { useLang } from "@/context/LanguageContext";
+import { useCartBump } from "@/hooks/useCartBump";
 import LanguageToggle from "./LanguageToggle";
 
 export default function Header() {
   const { count, open } = useCart();
   const { t } = useLang();
   const [scrolled, setScrolled] = useState(false);
+  const bumped = useCartBump();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -62,7 +64,9 @@ export default function Header() {
           <button
             onClick={open}
             aria-label={t.nav_cart}
-            className="relative flex h-9 items-center gap-1.5 rounded-full bg-white/70 px-3 text-ink-700 ring-1 ring-ink-900/8 backdrop-blur-xl transition hover:bg-white"
+            className={`relative flex h-9 items-center gap-1.5 rounded-full bg-white/70 px-3 text-ink-700 ring-1 ring-ink-900/[0.08] backdrop-blur-xl transition hover:bg-white ${
+              bumped ? "animate-bump" : ""
+            }`}
           >
             <BagIcon />
             <span className="text-[12px] font-semibold tabular-nums">

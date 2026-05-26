@@ -1,8 +1,25 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
 import type { Order } from "@/types";
 
 export async function POST(req: Request) {
+  // 5 orders per IP per minute — generous for a real customer placing
+  // a couple of test orders, harsh on bots trying to spam.
+  const limited = rateLimit(`orders:${clientIp(req)}`, {
+    max: 5,
+    windowMs: 60_000,
+  });
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limited.retryAfterSec) },
+      },
+    );
+  }
+
   const order = (await req.json()) as Order;
 
   if (!order?.order_id) {

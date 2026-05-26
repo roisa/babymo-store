@@ -109,6 +109,7 @@ const config: Config = {
         "drift-slow": "drift 18s ease-in-out infinite",
         "aurora-shift": "auroraShift 14s ease-in-out infinite",
         "pulse-soft": "pulseSoft 2.4s ease-in-out infinite",
+        bump: "bump 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
       keyframes: {
         fadeIn: { from: { opacity: "0" }, to: { opacity: "1" } },
@@ -152,6 +153,12 @@ const config: Config = {
         pulseSoft: {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.85", transform: "scale(1.08)" },
+        },
+        bump: {
+          "0%": { transform: "scale(1)" },
+          "30%": { transform: "scale(1.18) rotate(-3deg)" },
+          "60%": { transform: "scale(0.95) rotate(2deg)" },
+          "100%": { transform: "scale(1)" },
         },
       },
       backgroundImage: {

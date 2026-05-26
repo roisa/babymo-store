@@ -3,12 +3,14 @@
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useLang } from "@/context/LanguageContext";
+import { useCartBump } from "@/hooks/useCartBump";
 import { formatIDR } from "@/lib/utils";
 
 export default function FloatingCartButton() {
   const { count, subtotal, open } = useCart();
   const { t } = useLang();
   const pathname = usePathname();
+  const bumped = useCartBump();
 
   if (count === 0) return null;
   if (
@@ -23,7 +25,9 @@ export default function FloatingCartButton() {
   return (
     <button
       onClick={open}
-      className="fixed bottom-6 right-5 z-30 hidden animate-slide-up items-center gap-2.5 rounded-full bg-grass-fade px-4 py-3 text-[13px] font-semibold text-white shadow-ios-grass transition hover:-translate-y-0.5 sm:flex"
+      className={`fixed bottom-6 right-5 z-30 hidden animate-slide-up items-center gap-2.5 rounded-full bg-grass-fade px-4 py-3 text-[13px] font-semibold text-white shadow-ios-grass transition hover:-translate-y-0.5 sm:flex ${
+        bumped ? "animate-bump" : ""
+      }`}
     >
       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/25 text-[11px] font-bold tabular-nums backdrop-blur">
         {count}

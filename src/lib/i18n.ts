@@ -211,6 +211,7 @@ type Dict = {
   admin_action_wa: string;
   admin_action_copy: string;
   admin_action_label: string;
+  admin_action_invoice: string;
   admin_action_approve: string;
   admin_action_reject: string;
   admin_action_packed: string;
@@ -468,6 +469,7 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_action_wa: "💬 WhatsApp customer",
     admin_action_copy: "📋 Salin alamat",
     admin_action_label: "🏷 Cetak label",
+    admin_action_invoice: "🧾 Cetak invoice",
     admin_action_approve: "✓ Setujui pembayaran",
     admin_action_reject: "✗ Tolak",
     admin_action_packed: "📦 Tandai packed",
@@ -721,6 +723,7 @@ export const STRINGS: Record<Lang, Dict> = {
     admin_action_wa: "💬 WhatsApp customer",
     admin_action_copy: "📋 Copy address",
     admin_action_label: "🏷 Print label",
+    admin_action_invoice: "🧾 Print invoice",
     admin_action_approve: "✓ Approve payment",
     admin_action_reject: "✗ Reject",
     admin_action_packed: "📦 Mark packed",

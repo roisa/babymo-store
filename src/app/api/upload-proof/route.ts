@@ -1,7 +1,23 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
+  // 10 proof uploads per IP per minute (a customer may retry a few times).
+  const limited = rateLimit(`proof:${clientIp(req)}`, {
+    max: 10,
+    windowMs: 60_000,
+  });
+  if (!limited.ok) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      {
+        status: 429,
+        headers: { "Retry-After": String(limited.retryAfterSec) },
+      },
+    );
+  }
+
   const { order_id, proof_image } = await req.json();
 
   if (!order_id || !proof_image) {

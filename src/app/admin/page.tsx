@@ -468,6 +468,13 @@ function OrderCard({
             >
               {t.admin_action_label}
             </Link>
+            <Link
+              href={`/invoice/${order.order_id}`}
+              target="_blank"
+              className="btn-soft text-[12px] px-4 py-2"
+            >
+              {t.admin_action_invoice}
+            </Link>
 
             {order.order_status === "waiting_verification" && (
               <>
