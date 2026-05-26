@@ -225,7 +225,7 @@ no-op, and the client keeps a local order history in `localStorage`.
 | `NEXT_PUBLIC_SUPABASE_URL` | optional | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | optional | Supabase anon key (browser) |
 | `SUPABASE_SERVICE_ROLE_KEY` | optional | Server-side writes |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | yes (default `6281234567890`) | Store WA number |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | yes (default `6282315971002`) | Store WA number |
 | `WHATSAPP_NUMBER` | optional | Server-side fallback |
 | `FONNTE_API_KEY` | Phase 2 | Outbound WA via Fonnte |
 | `FONNTE_API_URL` | optional | Defaults to `https://api.fonnte.com/send` |

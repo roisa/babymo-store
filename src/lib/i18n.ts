@@ -102,6 +102,10 @@ type Dict = {
   toast_address_copied: string;
   toast_address_copy_fail: string;
   toast_wrong_passcode: string;
+  toast_wa_sent: string;
+  toast_wa_gateway_off: string;
+  toast_wa_failed: string;
+  admin_tracking_prompt: string;
 
   // checkout
   checkout_eyebrow: string;
@@ -340,6 +344,11 @@ export const STRINGS: Record<Lang, Dict> = {
     toast_address_copied: "Alamat disalin 📋",
     toast_address_copy_fail: "Tidak bisa menyalin",
     toast_wrong_passcode: "Passcode salah",
+    toast_wa_sent: "Pesan WhatsApp terkirim 💬",
+    toast_wa_gateway_off:
+      "Status disimpan. Gateway WhatsApp belum aktif.",
+    toast_wa_failed: "WhatsApp gagal terkirim",
+    admin_tracking_prompt: "Nomor resi pengiriman (opsional):",
 
     checkout_eyebrow: "checkout",
     checkout_title: "Tinggal beberapa detail lembut.",
@@ -580,6 +589,10 @@ export const STRINGS: Record<Lang, Dict> = {
     toast_address_copied: "Address copied 📋",
     toast_address_copy_fail: "Couldn't copy",
     toast_wrong_passcode: "Wrong passcode",
+    toast_wa_sent: "WhatsApp message sent 💬",
+    toast_wa_gateway_off: "Status saved. WhatsApp gateway not active yet.",
+    toast_wa_failed: "WhatsApp couldn't send",
+    admin_tracking_prompt: "Tracking number (optional):",
 
     checkout_eyebrow: "checkout",
     checkout_title: "Just a few soft details.",

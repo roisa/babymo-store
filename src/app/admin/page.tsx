@@ -100,6 +100,67 @@ export default function AdminPage() {
     notify(t.toast_order_updated, "success");
   };
 
+  /**
+   * Single helper that the OrderCard buttons route through.
+   * 1. Apply the right status patch
+   * 2. Send the matching transactional WhatsApp (paid / shipped /
+   *    completed) — soft-fails if FONNTE_API_KEY isn't configured yet
+   */
+  const transition = async (
+    order: Order,
+    next:
+      | { status: "paid" }
+      | { status: "pending_payment"; reject: true }
+      | { status: "packed" }
+      | { status: "shipped"; tracking?: string }
+      | { status: "completed" },
+  ) => {
+    const patch: Partial<Order> = { order_status: next.status };
+    if (next.status === "paid") {
+      patch.payment_status = "verified";
+      patch.verified_at = new Date().toISOString();
+    } else if (next.status === "pending_payment") {
+      patch.payment_status = "rejected";
+    }
+
+    await updateStatus(order.order_id, patch);
+
+    const waType =
+      next.status === "paid"
+        ? "payment_confirmed"
+        : next.status === "shipped"
+          ? "order_shipped"
+          : next.status === "completed"
+            ? "thank_you"
+            : null;
+    if (!waType) return;
+
+    try {
+      const res = await fetch("/api/send-whatsapp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: waType,
+          order: { ...order, ...patch },
+          tracking: next.status === "shipped" ? next.tracking : undefined,
+        }),
+      });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+      if (data.ok) {
+        notify(t.toast_wa_sent, "success");
+      } else if (data.error?.includes("FONNTE_API_KEY")) {
+        notify(t.toast_wa_gateway_off, "default");
+      } else {
+        notify(t.toast_wa_failed, "error");
+      }
+    } catch {
+      notify(t.toast_wa_failed, "error");
+    }
+  };
+
   if (!unlocked) {
     return (
       <div className="container-soft max-w-sm py-24 text-center">
@@ -210,7 +271,7 @@ export default function AdminPage() {
               onToggle={() =>
                 setOpenId((id) => (id === o.order_id ? null : o.order_id))
               }
-              onUpdate={(patch) => updateStatus(o.order_id, patch)}
+              onTransition={(next) => transition(o, next)}
             />
           ))}
         </div>
@@ -219,16 +280,23 @@ export default function AdminPage() {
   );
 }
 
+type TransitionInput =
+  | { status: "paid" }
+  | { status: "pending_payment"; reject: true }
+  | { status: "packed" }
+  | { status: "shipped"; tracking?: string }
+  | { status: "completed" };
+
 function OrderCard({
   order,
   open,
   onToggle,
-  onUpdate,
+  onTransition,
 }: {
   order: Order;
   open: boolean;
   onToggle: () => void;
-  onUpdate: (patch: Partial<Order>) => void;
+  onTransition: (next: TransitionInput) => void;
 }) {
   const { notify } = useToast();
   const { t } = useLang();
@@ -360,22 +428,16 @@ function OrderCard({
             {order.order_status === "waiting_verification" && (
               <>
                 <button
-                  onClick={() =>
-                    onUpdate({
-                      order_status: "paid",
-                      payment_status: "verified",
-                      verified_at: new Date().toISOString(),
-                    })
-                  }
+                  onClick={() => onTransition({ status: "paid" })}
                   className="btn-primary text-[12px] px-4 py-2"
                 >
                   {t.admin_action_approve}
                 </button>
                 <button
                   onClick={() =>
-                    onUpdate({
-                      order_status: "pending_payment",
-                      payment_status: "rejected",
+                    onTransition({
+                      status: "pending_payment",
+                      reject: true,
                     })
                   }
                   className="btn-ghost text-[12px] px-4 py-2"
@@ -386,7 +448,7 @@ function OrderCard({
             )}
             {order.order_status === "paid" && (
               <button
-                onClick={() => onUpdate({ order_status: "packed" })}
+                onClick={() => onTransition({ status: "packed" })}
                 className="btn-primary text-[12px] px-4 py-2"
               >
                 {t.admin_action_packed}
@@ -394,7 +456,11 @@ function OrderCard({
             )}
             {order.order_status === "packed" && (
               <button
-                onClick={() => onUpdate({ order_status: "shipped" })}
+                onClick={() => {
+                  const tracking =
+                    window.prompt(t.admin_tracking_prompt)?.trim() || undefined;
+                  onTransition({ status: "shipped", tracking });
+                }}
                 className="btn-primary text-[12px] px-4 py-2"
               >
                 {t.admin_action_shipped}
@@ -402,7 +468,7 @@ function OrderCard({
             )}
             {order.order_status === "shipped" && (
               <button
-                onClick={() => onUpdate({ order_status: "completed" })}
+                onClick={() => onTransition({ status: "completed" })}
                 className="btn-primary text-[12px] px-4 py-2"
               >
                 {t.admin_action_completed}

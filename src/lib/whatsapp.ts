@@ -14,7 +14,7 @@ import { formatIDR } from "@/lib/utils";
 const WA_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ||
   process.env.WHATSAPP_NUMBER ||
-  "6281234567890";
+  "6282315971002";
 
 const FONNTE_KEY = process.env.FONNTE_API_KEY;
 const FONNTE_URL = process.env.FONNTE_API_URL || "https://api.fonnte.com/send";

@@ -80,7 +80,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/6281234567890"
+                  href="https://wa.me/6282315971002"
                   className="transition hover:text-grass-700"
                   target="_blank"
                   rel="noreferrer"
