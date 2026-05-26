@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { readLocalOrders, updateLocalOrder, writeLocalOrders } from "@/lib/orders";
+import { decrementStockFor } from "@/lib/stock";
 import { useToast } from "@/context/ToastContext";
 import { useLang } from "@/context/LanguageContext";
 import { formatDateID, formatIDR } from "@/lib/utils";
@@ -121,6 +122,17 @@ export default function AdminPage() {
       patch.verified_at = new Date().toISOString();
     } else if (next.status === "pending_payment") {
       patch.payment_status = "rejected";
+    }
+
+    // Stock auto-decrement on first transition into "paid".
+    // Idempotent: only fires when the order wasn't already paid (or past
+    // paid in the flow — packed/shipped/completed all already counted).
+    const alreadyCounted = ["paid", "packed", "shipped", "completed"].includes(
+      order.order_status,
+    );
+    if (next.status === "paid" && !alreadyCounted) {
+      decrementStockFor(order.items);
+      notify(t.toast_stock_decremented(order.items.length), "default");
     }
 
     await updateStatus(order.order_id, patch);

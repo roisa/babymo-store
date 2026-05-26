@@ -6,6 +6,8 @@ import { formatIDR } from "@/lib/utils";
 type Props = {
   price: number;
   qty: number;
+  maxQty?: number;
+  soldOut?: boolean;
   onChangeQty: (q: number) => void;
   onAdd: () => void;
 };
@@ -13,17 +15,22 @@ type Props = {
 export default function StickyCheckoutBar({
   price,
   qty,
+  maxQty,
+  soldOut = false,
   onChangeQty,
   onAdd,
 }: Props) {
   const { t } = useLang();
+  const canIncrement = !soldOut && (maxQty === undefined || qty < maxQty);
+
   return (
     <div className="fixed inset-x-0 bottom-3 z-30 px-4 pb-[max(0px,env(safe-area-inset-bottom))] sm:hidden">
       <div className="mx-auto flex max-w-md items-center gap-2.5 rounded-full glass-thick p-1.5">
         <div className="flex items-center gap-1 rounded-full bg-ink-900/[0.05] p-0.5">
           <button
             onClick={() => onChangeQty(Math.max(1, qty - 1))}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[13px] font-semibold shadow-ios transition active:scale-95"
+            disabled={soldOut}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[13px] font-semibold shadow-ios transition active:scale-95 disabled:opacity-50"
             aria-label="−"
           >
             −
@@ -33,14 +40,21 @@ export default function StickyCheckoutBar({
           </span>
           <button
             onClick={() => onChangeQty(qty + 1)}
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[13px] font-semibold shadow-ios transition active:scale-95"
+            disabled={!canIncrement}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[13px] font-semibold shadow-ios transition active:scale-95 disabled:opacity-50"
             aria-label="+"
           >
             +
           </button>
         </div>
-        <button onClick={onAdd} className="btn-primary flex-1 text-[13.5px] py-3">
-          {t.pdp_add_to_bag} · {formatIDR(price * qty)}
+        <button
+          onClick={onAdd}
+          disabled={soldOut}
+          className="btn-primary flex-1 text-[13.5px] py-3 disabled:bg-ink-200 disabled:text-ink-400 disabled:shadow-none"
+        >
+          {soldOut
+            ? t.pdp_sold_out
+            : `${t.pdp_add_to_bag} · ${formatIDR(price * qty)}`}
         </button>
       </div>
     </div>

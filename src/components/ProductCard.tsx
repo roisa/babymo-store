@@ -7,6 +7,7 @@ import type { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { useLang } from "@/context/LanguageContext";
+import { useStock } from "@/hooks/useStock";
 import { formatIDR } from "@/lib/utils";
 
 type Props = { product: Product; priority?: boolean };
@@ -17,6 +18,9 @@ export default function ProductCard({ product, priority }: Props) {
   const { t } = useLang();
   const [wished, setWished] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const stock = useStock(product.id, product.stock);
+  const soldOut = stock === 0;
+  const lowStock = stock > 0 && stock <= 3;
 
   return (
     <div className="group relative flex flex-col">
@@ -40,10 +44,22 @@ export default function ProductCard({ product, priority }: Props) {
           />
         )}
 
-        {product.bestseller && (
+        {soldOut ? (
+          <span className="absolute left-3 top-3 rounded-full bg-ink-900/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-xl">
+            {t.product_badge_sold_out}
+          </span>
+        ) : lowStock ? (
+          <span className="absolute left-3 top-3 rounded-full bg-tangerine-400/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-xl">
+            {t.product_badge_low_stock(stock)}
+          </span>
+        ) : product.bestseller ? (
           <span className="absolute left-3 top-3 rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-grass-700 ring-1 ring-grass-100 backdrop-blur-xl">
             {t.product_badge_bestseller}
           </span>
+        ) : null}
+
+        {soldOut && (
+          <div className="absolute inset-0 bg-warmwhite/30 backdrop-grayscale-[0.4]" />
         )}
 
         <button
@@ -81,12 +97,14 @@ export default function ProductCard({ product, priority }: Props) {
           <button
             onClick={(e) => {
               e.preventDefault();
+              if (soldOut) return;
               add(product, 1);
               notify(t.toast_added(product.name), "success");
               setTimeout(open, 250);
             }}
+            disabled={soldOut}
             aria-label={`${t.product_add_aria}: ${product.name}`}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-white shadow-ios transition-all ease-spring active:scale-90 hover:bg-grass-600"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-white shadow-ios transition-all ease-spring active:scale-90 hover:bg-grass-600 disabled:cursor-not-allowed disabled:bg-ink-200 disabled:text-ink-400 disabled:shadow-none"
           >
             <PlusIcon />
           </button>

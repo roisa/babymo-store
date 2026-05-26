@@ -7,6 +7,7 @@ import type { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { useLang } from "@/context/LanguageContext";
+import { useStock } from "@/hooks/useStock";
 import { formatIDR } from "@/lib/utils";
 import { buildSimpleConsultLink } from "@/lib/whatsapp";
 import StickyCheckoutBar from "@/components/StickyCheckoutBar";
@@ -21,9 +22,14 @@ export default function ProductDetailClient({ product }: { product: Product }) {
   const markImgError = (i: number) =>
     setImgErrors((m) => ({ ...m, [i]: true }));
 
+  const stock = useStock(product.id, product.stock);
+  const soldOut = stock === 0;
+  const safeQty = Math.min(qty, Math.max(1, stock));
+
   const handleAdd = (alsoOpen = false) => {
-    add(product, qty);
-    notify(t.toast_added_qty(product.name, qty), "success");
+    if (soldOut) return;
+    add(product, safeQty);
+    notify(t.toast_added_qty(product.name, safeQty), "success");
     if (alsoOpen) setTimeout(open, 250);
   };
 
@@ -124,8 +130,12 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             <Info icon="💬" title={t.pdp_info_support} sub={t.pdp_info_support_sub} />
             <Info
               icon="🌱"
-              title={t.pdp_info_stock(product.stock)}
-              sub={t.pdp_info_stock_sub}
+              title={
+                soldOut
+                  ? t.product_badge_sold_out
+                  : t.pdp_info_stock(stock)
+              }
+              sub={soldOut ? "—" : t.pdp_info_stock_sub}
             />
           </ul>
 
@@ -133,17 +143,19 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             <div className="flex items-center gap-1 rounded-full bg-ink-900/[0.05] p-0.5">
               <button
                 onClick={() => setQty((q) => Math.max(1, q - 1))}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-semibold shadow-ios active:scale-95"
+                disabled={soldOut}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-semibold shadow-ios active:scale-95 disabled:opacity-50"
                 aria-label="−"
               >
                 −
               </button>
               <span className="min-w-7 text-center text-[14px] font-semibold tabular-nums">
-                {qty}
+                {safeQty}
               </span>
               <button
-                onClick={() => setQty((q) => q + 1)}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-semibold shadow-ios active:scale-95"
+                onClick={() => setQty((q) => Math.min(stock || 1, q + 1))}
+                disabled={soldOut || safeQty >= stock}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[14px] font-semibold shadow-ios active:scale-95 disabled:opacity-50"
                 aria-label="+"
               >
                 +
@@ -151,9 +163,12 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             </div>
             <button
               onClick={() => handleAdd(true)}
-              className="btn-primary flex-1 min-w-[220px] text-[15px] py-3.5"
+              disabled={soldOut}
+              className="btn-primary flex-1 min-w-[220px] text-[15px] py-3.5 disabled:bg-ink-200 disabled:text-ink-400 disabled:shadow-none"
             >
-              {t.pdp_add_to_bag} · {formatIDR(product.price * qty)}
+              {soldOut
+                ? t.pdp_sold_out
+                : `${t.pdp_add_to_bag} · ${formatIDR(product.price * safeQty)}`}
             </button>
           </div>
 
@@ -187,7 +202,9 @@ export default function ProductDetailClient({ product }: { product: Product }) {
 
       <StickyCheckoutBar
         price={product.price}
-        qty={qty}
+        qty={safeQty}
+        maxQty={stock}
+        soldOut={soldOut}
         onChangeQty={setQty}
         onAdd={() => handleAdd(true)}
       />

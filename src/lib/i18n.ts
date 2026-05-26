@@ -57,6 +57,8 @@ type Dict = {
   product_empty_title: string;
   product_empty_sub: string;
   product_badge_bestseller: string;
+  product_badge_sold_out: string;
+  product_badge_low_stock: (n: number) => string;
   product_add_aria: string;
 
   // PDP
@@ -72,6 +74,7 @@ type Dict = {
   pdp_info_stock: (n: number) => string;
   pdp_info_stock_sub: string;
   pdp_add_to_bag: string;
+  pdp_sold_out: string;
   pdp_consult: string;
   pdp_reviews: string;
   pdp_reviews_meta: string;
@@ -105,6 +108,7 @@ type Dict = {
   toast_wa_sent: string;
   toast_wa_gateway_off: string;
   toast_wa_failed: string;
+  toast_stock_decremented: (n: number) => string;
   admin_tracking_prompt: string;
 
   // checkout
@@ -297,6 +301,8 @@ export const STRINGS: Record<Lang, Dict> = {
     product_empty_sub:
       "Coba pencarian atau kategori lain — kami selalu menambah hal-hal lembut.",
     product_badge_bestseller: "Terlaris",
+    product_badge_sold_out: "Habis",
+    product_badge_low_stock: (n) => `Tinggal ${n} lagi`,
     product_add_aria: "Tambahkan ke keranjang",
 
     pdp_breadcrumb_home: "Beranda",
@@ -311,6 +317,7 @@ export const STRINGS: Record<Lang, Dict> = {
     pdp_info_stock: (n) => `Stok: ${n}`,
     pdp_info_stock_sub: "siap kirim",
     pdp_add_to_bag: "Masukkan keranjang",
+    pdp_sold_out: "Stok habis",
     pdp_consult: "Tanya tentang produk ini di WhatsApp",
     pdp_reviews: "Ulasan",
     pdp_reviews_meta: "4,9 · 128 ulasan",
@@ -348,6 +355,7 @@ export const STRINGS: Record<Lang, Dict> = {
     toast_wa_gateway_off:
       "Status disimpan. Gateway WhatsApp belum aktif.",
     toast_wa_failed: "WhatsApp gagal terkirim",
+    toast_stock_decremented: (n) => `Stok ${n} produk diperbarui 🌱`,
     admin_tracking_prompt: "Nomor resi pengiriman (opsional):",
 
     checkout_eyebrow: "checkout",
@@ -542,6 +550,8 @@ export const STRINGS: Record<Lang, Dict> = {
     product_empty_sub:
       "Try a different search or category — we're stocking gentle things all the time.",
     product_badge_bestseller: "Bestseller",
+    product_badge_sold_out: "Sold out",
+    product_badge_low_stock: (n) => `Only ${n} left`,
     product_add_aria: "Add to cart",
 
     pdp_breadcrumb_home: "Home",
@@ -556,6 +566,7 @@ export const STRINGS: Record<Lang, Dict> = {
     pdp_info_stock: (n) => `Stock: ${n}`,
     pdp_info_stock_sub: "ready to ship",
     pdp_add_to_bag: "Add to bag",
+    pdp_sold_out: "Sold out",
     pdp_consult: "Ask about this product on WhatsApp",
     pdp_reviews: "Reviews",
     pdp_reviews_meta: "4.9 · 128 reviews",
@@ -592,6 +603,7 @@ export const STRINGS: Record<Lang, Dict> = {
     toast_wa_sent: "WhatsApp message sent 💬",
     toast_wa_gateway_off: "Status saved. WhatsApp gateway not active yet.",
     toast_wa_failed: "WhatsApp couldn't send",
+    toast_stock_decremented: (n) => `Stock updated for ${n} item${n > 1 ? "s" : ""} 🌱`,
     admin_tracking_prompt: "Tracking number (optional):",
 
     checkout_eyebrow: "checkout",
