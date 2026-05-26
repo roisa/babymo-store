@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://babymo-shop.vercel.app";
+  const base = SITE_URL;
   return {
     rules: [
       {

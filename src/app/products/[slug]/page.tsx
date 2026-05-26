@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   SAMPLE_PRODUCTS,
+  getCategoryBySlug,
   getProductBySlug,
   getProductsByCategory,
 } from "@/lib/products";
@@ -9,6 +10,8 @@ import ProductDetailClient from "./ProductDetailClient";
 import ProductGrid from "@/components/ProductGrid";
 import { SectionHeader } from "@/components/CategoryGrid";
 import RecentlyViewed from "@/components/RecentlyViewed";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
+import { JsonLd, breadcrumbLd } from "@/lib/seo";
 
 type Params = { slug: string };
 
@@ -24,13 +27,25 @@ export async function generateMetadata({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Product" };
+  const url = `${SITE_URL}/products/${product.slug}`;
+  // No explicit `openGraph.images` here so Next.js auto-attaches the
+  // dynamic /products/[slug]/opengraph-image route — gives a branded
+  // 1200×630 card with the product name + price chip rather than just
+  // the raw product photo.
   return {
     title: product.name,
     description: product.description,
+    alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
-      title: product.name,
+      title: `${product.name} · ${SITE_NAME}`,
       description: product.description,
-      images: product.images,
+      url,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: product.tagline ?? product.description,
     },
   };
 }
@@ -44,25 +59,26 @@ export default async function ProductPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
+  const category = getCategoryBySlug(product.category);
   const related = getProductsByCategory(product.category)
     .filter((p) => p.id !== product.id)
     .slice(0, 4);
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://babymo-shop.vercel.app";
+  const url = `${SITE_URL}/products/${product.slug}`;
 
   // Google Shopping / rich result eligibility
-  const jsonLd = {
+  const productLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
     image: product.images,
     sku: product.id,
-    brand: { "@type": "Brand", name: "Baby Mo" },
+    brand: { "@type": "Brand", name: SITE_NAME },
+    category: category?.name,
     offers: {
       "@type": "Offer",
-      url: `${baseUrl}/products/${product.slug}`,
+      url,
       priceCurrency: "IDR",
       price: product.price,
       availability:
@@ -70,16 +86,49 @@ export default async function ProductPage({
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
       itemCondition: "https://schema.org/NewCondition",
-      seller: { "@type": "Organization", name: "Baby Mo" },
+      seller: { "@type": "Organization", name: SITE_NAME },
+      shippingDetails: {
+        "@type": "OfferShippingDetails",
+        shippingDestination: {
+          "@type": "DefinedRegion",
+          addressCountry: "ID",
+        },
+        deliveryTime: {
+          "@type": "ShippingDeliveryTime",
+          handlingTime: {
+            "@type": "QuantitativeValue",
+            minValue: 0,
+            maxValue: 1,
+            unitCode: "DAY",
+          },
+          transitTime: {
+            "@type": "QuantitativeValue",
+            minValue: 2,
+            maxValue: 5,
+            unitCode: "DAY",
+          },
+        },
+      },
     },
   };
 
+  const breadcrumb = breadcrumbLd([
+    { name: "Beranda", url: SITE_URL },
+    { name: "Belanja", url: `${SITE_URL}/products` },
+    ...(category
+      ? [
+          {
+            name: category.name,
+            url: `${SITE_URL}/categories/${category.slug}`,
+          },
+        ]
+      : []),
+    { name: product.name, url },
+  ]);
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={[productLd, breadcrumb]} />
       <ProductDetailClient product={product} />
 
       <RecentlyViewed currentProductId={product.id} />

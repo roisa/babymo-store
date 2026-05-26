@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { CATEGORIES, SAMPLE_PRODUCTS } from "@/lib/products";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://babymo-shop.vercel.app";
+  const base = SITE_URL;
   const now = new Date();
 
   return [
